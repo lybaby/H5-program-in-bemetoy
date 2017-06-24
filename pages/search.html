@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name='format-detection' content='telephone=no'>
+    <meta name='viewport' content='width=device-width, minimum-scale=1.0, maximum-scale=1.0'>
+    <title>推送失败</title>
+    <script type="text/javascript" src="../static/lib/zepto-1.1.6.min.js"></script>
+    <script type="text/javascript" src="../static/lib/require.js"></script>
+    <script type="text/javascript" src="../static-src/js/main.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="../static/css/style.css">
+
+</head>
+<body>
+<article class="search">
+	<div class="search_header">
+		<input type="text" class="left input" id="search_input" maxlength="10" placeholder=" 搜索歌曲、专辑"/>
+		<a class="delete-btn"></a>
+		<a href="javascript:void(0);" type="ok" class="left header_btn cancel-btn " >搜索</a>
+	</div>
+	<div class="search_list">
+		<ul class="search_ul">
+		</ul>
+	</div>
+	<div class="search_suggest">
+		<div class="search_hot">
+			<div class="hot_title">热门搜索</div>
+			<ul class="hot_ul">
+			</ul>
+		</div>
+		<div class="search_history">
+			<div class="hot_title">搜索历史</div>
+			<ul class="history_ul">
+			</ul>
+			<div class="clear_list hot_title" style="text-indent: 0;">
+				<a>清空搜索历史</a>
+			</div>
+		</div>
+	</div>
+	<div class="search_result">
+		<div class="result_header">
+			<ul>
+				<li class="cur h_song" _type="song">单曲</li>
+				<li class=" h_album" _type="album">专辑</li>
+				<li class=" h_station" _type="station">电台</li>
+			</ul>
+		</div>
+	
+		<div class="song_list albuminfo-page">
+			<div class="header_song">
+			</div>
+			<div class="show_mid"></div>
+			<div class="song-box">
+				<ul id="song-box">
+				</ul>	
+			</div>
+		</div>
+		<div class="album_list">
+			<ul id="album_list">
+			</ul>
+		</div>
+		<div class="station_list">
+			<ul id="station_list">
+			</ul>
+		</div>
+	</div>
+	<div class="no_song albuminfo-page">
+			<div class="nosong_content"> 很抱歉，没有找到结果~</div>
+			<div class="song-box">
+				<div class="recommend_text">我们为您推荐5首歌曲：</div>
+				<ul id="random_song">
+				</ul>	
+			</div>
+	</div>
+	
+</article>
+
+<!-- 这里是模板 -->
+<script type="text/template" id="J_temp_hot_list">
+    <% $.each(list, function(i, item){ %>
+    <li><a href="javascript:void(0);" class="text-over"><%=item.search_name %></a></li>
+    <%});%>
+</script>
+
+<script type="text/template" id="J_temp_search_list">
+    <% $.each(list, function(i, item){ %>
+    <li><a href="javascript:void(0);" class="text-over"><%=item.result %></a></li>
+    <%});%>
+</script>
+
+<script type="text/template" id="J_temp_search_history">
+    <% $.each(list, function(i, item){ %>
+    <li><a class="search_name text-over" href="javascript:void(0);"><%=item.search_text %></a><a class="delete" href="javascript:void(0);" _id="<%=item.id %>"></a></li>
+    <%});%>
+</script>
+
+
+<script type="text/template" id="J_temp_song_list">
+    <% $.each(list, function(i, item){ %>
+    <li class="item" sid="<%=item.id %>" md5="<%=item.md5 %>"  url="<%=item.url %>" tag="album" tagval="<%=item.tagval %>"  size="<%=item.filesize %>" type="<%=item.type %>" >
+        <a class="item-a" href="javascript:void(0);">
+            <div class="title text-over"><%=item.name %></div>
+            <div class="desc"><%=BEME.func.formatTime(item.song_time) %></div>
+		</a>
+		 <a class="item-play" href="javascript:void(0);"><img src="./static/images/more.png"></a>
+    </li>
+    <%});%>
+</script>
+
+<script type="text/template" id="J_temp_album_list">
+    <% $.each(list, function(i, item){ %>
+    <li >
+        <a class="item-a" href="<%=item.id %>" id="<%=item.album_id %>">
+			<img src="<%=BEME.func.imageUrl(item.url) %>"/>
+			<div class="name">
+				<div class="text-over"><%=item.name %></div>
+				<div class="time">收藏 <%=item.collection_num %></div>
+			</div>  
+		</a>
+		<img src="./static/images/jiantou_search.png" class="jiantou">
+    </li>
+    <%});%>
+</script>
+
+<script type="text/template" id="J_temp_station_list">
+    <% $.each(list, function(i, item){ %>
+    <li >
+        <a class="item-a" href="#m=fminfo&id=<%=item.id%>">
+			<img src="<%=BEME.func.imageUrl(item.head_url) %>"/>
+			<div class="name">
+				<div class="text-over"><%=item.name %></div>
+				<div class="time">收藏 <%=item.subscription_num %></div>
+			</div>  
+		</a>
+		<img src="./static/images/jiantou_search.png" class="jiantou">
+    </li>
+    <%});%>
+</script>
+
+
+
+<script type="text/javascript">
+    BEME.initMinPage('search');
+</script>
+
+</body>
+</html>

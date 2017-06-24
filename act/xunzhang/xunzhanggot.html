@@ -1,0 +1,62 @@
+<html>
+<head>
+<meta charset="UTF-8">
+<title>六一儿童节，贝美许愿季</title>
+<meta name='viewport' content='width=device-width, minimum-scale=1.0, maximum-scale=1.0'>
+<meta name='format-detection' content='telephone=no'>
+<meta name="screen-orientation"content="portrait">
+<meta name="x5-orientation" content="portrait">
+
+<script type="text/javascript">
+    var resizeBody = function(){
+        var docEl = document.documentElement;
+        docEl.style.fontSize = docEl.clientWidth/7.5+'px';
+    };
+    var key = "onorientationchange" in window ? "orientationchange" : "resize";
+    window.addEventListener(key, resizeBody, false);
+
+    resizeBody();
+</script>
+
+<link rel="stylesheet" type="text/css" href="../../static/css/style.css">
+<style type="text/css">
+/*#############这个看看，为啥body设置为0.1rem了##########*/
+body{height: 100%;}
+/*########################################################*/
+
+.comm-page .a-btn{ -webkit-tap-highlight-color: rgba(0,0,0,0.1);}
+.more-block{background: url('../../static/images/xiala.png') no-repeat center center; width: 0.7rem; height: 0.4rem; display: inline-block; background-size: 0.4rem; }
+.clearfix:after{content:".";display:block;height:0;clear:both;visibility:hidden}
+
+.xunzhanggot-page{overflow: hidden; background: url('./static/images/xz-bg.png') no-repeat 0 0; background-size:cover; height: 100%;}
+.xunzhanggot-page .top{margin: 0.6rem 4% 0.6rem 4%;}
+.xunzhanggot-page .icon{ background: url('./static/images/xz-starbg.png') no-repeat 0 0; background-size: 100% auto; height: 3.4rem; width: 4rem; margin: 0.3rem auto 0 auto; text-align: center;}
+.xunzhanggot-page .icon img{width: 58%; }
+
+.xunzhanggot-page .title{font-weight: bold; font-size: 15px; text-align: center; color: #000; margin-top: 0.8rem;}
+.xunzhanggot-page .desc{color: #666; margin-top: 0.7rem; text-align: center;}
+</style>
+</head>
+<body>
+
+<article class="comm-page xunzhanggot-page">
+    <div class="top">
+        <img class="img-auto" src="./static/test/nuanxin.png" alt="">
+    </div>
+
+    <div class="icon goted-icon"><img src="./static/test/zhan.png"></div>
+
+    <div class="title">只有10%的宝贝拿到了这个勋章</div>
+    <div class="desc">悄悄告诉你：勋章越多，惊喜更多，宝贝再接再励哟！</div>
+</article>
+
+<script type="text/javascript" src="../../static/lib/zepto-1.1.6.min.js"></script>
+<script type="text/javascript">
+$(document.body).ready(function(){
+
+});
+
+</script>
+
+</body>
+</html>

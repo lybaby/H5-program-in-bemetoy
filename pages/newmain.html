@@ -1,0 +1,66 @@
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name='format-detection' content='telephone=no'>
+<meta name='viewport' content='width=device-width, minimum-scale=1.0, maximum-scale=1.0'>
+<title>test</title>
+<script type="text/javascript" src="../static/lib/zepto-1.1.6.min.js"></script>
+<script type="text/javascript" src="../static/lib/require.js"></script>
+<script type="text/javascript" src="../static-src/js/main.js"></script>
+
+<link rel="stylesheet" type="text/css" href="../static/css/style.css">
+<style type="text/css">
+/*.main-page{background: url('../static/images/pages/main.jpg') no-repeat 0 0; background-size: 100% auto; height: 2000px;}*/
+</style>
+</head>
+<body>
+
+<article class="comm-page main-page">
+	<ul class="menu-box-new"> 
+        <li><a class="item-a m5-btn" href="#!m=albummain">
+           </a>
+        </li>
+        <li><a class="item-a m6-btn" href="#!m=albumindex">
+            </a>
+        </li>
+    </ul>
+    
+    <div class="otherlisten-title">其他小朋友正在听</div>
+    <section class="catecontent-list" id="J_cate-box"></section>
+
+</article>
+
+
+<script type="text/template" id="J_temp-cateitem">
+<% $.each(list, function(i, item){ %>
+<div class="content-item catecontent-item catecontent-item<%=i %>">
+    <div class="title-box">
+        <div class="left title title-b"><%=item.name %></div>
+        <a href="<%=item.url %>" class="right item-a more-btn more">更多</a>
+    </div>
+    <ul class="list">
+        <% $.each(item.album_list, function(ii, info){ %>
+        <li><a class="item-a" href="#!m=albuminfo&id=<%=info.id %>">
+            <div class="img-b">
+                <img imgsrc="<%=BEME.func.imageUrlHead(info.url) %>" src="./static/images/moren04.jpg" alt="<%=info.name %>" class="img-auto">
+                <div class="info-box">
+                    <div class="tag left"><%=info.cnt %></div>
+                    <div class="tag right">0</div>
+                </div>
+            </div>
+            <div class="name text-over"><%=info.name %></div>
+            <div class="name-desc">共<%=info.sid.split(',').length %>首</div>
+        </a></li>
+        <%});%>
+    </ul>
+</div>
+<%});%>
+</script>
+
+
+<script type="text/javascript">
+    BEME.initPage('newmain');
+</script>
+
+</body>
+</html>

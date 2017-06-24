@@ -1,0 +1,104 @@
+<html>
+<head>
+<meta charset="UTF-8">
+<title>六一儿童节，贝美许愿季</title>
+<meta name='viewport' content='width=device-width, minimum-scale=1.0, maximum-scale=1.0'>
+<meta name='format-detection' content='telephone=no'>
+<meta name="screen-orientation"content="portrait">
+<meta name="x5-orientation" content="portrait">
+
+<script type="text/javascript">
+    var resizeBody = function(){
+        var docEl = document.documentElement;
+        docEl.style.fontSize = docEl.clientWidth/7.5+'px';
+    };
+    var key = "onorientationchange" in window ? "orientationchange" : "resize";
+    window.addEventListener(key, resizeBody, false);
+
+    resizeBody();
+</script>
+
+<link rel="stylesheet" type="text/css" href="../../static/css/style.css">
+<style type="text/css">
+.comm-page .a-btn{ -webkit-tap-highlight-color: rgba(0,0,0,0.1);}
+.more-block{background: url('../../static/images/xiala.png') no-repeat center center; width: 0.7rem; height: 0.4rem; display: inline-block; background-size: 0.4rem; }
+.clearfix:after{content:".";display:block;height:0;clear:both;visibility:hidden}
+
+.xunzhang-page .content{margin: 0 2%;}
+.xunzhang-page .line{padding: 0.2rem 0;}
+.xunzhang-page .title{text-align: center; font-weight: bold; font-size: 15px; color: #000; line-height: 0.6rem; margin-top: 0.2rem;}
+.xunzhang-page .desc{line-height: 22px; color: #666;}
+.xunzhang-page .icon{ background: url('./static/images/xz-starbg.png') no-repeat 0 0; background-size: 100% auto; height: 2.7rem; width: 3.3rem; margin: 0.3rem auto 0 auto; text-align: center;}
+.xunzhang-page .icon img{width: 50%; }
+.xunzhang-page .star-box,.xunzhang-page .cur{ background: url('./static/images/xz-star.png') no-repeat left top; background-size: auto 90%; height: 0.6rem;}
+.xunzhang-page .star-box{width: 4.5rem; margin: 0.2rem auto 0 auto;}
+.xunzhang-page .cur{ background: url('./static/images/xz-star-c.png') no-repeat left top; background-size: auto 90%;}
+.xunzhang-page .btn-ok,.xunzhang-page .btn-old{display: block;}
+.xunzhang-page .btn-ok{ background: url('./static/images/xz-btn-ok.png') no-repeat 0 0; background-size: 100% auto; width: 1.7rem; height: 0.75rem; margin: 0.3rem auto 0 auto; }
+.xunzhang-page .gotnum{text-align: center; line-height: 26px;}
+.xunzhang-page .note{text-align: center; line-height: 20px; margin-top: 0.6rem;}
+.xunzhang-page .btn-old{ background: url('./static/images/xz-btn-old.png') no-repeat 0 0; background-size: 100% auto; width: 1.7rem; height: 0.6rem; margin: 0.9rem auto 0.3rem auto;}
+
+
+.xunzhang-page .goted-icon, .xunzhang-page .gotinfo, .havegot .top, .havegot .icon, .havegot .btn-ok, .havegot .gotnum{display: none;}
+.havegot .goted-icon, .havegot .gotinfo{display: block;}
+.havegot .goted-icon{width: 4rem; height: 3.3rem; margin: 0.3rem auto 0 auto;}
+.havegot .star-box{ margin: 0.5rem auto; }
+.havegot .wording{font-weight: bold; color: #ff8900; font-size: 15px; line-height: 30px; text-align: center;}
+.havegot .info{text-align: center; margin: 0.3rem 0 1.2rem 0;}
+</style>
+</head>
+<body>
+
+<article class="comm-page xunzhang-page">
+    <div class="top">
+        <img class="img-auto" src="./static/images/xz-top.png" alt="">
+    </div>
+
+    <div class="icon goted-icon"><img src="./static/test/zhan.png"></div>
+    
+    <div class="content">
+        <div class="line"><img class="img-auto" src="./static/images/xz-line.png" alt=""></div>
+        <div class="imgbox">
+            <img class="img-auto" src="./static/test/p1.png" alt="">
+        </div>
+
+        <div class="title">爸爸出门前，宝宝亲一下爸爸的脸颊</div>
+        <div class="desc">小朋友，爸爸每天很辛苦的工作，是为了给你和妈妈更好的生活，如果在他每天出门工作前，给他一个拥抱，他会很开心，更会动力满满哦！</div>
+    </div>
+
+    <div class="icon"><img src="./static/test/zhan.png"></div>
+
+    <div class="star-box"><div class="cur"></div></div>
+
+    <a class="a-btn btn-ok" href="javascript:void(0);" id="J_btn-ok"></a>
+    <div class="gotnum"><span>122</span>人已完成</div>
+
+    <div class="gotinfo">
+        <div class="wording">恭喜宝宝获得“暖心宝贝”勋章</div>
+        <div class="info">只有10%的宝贝拿到了这个勋章</div>
+    </div>
+
+    <div class="note">
+        1. 每日完成一个任务<br>
+        2. 全部任务完成后，可获得勋章<br>
+        3. 勋章越多，惊喜越多，宝贝加油！
+    </div>
+
+    <a class="a-btn btn-old" href="./xunzhanglist.html"></a>
+</article>
+
+<script type="text/javascript" src="../../static/lib/zepto-1.1.6.min.js"></script>
+<script type="text/javascript">
+$(document.body).ready(function(){
+    $('.star-box .cur').css('width', (0.9*5)+'rem');
+
+    $('#J_btn-ok').on('click', function(){
+        $('.xunzhang-page').addClass('havegot');
+    });
+});
+
+</script>
+
+</body>
+</html>

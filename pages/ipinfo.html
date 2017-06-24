@@ -1,0 +1,85 @@
+<html>
+
+<body>
+
+<article class="animinfo-page bear-info-page animation-page ranking-page">
+	<div class="title-box" value="">
+		<div><div id="new-title" class="text-over left"></div><div id="new-day" class="right"></div></div>
+	</div>
+	<div class="play-video">
+		<video src="http://s.bemetoy.com/dance/bd/bd494888fc3d058488c448d10e93a7d8.mp4" controls="controls" poster="./static/images/video_mika.jpg"></video>
+	</div>
+	
+	<div class="content-desc">
+		<div id="bear-song-list" class="push-div">
+			<div class="music" id="play-music"> 
+			</div>
+		</div>
+
+	
+		<div class="task guidebox">
+			<div class="title"><span class="circle"></span><span>本期引导任务</span><span class="circle"></span></div>
+			<div class="task-text">问宝贝一个问题：</div>
+			<div class="text" id="question"> 寒冬来临的时候，小动物们都在森林里做什么呢？</div>
+			<div class="text hide-all" id="answer">答案是：寒冬来临的时候，小动物们都在森林里做什么呢？寒冬来临的时候，小动物们都在森林里做什么呢？</div>
+			<a href="javascript:void(0);" class="a-btn">点击看答案</a>
+		</div>
+	
+	</div>
+	
+    <div class="videobox">
+        <div class="top-box videomenu" id="J_top-box">
+            <div class="cate-box" id="J_cate-box"></div>
+        </div>
+
+        <ul class="videolist" id="J_video-list"></ul>
+    </div>
+</article>
+
+
+<script type="text/template" id="J_temp-item-song">
+    <% $.each(list, function(i, item){ %>
+    <li class="music-list" sid="<%=item.id %>" md5="<%=item.md5 %>"  url="<%=item.url %>" tag="ip" tagval="<%=item.tagval %>"  size="<%=item.filesize %>" type="<%=item.type %>" >
+		<a class="title">本期音频</a>
+		<div class="push-bear-song">推送给玩具</div>
+    </li>
+    <%});%>
+</script>
+
+
+<!-- 这里是模板 -->
+<script type="text/template" id="J_temp-tag">
+    <% $.each(list, function(i, item){ %>
+        <% if(i%4==0){ %>
+        <ul class="menu-list">
+            <%}%>
+            <li><span class="item-a" href="javascript:void(0);" data-id="<%-item.id %>"><%=item.name %></span></li>
+            <% if((i+1)%4==0){ %>
+        </ul>
+        <%}%>
+    <%});%>
+</script>
+
+<script type="text/template" id="J_temp-list">
+    <% $.each(list, function(i, item){ %>
+    <li class="videoitem">
+        <a class="item-a clearfix" href="#!m=ipinfo&id=<%=item.id%>">
+            <div class="left"><img class="img-cover" src="<%=item.url%>"></div>
+            <div class="right">
+                <div class="name new"><%=item.name%><i class="<%=item.is_new == 1?"newflag":""%>""></i></div>
+                <div class="time"><%=item.time%></div>
+            </div>
+        </a>
+    </li>
+    <%});%>
+</script>
+
+
+
+
+<script type="text/javascript">
+    BEME.initMinPage('ipinfo');
+</script>
+
+</body>
+</html>

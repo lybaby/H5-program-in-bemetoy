@@ -1,0 +1,105 @@
+<html>
+<head>
+</head>
+<body>
+
+<article class="mika-info-page  bear-page">
+    <div class="banner">
+        <img imgsrc="" src="./static/images/banner05.jpg" alt="" class="img-cover">
+    </div>
+	
+    <div class="recommend">
+      贝美童趣馆新成员“米卡”登场啦。根据宝宝不同阶段的成长需求，制作的最贴合宝宝的教育视频，视频丰富多彩，充满乐趣。通过宝宝喜爱的卡通偶像带动，让宝宝在眼观，耳听，手动快乐感官体验的同时，寓学于乐。让我们快跟米卡一起学习吧！
+    </div>
+	
+	
+	<div class="classify">
+		<ul class="classify-list">
+		</ul>
+	</div>
+	
+  
+    <div class="play-other">
+        <div class="title">米卡杂志汇</div>
+        <ul id="J_list-box">
+			<li class="item">
+				<div class="title-num">第三期 Drive my car</div>
+				<div class="key">更新时间： 1月28日</div>
+			</li>
+			<li class="item">
+				<div class="title-num">第三期 Drive my car</div>
+				<div class="key">更新时间： 1月28日</div>
+			</li>
+			<li class="item">
+				<div class="title-num">第三期 Drive my car</div>
+				<div class="key">更新时间： 1月28日</div>
+			</li>
+        </ul>
+    </div>
+	<div>
+		<ul class="page-list">
+			<li><a style="margin:0;">第1-10期</a></li>
+			<li><a>第11-20期</a></li>
+			<li><a style="margin:0;float:right;">第21-30期</a></li>
+			<li><a style="margin:0;">第31-40期</a></li>
+			<li><a>第41-50期</a></li>
+		</ul>
+	</div>
+	<div class="share_weixin"></div>
+	<div class="footer-weixin" style="display:none;">
+		 <img src="./static/images/app-header.png" class="app">
+		 <span class="text">宝宝爱听,贝美时光说</span>
+		 <a class="download" href="http://www.bemetoy.com/download/download.html" >点击下载</a>
+	</div>
+</article>
+
+
+
+<!-- 这里是模板 -->
+<script type="text/template" id="J_temp-item">
+    <% $.each(list, function(i, item){ %>
+    <li class="item" >
+		<a href="#!m=bememikainfo&id=<%=item.id %>&type=<%=item.type %>">
+			<img src="<%=item.url %>" />
+			<div>
+				<div class="title-num text-over"><%=item.content %></div>
+				<div class="key">更新时间：<%=item.question %></div>
+			</div>
+		</a>
+    </li>
+    <%});%>
+</script>
+
+<script type="text/template" id="J_temp-item-classify">
+    <% $.each(list, function(i, item){ %>
+		<li>
+			<div  class='<%=item.new === 1?"newtag":""%>'></div>
+		   <a href="#!m=bememikalist&id=<%=item.id %>">
+			<img src="<%=item.url %>" />
+				<div class="name"><%=item.name %></div>
+				<div class="year">（<%=item.sub_name %>）</div>
+		   </a>
+		 
+		</li>
+    <%});%>
+</script>
+
+<script type="text/javascript">
+		function GetQueryString(name)
+		{
+			 var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+			 var r = window.location.search.substr(1).match(reg);
+			 if(r!=null)return  r[2]; return null;
+		}
+		var weixin = GetQueryString('weixin');
+		console.log(weixin);
+		if(weixin == 1){
+			$('.footer-weixin').show();
+		}
+</script>
+
+<script type="text/javascript">
+    BEME.initMinPage('bememikaindex');
+</script>
+</body>
+</html>

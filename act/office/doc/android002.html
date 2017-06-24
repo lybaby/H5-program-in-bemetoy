@@ -1,0 +1,177 @@
+<!--#include file="/m2/act/office/layouts/header.html"-->
+<title>贝美开发者中心</title>
+</head>
+
+<body class="page page-scene">
+<div class="header" id="J_header">
+    <!--#include file="/m2/act/office/layouts/navigation.html"-->
+</div>
+<div class="doc_center">
+	<div class="doc">
+		<!--#include file="menulist.html"-->
+		
+		<div class="doc_detail">
+			<div class="">
+				<h1>账号接入</h1>
+				<div class="level1"><hr></div>
+			</div>
+			<div class="doc_content">
+				<div>
+					<h2>前言</h2>
+					<div class="text_indent text_i0">
+						贝美SDK目前不提供账号创建接口，第三方开发者需要自己创建openId后，通过贝美SDK接入。SDK将以openId来区分不同的账号。<br>
+						贝美SDK维护的账号体系会以家庭圈为主导，一个家庭圈可以理解为一个群。用户的行为都是以家庭圈为基础进行的，
+						例如发送语音，家庭圈成员都会收到；邀约家人进家庭圈；家人通过申请关注进家庭圈等
+					</div>
+				</div>
+				<div>
+					<h2>AndroidManifest.mxl设置</h2>
+					<div class="text_indent text_i0">  
+						增加以下权限：
+						<div class="code">
+							<code>&lt;uses-permission android:name="android.permission.RECORD_AUDIO"/></code>
+							<code>&lt;uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/></code>
+							<code>&lt;uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/></code>
+							<code>&lt;uses-permission android:name="android.permission.INTERNET"/></code>
+							<code>&lt;uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" /></code>
+							<code>&lt;uses-permission android:name="android.permission.SYSTEM_OVERLAY_WINDOW" /></code>
+							<code>&lt;uses-permission android:name="android.permission.WAKE_LOCK" /></code>
+							<code>&lt;uses-permission android:name="android.permission.READ_PHONE_STATE" /></code>
+							<code>&lt;uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/></code>
+						</div>
+						增加以下receiver和service：
+						<div class="code">
+							<code>&lt;receiver android:name="com.bemetoy.sdk.bmcore.netscene.NotifyReceiver" /></code>
+							<code>&lt;receiver android:name="com.bemetoy.sdk.bmcore.core.BMReceivers$BootReceiver"></code>
+							<code class="marginl_20">&lt;intent-filter></code>
+							<code class="marginl_40">&lt;action android:name="android.intent.action.BOOT_COMPLETED"/></code>
+							<code class="marginl_40">&lt;action android:name="android.intent.action.SCREEN_ON"/></code>
+							<code class="marginl_40"> &lt;action android:name="android.intent.action.SCREEN_OFF"/></code>
+							<code class="marginl_20">&lt;/intent-filter></code>
+							<code>&lt;/receiver></code>
+							<code>&lt;receiver android:name="com.bemetoy.sdk.bmcore.core.BMReceivers$ConnectionReceiver"></code>
+							<code class="marginl_20">&lt;intent-filter></code>
+							<code class="marginl_40">&lt;action android:name="android.net.conn.CONNECTIVITY_CHANGE"/></code>
+							<code class="marginl_20">&lt;/intent-filter></code>
+							<code>&lt;/receiver></code>
+							<code>&lt;receiver android:name="com.bemetoy.sdk.bmcore.core.BMReceivers$UserPresentReceiver"></code>
+							<code class="marginl_20">&lt;intent-filter></code>
+							<code class="marginl_40"> &lt;action android:name="android.intent.action.USER_PRESENT"/></code>
+							<code class="marginl_20">&lt;/intent-filter></code>
+							<code>&lt;/receiver></code>
+							<code>&lt;receiver android:name="com.bemetoy.sdk.bmcore.core.BMReceivers$AlarmReceiver"/></code>
+							<code>&lt;service android:name="com.bemetoy.sdk.bmcore.netscene.NotifyReceiver$NotifyService"/></code>
+							<code>&lt;service android:name="com.bemetoy.sdk.bmcore.core.BMForegroundService"/></code>
+							<code>&lt;service android:name="com.bemetoy.sdk.bmcore.core.CoreService"/></code>
+						</div>
+					</div>
+				</div>
+				<div>
+					<h2>初始化</h2>
+					<div class="text_indent">  
+						<div class="code">
+							<code>BMContext.Builder builder = BMContext.newBuilder();</code>
+							<code>//appID:应用ID</code>
+							<code>builder.setAppId(appId);</code>
+							<code>//appKey:应用Key</code>
+							<code>builder.setAppKey(appKey);</code>
+							<code>BMIoTClient.init(builder.build());</code>
+						</div>
+						<div class="notice_str">
+							注：<br>
+							&nbsp;&nbsp;初始化必须在application初始化的时候调用（具体可参考demo）<br>
+							&nbsp;&nbsp;此过程会有异步的网络操作
+						</div>
+					</div>
+				</div>
+				<div>
+					<h2>登录</h2>
+					<div class="text_indent">  
+						<div class="code">
+							<code>/**</code>
+							<code>&nbsp; * 登录接口</code>
+							<code>&nbsp; *参数：openId            账号标识符，第三方提供</code>
+							<code>*/</code>
+							<code>BMIoTClient.getBMCore().login(openId);</code>
+						</div>
+						<div class="recommend text_i0">
+							登录接口在首次登录成功后，下次启动app无需再次调用，因为SDK内部会做自动登录逻辑。只有在以下几种情况下才需要重新调用登录接口：<br>
+							<ol><li>用户在其他设备登录了该账号，导致被踢下线；</li>
+							<li>用户调用了登出接口;</li>
+							<li>用户需要切换到其他账号；</li>
+							<li>用户鉴权失败,需要重新初始化appId和appKey</li></ol>
+							因此调用登录前需要检测是否能自动登录:<br>
+						</div>
+						<div class="code">
+							<code>/**</code>
+							<code>&nbsp; * 是否能自动登录</code>
+							<code>&nbsp; *参数：openId            账号标识符，第三方提供</code>
+							<code>*/</code>
+							<code>BMIoTClient.getBMCore().canAutoLogin(openId)</code>
+						</div>
+						<div class="recommend text_i0">
+							openId是账号相关信息，由第三方生成。
+						</div>
+						<div class="notice_str">
+							注：
+							<ol class="margint_0">
+								<li>第三方生成的openId不能以”toy_”或者”group_”开头</li>
+								<li>贝美后台会将首次登录的openId保存下来，以后同一个用户需要用相同的openId才能登录</li>
+								<li>登录接口不需要也不应该频繁调用，否则会有被封号风险！</li>
+							</ol>
+						</div>
+					</div>
+				</div>
+				<div>
+					<h2>登出</h2>
+					<div class="text_indent">  
+						<div class="code">
+							<code>/**</code>
+							<code>&nbsp; * 登出接口</code> 
+							<code>*/</code>
+							<code>BMIoTClient.getBMCore().logout();</code>
+						</div>
+					</div>
+				</div>
+				<div>
+					<h2>登录状态监听</h2>
+					<div class="text_indent">  
+						<div class="code">
+							<code>BMCore.IOnAuthStateChangeListener listener = new BMCore.IOnAuthStateChangeListener() {</code>
+							<code class="marginl_20">@Override</code>
+							<code class="marginl_20"> public void onAuthStateChange(int errCode) {</code>
+							<code class="marginl_40"> if (errCode == BMErrorCode.Err_None) {</code>
+							<code class="marginl_60">              //鉴权成功</code>
+							<code class="marginl_40">} else if (errCode == BMErrorCode.Err_Server_Login_Fail) {</code>
+							<code class="marginl_60">			  //鉴权失败，用户纠错后，需重新调用login</code>
+							<code class="marginl_40"> } else if (errCode == BMErrorCode.Err_Local_Invalid_Args) {</code>
+							<code class="marginl_60">             //输入参数有误(openid不合法)</code>
+							<code class="marginl_40"> } else if (errCode == BMErrorCode.Err_Server_Kicked) {</code>
+							<code class="marginl_60">            //账号异地登录，被踢下线。如果用户需要重新登录，需重新调用login</code>
+							<code class="marginl_40">} else if (errCode == BMErrorCode.Err_Server_Logout) {</code>
+							<code class="marginl_60">			//登出成功</code>
+							<code class="marginl_40">} else if (errCode == BMErrorCode.Err_Net_Anomaly) {</code>
+							<code class="marginl_60">			//网络异常</code>
+							<code class="marginl_40">}</code>
+							<code class="marginl_20">}</code>
+							<code>};</code>
+							<code>BMIoTClient.getBMCore().setOnAuthStateChangeListener(listener);</code>
+						</div>
+					</div>
+				</div>
+				
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<script type="text/javascript">
+_domReady.push(function(){
+    $('#J_navlist .bk[action="developer"]').addClass('cur');
+	$('#android002').addClass('cur');
+
+});
+</script>
+
+<!--#include file="/m2/act/office/layouts/footer.html"-->

@@ -1,0 +1,224 @@
+<!--#include file="/m2/act/office/layouts/header.html"-->
+<title>贝美开发者中心</title>
+</head>
+
+<body class="page page-scene">
+<div class="header" id="J_header">
+    <!--#include file="/m2/act/office/layouts/navigation.html"-->
+</div>
+<div class="doc_center">
+	<div class="doc">
+		<!--#include file="menulist.html"-->
+
+		
+		<div class="doc_detail">
+			<div class="">
+				<h1>资源操作</h1>
+				<div class="level1"><hr></div>
+			</div>
+			<div class="doc_content">
+				<div>
+					<h2>拉取资源</h2>
+					<div class="text_indent text_i0">
+						<div class="code">
+							<code>BMResourcesManager.IOnGetResourceListener resourceListener = new BMResourcesManager.IOnGetResourceListener() {</code>
+							<code class="marginl_20">@Override</code>
+							<code class="marginl_20"> public void onGetResource(int errCode, BMResourcesManager.BMResourceInfo resInfo, boolean isCache){</code>
+							<code class="marginl_40"> 		if (errCode == BMErrorCode.Err_None) {</code>
+							<code class="marginl_60">              //获取到本地缓存资源或拉取到服务器资源</code>
+							<code class="marginl_40"> 		} else if (errCode == BMErrorCode.Err_Server_Not_Auth) {</code>
+							<code class="marginl_60">			  //未鉴权</code>
+							<code class="marginl_40">   	} else if (errCode == BMErrorCode.Err_Net_Response_Fail) {</code>
+							<code class="marginl_60">             //请求响应失败</code>
+							<code class="marginl_40">  		} else if (errCode == BMErrorCode.Err_SQL_Error) {</code>
+							<code class="marginl_60">          	 //数据库错误</code>
+							<code class="marginl_40">		}</code>
+							<code class="marginl_20">	}</code>
+							<code>};</code>
+							<code>BMIoTClient.getBMResourcesManager().getResource(pageId, resourceListener);</code>
+						</div>
+						<div class="notice_str">
+							注：使用该接口拉取资源前，需要在运营后台配置资源内容
+						</div>
+					</div>
+				</div>
+				<div>
+					<h2>分页拉取专辑列表</h2>
+					<div class="text_indent text_i0">
+						<div class="code">
+							<code>BMResourcesManager.IOnGetAlbumsListener albumsListener = new BMResourcesManager.IOnGetAlbumsListener() {</code>
+							<code class="marginl_20">@Override</code>
+							<code class="marginl_20">  public void onGetAlbums(int errCode, List<BMResourcesManager.BMAlbumInfo> albumInfo, boolean isCache, boolean continueFlag) {</code>
+							<code class="marginl_40"> 		if (errCode == BMErrorCode.Err_None) {</code>
+							<code class="marginl_60">              //获取到本地缓存资源或拉取到最新专辑列表</code>
+							<code class="marginl_40"> 		} else if (errCode == BMErrorCode.Err_Server_Not_Auth) {</code>
+							<code class="marginl_60">			  //未鉴权</code>
+							<code class="marginl_40">   	} else if (errCode == BMErrorCode.Err_Net_Response_Fail) {</code>
+							<code class="marginl_60">             //请求响应失败</code>
+							<code class="marginl_40">  		} else if (errCode == BMErrorCode.Err_SQL_Error) {</code>
+							<code class="marginl_60">          	 //数据库错误</code>
+							<code class="marginl_40">		}</code>
+							<code class="marginl_20">	}</code>
+							<code>};</code>
+							<code>BMIoTClient.getBMResourcesManager().getMoreAlbums(lastAlbumId, pagesize, albumsListener);</code>
+						</div>
+						<div class="notice_str">
+							注：当获取第一页数据时,lastAlbumId传递-1;
+						</div>
+					</div>
+				</div>
+				<div>
+					<h2>获取专辑详情</h2>
+					<div class="text_indent text_i0">
+						<div class="code">
+							<code>BMResourcesManager.IOnGetAlbumInfoListener albumInfoListener = new BMResourcesManager.IOnGetAlbumInfoListener() {</code>
+							<code class="marginl_20">@Override</code>
+							<code class="marginl_20">  public void onGetAlbumInfo(int errCode, BMResourcesManager.BMAlbumInfo albumInfo, boolean isCache){</code>
+							<code class="marginl_40"> 		if (errCode == BMErrorCode.Err_None) {</code>
+							<code class="marginl_60">              //获取到本地缓存资源或拉取到最新专辑详情</code>
+							<code class="marginl_40"> 		} else if (errCode == BMErrorCode.Err_Server_Not_Auth) {</code>
+							<code class="marginl_60">			  //未鉴权</code>
+							<code class="marginl_40">   	} else if (errCode == BMErrorCode.Err_Net_Response_Fail) {</code>
+							<code class="marginl_60">             //请求响应失败</code>
+							<code class="marginl_40">  		} else if (errCode == BMErrorCode.Err_SQL_Error) {</code>
+							<code class="marginl_60">          	 //数据库错误</code>
+							<code class="marginl_40">		}</code>
+							<code class="marginl_20">	}</code>
+							<code>};</code>
+							<code>BMIoTClient.getBMResourcesManager().getAlbumInfo(albumId, albumInfoListener);</code>
+						</div>
+					</div>
+				</div>
+				<div>
+					<h2>推送歌曲</h2>
+					<div class="text_indent text_i0">
+						<div class="code">
+							<code>BMResourcesManager.IOnPushStatusListener pushStatusListener = new BMResourcesManager.IOnPushStatusListener() {</code>
+							<code class="marginl_20">@Override</code>
+							<code class="marginl_20">  public void onPushStatus(int errCode) {</code>
+							<code class="marginl_40"> 		if (errCode == BMErrorCode.Err_None) {</code>
+							<code class="marginl_60">              //推送成功</code>
+							<code class="marginl_40"> 		} else if (errCode == BMErrorCode.Err_Server_Unbound) {</code>
+							<code class="marginl_60">			  //未绑定设备</code>
+							<code class="marginl_40"> 		} else if (errCode == BMErrorCode.Err_Server_Not_Auth) {</code>
+							<code class="marginl_60">			  //未鉴权</code>
+							<code class="marginl_40">   	} else if (errCode == BMErrorCode.Err_Net_Response_Fail) {</code>
+							<code class="marginl_60">             //请求响应失败</code>
+							<code class="marginl_40">  		} else if (errCode == BMErrorCode.Err_SQL_Error) {</code>
+							<code class="marginl_60">          	 //数据库错误</code>
+							<code class="marginl_40">		}</code>
+							<code class="marginl_20">	}</code>
+							<code>};</code>
+							<code>BMIoTClient.getBMResourcesManager().pushMedia2Toy(toyOpenId, mediaInfos, pushStatusListener);</code>
+						</div>
+					</div>
+				</div>
+				<div>
+					<h2>分页拉取电台列表</h2>
+					<div class="text_indent text_i0">
+						<div class="code">
+							<code>BMResourcesManager.IOnGetRadiosListener radiosListener = new BMResourcesManager.IOnGetRadiosListener() {</code>
+							<code class="marginl_20">@Override</code>
+							<code class="marginl_20">  public void onGetRadios(int errCode, List<BMResourcesManager.BMRadioInfo> radioInfo, boolean isCache, boolean continueFlag) {</code>
+							<code class="marginl_40"> 		if (errCode == BMErrorCode.Err_None) {</code>
+							<code class="marginl_60">              //获取到本地缓存资源或拉取到最新电台列表</code>
+							<code class="marginl_40"> 		} else if (errCode == BMErrorCode.Err_Server_Not_Auth) {</code>
+							<code class="marginl_60">			  //未鉴权</code>
+							<code class="marginl_40">   	} else if (errCode == BMErrorCode.Err_Net_Response_Fail) {</code>
+							<code class="marginl_60">             //请求响应失败</code>
+							<code class="marginl_40">  		} else if (errCode == BMErrorCode.Err_SQL_Error) {</code>
+							<code class="marginl_60">          	 //数据库错误</code>
+							<code class="marginl_40">		}</code>
+							<code class="marginl_20">	}</code>
+							<code>};</code>
+							<code>BMIoTClient.getBMResourcesManager().getMoreRadios(lastRadioId, pagesize, radiosListener);</code>
+						</div>
+						<div class="notice_str">
+							注：当获取第一页数据时,lastAlbumId传递-1;
+						</div>
+					</div>
+				</div>
+				<div>
+					<h2>分页拉取电台列表</h2>
+					<div class="text_indent text_i0">
+						<div class="code">
+							<code>BMResourcesManager.IOnGetRadioInfoListener radioInfoListener = new BMResourcesManager.IOnGetRadioInfoListener() {</code>
+							<code class="marginl_20">@Override</code>
+							<code class="marginl_20">  public void onGetRadioInfo(int errCode, BMResourcesManager.BMRadioInfo radioInfo, boolean isCache){</code>
+							<code class="marginl_40"> 		if (errCode == BMErrorCode.Err_None) {</code>
+							<code class="marginl_60">              //获取到本地缓存资源或拉取到最新电台详情</code>
+							<code class="marginl_40"> 		} else if (errCode == BMErrorCode.Err_Server_Not_Auth) {</code>
+							<code class="marginl_60">			  //未鉴权</code>
+							<code class="marginl_40">   	} else if (errCode == BMErrorCode.Err_Net_Response_Fail) {</code>
+							<code class="marginl_60">             //请求响应失败</code>
+							<code class="marginl_40">  		} else if (errCode == BMErrorCode.Err_SQL_Error) {</code>
+							<code class="marginl_60">          	 //数据库错误</code>
+							<code class="marginl_40">		}</code>
+							<code class="marginl_20">	}</code>
+							<code>};</code>
+							<code>BMIoTClient.getBMResourcesManager().getRadioInfo(radioId, radioInfoListener);</code>
+						</div>
+					</div>
+				</div>
+				<div>
+					<h2>订阅电台</h2>
+					<div class="text_indent text_i0">
+						<div class="code">
+							<code>BMResourcesManager.IOnSubscribeListener subscribeListener = new BMResourcesManager.IOnSubscribeListener() {</code>
+							<code class="marginl_20">@Override</code>
+							<code class="marginl_20"> public void onSubscribe(int errCode) {</code>
+							<code class="marginl_40"> 		if (errCode == BMErrorCode.Err_None) {</code>
+							<code class="marginl_60">              //订阅成功</code>
+							<code class="marginl_40"> 		} else if (errCode == BMErrorCode.Err_Server_Unbound) {</code>
+							<code class="marginl_60">			  //未绑定设备</code>
+							<code class="marginl_40"> 		} else if (errCode == BMErrorCode.Err_Server_Not_Auth) {</code>
+							<code class="marginl_60">			  //未鉴权</code>
+							<code class="marginl_40">   	} else if (errCode == BMErrorCode.Err_Net_Response_Fail) {</code>
+							<code class="marginl_60">             //请求响应失败</code>
+							<code class="marginl_40">  		} else if (errCode == BMErrorCode.Err_SQL_Error) {</code>
+							<code class="marginl_60">          	 //数据库错误</code>
+							<code class="marginl_40">		}</code>
+							<code class="marginl_20">	}</code>
+							<code>};</code>
+							<code>BMIoTClient.getBMResourcesManager().subscribeRadio(radioId,toyOpenId,subscribeListener);</code>
+						</div>
+					</div>
+				</div>
+				<div>
+					<h2>取消订阅</h2>
+					<div class="text_indent text_i0">
+						<div class="code">
+							<code>BMResourcesManager.IOnUnsubscribeListener unsubscribeListener = new BMResourcesManager.IOnUnsubscribeListener() {</code>
+							<code class="marginl_20">@Override</code>
+							<code class="marginl_20"> public void onSubscribe(int errCode) {</code>
+							<code class="marginl_40"> 		if (errCode == BMErrorCode.Err_None) {</code>
+							<code class="marginl_60">              //取消订阅成功</code>
+							<code class="marginl_40"> 		} else if (errCode == BMErrorCode.Err_Server_Unbound) {</code>
+							<code class="marginl_60">			  //未绑定设备</code>
+							<code class="marginl_40"> 		} else if (errCode == BMErrorCode.Err_Server_Not_Auth) {</code>
+							<code class="marginl_60">			  //未鉴权</code>
+							<code class="marginl_40">   	} else if (errCode == BMErrorCode.Err_Net_Response_Fail) {</code>
+							<code class="marginl_60">             //请求响应失败</code>
+							<code class="marginl_40">  		} else if (errCode == BMErrorCode.Err_SQL_Error) {</code>
+							<code class="marginl_60">          	 //数据库错误</code>
+							<code class="marginl_40">		}</code>
+							<code class="marginl_20">	}</code>
+							<code>};</code>
+							<code>BMIoTClient.getBMResourcesManager().unsubscribeRadio(radioId,toyOpenId,unsubscribeListener);</code>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<script type="text/javascript">
+_domReady.push(function(){
+    $('#J_navlist .bk[action="developer"]').addClass('cur');
+	$('#android007').addClass('cur');
+});
+</script>
+
+<!--#include file="/m2/act/office/layouts/footer.html"-->

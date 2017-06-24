@@ -1,0 +1,229 @@
+<!--#include file="/m2/act/office/layouts/header.html"-->
+<title>贝美开发者中心</title>
+</head>
+
+<body class="page page-scene">
+<div class="header" id="J_header">
+    <!--#include file="/m2/act/office/layouts/navigation.html"-->
+</div>
+<div class="doc_center">
+	<div class="doc">
+		<!--#include file="menulist.html"-->
+		
+		<div class="doc_detail">
+			<div class="">
+				<h1>资源操作</h1>
+				<div class="level1"><hr></div>
+			</div>
+			<div class="doc_content">
+				<div>
+					<h2>拉取资源</h2>
+					<div class="text_indent text_i0">
+						<div class="code">
+							<code>BMIoTResourcePullService *service = [[BMIoTResourcePullService alloc]init]; </code>
+							<code>[service requestConfigResourceInfoWithPageID:page complectionBlock:^(int errCode, BOOL isCache, NSArray<BMIoTConfigResource *> *resources)</code>
+							<code>{</code>
+							<code class="marginl_20">if (errCode == kBMErrorNone)</code>
+							<code class="marginl_20">{</code>
+							<code class="marginl_40">                //获取到本地缓存资源或拉取到服务器资源</code>
+							<code class="marginl_20"> }</code>
+							<code class="marginl_20">else if (errCode == kBMErrorServerResNotFound)</code>
+							<code class="marginl_20">{</code>
+							<code class="marginl_40">                //资源不存在</code>
+							<code class="marginl_20"> }</code>
+							<code class="marginl_20"> else if (errCode == kBMErrorNetAnomaly)</code>
+							<code class="marginl_20">{</code>
+							<code class="marginl_40">                //网络异常</code>
+							<code class="marginl_20"> }</code>
+							<code>}];</code>	
+						</div>
+						<div class="notice_str">
+							注：使用该接口拉取资源前，需要在运营后台配置资源内容
+						</div>
+					</div>
+				</div>
+				<div>
+					<h2>分页拉取专辑列表</h2>
+					<div class="text_indent text_i0">
+						<div class="code">
+							<code>BMIoTResourcePullService *service = [[BMIoTResourcePullService alloc]init]; </code>
+							<code>[service requestAlbumListWithLastAlbumId:lastAlbumId 
+							pageSize:pageSize complectionBlock:^(int errCode, BOOL isCache, BOOL continueFlag, NSArray<BMIoTAlbum *> *albums)</code>
+							<code>{</code>
+							<code class="marginl_20">if (errCode == kBMErrorNone)</code>
+							<code class="marginl_20">{</code>
+							<code class="marginl_40">                //获取到本地缓存或者拉取到最新专辑列表</code>
+							<code class="marginl_20"> }</code>
+							<code class="marginl_20">else if (errCode == kBMErrorServerResNotFound)</code>
+							<code class="marginl_20">{</code>
+							<code class="marginl_40">                //资源不存在</code>
+							<code class="marginl_20"> }</code>
+							<code class="marginl_20"> else if (errCode == kBMErrorNetAnomaly)</code>
+							<code class="marginl_20">{</code>
+							<code class="marginl_40">                //网络异常</code>
+							<code class="marginl_20"> }</code>
+							<code>}];</code>	
+						</div>
+					</div>
+				</div>
+				<div>
+					<h2>获取专辑详情</h2>
+					<div class="text_indent text_i0">
+						<div class="code">
+							<code>BMIoTResourcePullService *service = [[BMIoTResourcePullService alloc]init]; </code>
+							<code>[service requestAlbumDetailWithAlbumID:albumId complectionBlock:^(int errCode, BOOL isCache, BMIoTAlbumDetail *album)</code>
+							<code>{</code>
+							<code class="marginl_20">if (errCode == kBMErrorNone)</code>
+							<code class="marginl_20">{</code>
+							<code class="marginl_40">                //获取到本地缓存或者拉取到最新专辑详情</code>
+							<code class="marginl_20"> }</code>
+							<code class="marginl_20">else if (errCode == kBMErrorServerResNotFound)</code>
+							<code class="marginl_20">{</code>
+							<code class="marginl_40">                //资源不存在</code>
+							<code class="marginl_20"> }</code>
+							<code class="marginl_20"> else if (errCode == kBMErrorNetAnomaly)</code>
+							<code class="marginl_20">{</code>
+							<code class="marginl_40">                //网络异常</code>
+							<code class="marginl_20"> }</code>
+							<code>}];</code>	
+						</div>
+					</div>
+				</div>
+				<div>
+					<h2>推送歌曲</h2>
+					<div class="text_indent text_i0">
+						<div class="code">
+							<code>BMIoTResourcePullService *service = [[BMIoTResourcePullService alloc]init]; </code>
+							<code>[service pushMedia:infoArray toToyWithToyID:openId complection:^(int errCode) {</code>
+							<code>{</code>
+							<code class="marginl_20">if (errCode == kBMErrorNone)</code>
+							<code class="marginl_20">{</code>
+							<code class="marginl_40">                //推送成功</code>
+							<code class="marginl_20"> }</code>
+							<code class="marginl_20">else if (errCode == kBMErrorServerUnbound)</code>
+							<code class="marginl_20">{</code>
+							<code class="marginl_40">                //未绑定设备</code>
+							<code class="marginl_20"> }</code>
+							<code class="marginl_20">else if (errCode == kBMErrorServerResNotFound)</code>
+							<code class="marginl_20">{</code>
+							<code class="marginl_40">                //资源不存在</code>
+							<code class="marginl_20"> }</code>
+							<code class="marginl_20"> else if (errCode == kBMErrorNetAnomaly)</code>
+							<code class="marginl_20">{</code>
+							<code class="marginl_40">                //网络异常</code>
+							<code class="marginl_20"> }</code>
+							<code>}];</code>	
+						</div>
+					</div>
+				</div>
+				<div>
+					<h2>分页拉取电台列表</h2>
+					<div class="text_indent text_i0">
+						<div class="code">
+							<code>BMIoTResourcePullService *service = [[BMIoTResourcePullService alloc]init]; </code>
+							<code>[service requestRadioListWithLastRadioId:radioId pageSize:size complection:^
+							(int errCode, BOOL isCache, BOOL continueFlag, NSArray<BMIoTRadio *> *radios)</code>
+							<code>{</code>
+							<code class="marginl_20">if (errCode == kBMErrorNone)</code>
+							<code class="marginl_20">{</code>
+							<code class="marginl_40">                //获取到本地缓存或者拉取到最新电台列表</code>
+							<code class="marginl_20"> }</code>
+							<code class="marginl_20">else if (errCode == kBMErrorServerResNotFound)</code>
+							<code class="marginl_20">{</code>
+							<code class="marginl_40">                //资源不存在</code>
+							<code class="marginl_20"> }</code>
+							<code class="marginl_20"> else if (errCode == kBMErrorNetAnomaly)</code>
+							<code class="marginl_20">{</code>
+							<code class="marginl_40">                //网络异常</code>
+							<code class="marginl_20"> }</code>
+							<code>}];</code>	
+						</div>
+					</div>
+				</div>
+				<div>
+					<h2>分页拉取电台列表</h2>
+					<div class="text_indent text_i0">
+						<div class="code">
+							<code>BMIoTResourcePullService *service = [[BMIoTResourcePullService alloc]init]; </code>
+							<code>[service requestRadioDetailInfoWithRadioID:radioId complection:^(int errCode, BOOL isCache, BMIoTRadioDetail *radio)</code>
+							<code>{</code>
+							<code class="marginl_20">if (errCode == kBMErrorNone)</code>
+							<code class="marginl_20">{</code>
+							<code class="marginl_40">                //获取到本地缓存或者拉取到最新电台详情</code>
+							<code class="marginl_20"> }</code>
+							<code class="marginl_20">else if (errCode == kBMErrorServerResNotFound)</code>
+							<code class="marginl_20">{</code>
+							<code class="marginl_40">                //资源不存在</code>
+							<code class="marginl_20"> }</code>
+							<code class="marginl_20"> else if (errCode == kBMErrorNetAnomaly)</code>
+							<code class="marginl_20">{</code>
+							<code class="marginl_40">                //网络异常</code>
+							<code class="marginl_20"> }</code>
+							<code>}];</code>	
+						</div>
+					</div>
+				</div>
+				<div>
+					<h2>订阅电台</h2>
+					<div class="text_indent text_i0">
+						<div class="code">
+							<code>BMIoTResourcePullService *service = [[BMIoTResourcePullService alloc]init]; </code>
+							<code>[service subscribeRadio:radioId forToy:toyId complection:^(int errCode)</code>
+							<code>{</code>
+							<code class="marginl_20">if (errCode == kBMErrorNone)</code>
+							<code class="marginl_20">{</code>
+							<code class="marginl_40">                //订阅成功</code>
+							<code class="marginl_20"> }</code>
+							<code class="marginl_20">else if (errCode == kBMErrorServerUnbound)</code>
+							<code class="marginl_20">{</code>
+							<code class="marginl_40">                //未绑定设备</code>
+							<code class="marginl_20"> }</code>
+							<code class="marginl_20">else if (errCode == kBMErrorServerResNotFound)</code>
+							<code class="marginl_20">{</code>
+							<code class="marginl_40">                //资源不存在</code>
+							<code class="marginl_20"> }</code>
+							<code class="marginl_20"> else if (errCode == kBMErrorNetAnomaly)</code>
+							<code class="marginl_20">{</code>
+							<code class="marginl_40">                //网络异常</code>
+							<code class="marginl_20"> }</code>
+							<code>}];</code>	
+						</div>
+					</div>
+				</div>
+				<div>
+					<h2>取消订阅</h2>
+					<div class="text_indent text_i0">
+						<div class="code">
+							<code>BMIoTResourcePullService *service = [[BMIoTResourcePullService alloc]init]; </code>
+							<code>[service unsubscribeRadio:radioId forToy:toyId complection:^(int errCode)</code>
+							<code>{</code>
+							<code class="marginl_20">if (errCode == kBMErrorNone)</code>
+							<code class="marginl_20">{</code>
+							<code class="marginl_40">                //取消订阅成功</code>
+							<code class="marginl_20"> }</code>
+							<code class="marginl_20">else if (errCode == kBMErrorServerUnbound)</code>
+							<code class="marginl_20">{</code>
+							<code class="marginl_40">                //未绑定设备</code>
+							<code class="marginl_20"> }</code>
+							<code class="marginl_20"> else if (errCode == kBMErrorNetAnomaly)</code>
+							<code class="marginl_20">{</code>
+							<code class="marginl_40">                //网络异常</code>
+							<code class="marginl_20"> }</code>
+							<code>}];</code>	
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<script type="text/javascript">
+_domReady.push(function(){
+    $('#J_navlist .bk[action="developer"]').addClass('cur');
+	$('#ios007').addClass('cur');
+});
+</script>
+
+<!--#include file="/m2/act/office/layouts/footer.html"-->

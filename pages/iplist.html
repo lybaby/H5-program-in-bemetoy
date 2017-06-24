@@ -1,0 +1,37 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name='format-detection' content='telephone=no'>
+    <meta name='viewport' content='width=device-width, minimum-scale=1.0, maximum-scale=1.0'>
+    <title>贝美童趣馆</title>
+</head>
+<body>
+
+<article class="mika-info-page">
+    <div class="ip-classlist classlist">
+		<ul id="ip-classlist">
+		
+		</ul>
+</article>
+
+<script type="text/template" id="J_temp-item-class">
+    <% $.each(list, function(i, item){ %>
+    <li class="item">
+        <a class="item-a" href="<%=item.jump_url %>">
+			<div class="img-b left" ><img src="<%=item.url %>" class="img-list"/></div>
+            <div class="name">
+				<div  class="text-over"><%=item.name %></div>
+				<div class="time"><%=item.question %>更新</div>
+			</div>  
+        </a>
+		<img src="./static/images/left-ip.png" class="jiantou"/>
+    </li>
+    <%});%>
+</script>
+
+
+<script type="text/javascript">
+    BEME.initMinPage('iplist');
+</script>
+</body>
+</html>

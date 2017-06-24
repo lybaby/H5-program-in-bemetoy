@@ -1,0 +1,83 @@
+<!--#include file="/m2/act/office/layouts/header.html"-->
+<title>贝美开发者中心</title>
+</head>
+
+<body class="page page-scene">
+<div class="header" id="J_header">
+    <!--#include file="/m2/act/office/layouts/navigation.html"-->
+</div>
+<div class="doc_center">
+	<div class="doc">
+		<!--#include file="menulist.html"-->
+		
+		<div class="doc_detail">
+			<div class="">
+				<h1>账号管理</h1>
+				<div class="level1"><hr></div>
+			</div>
+			<div class="doc_content">
+				<div>
+					<h2>获取家庭圈信息</h2>
+					<div class="text_indent">
+						<div class="code">
+							<code>BMGroupInfo groupInfo = BMIoTClient.getBMContactStorage().getGroup();</code>
+						</div>
+					</div>
+				</div>
+				<div>
+					<h2>获取家庭圈除自身外的所有成员</h2>
+					<div class="text_indent">
+						<div class="code">
+							<code>List<BMContactInfo> toyInfos = BMIoTClient.getBMContactStorage().getGroup().getAllMembers();</code>
+						</div>
+					</div>
+				</div>
+				<div>
+					<h2>获取家庭圈所有玩具的信息</h2>
+					<div class="text_indent">
+						<div class="code">
+							<code>List<BMContactInfo> toyInfos = BMIoTClient.getBMContactStorage().getGroup().getAllToysInGroup();</code>
+						</div>
+					</div>
+				</div>
+				<div>
+					<h2>获取某成员信息</h2>
+					<div class="text_indent">
+						<div class="code">
+							<code>BMContactInfo contactInfo = BMIoTClient.getBMContactStorage().getMemberBy(openId);</code>
+						</div>
+					</div>
+				</div>
+				<div>
+					<h2>监听家庭圈成员变化</h2>
+					<div class="text_indent">  
+						<div class="code">
+							<code>IOnGroupChangeListener listener = new IOnGroupChangeListener() {</code>
+							<code class="marginl_20">@Override</code>
+							<code class="marginl_20"> public void onJoin(List<String> openIds) {</code>
+							<code class="marginl_40">              //新增成员</code>
+							<code class="marginl_20">}</code>
+							<code class="marginl_20">@Override</code>
+							<code class="marginl_20">public void onQuit(List<String> openIds) {</code>
+							<code class="marginl_40">            //成员退出</code>
+							<code class="marginl_20">}</code>
+							<code>}</code>
+							<code>BMIoTClient.getBMContactsManager().setOnGroupChangeListener(listener);</code>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<script type="text/javascript">
+_domReady.push(function(){
+    $('#J_navlist .bk[action="developer"]').addClass('cur');
+	$('#android003').addClass('cur');
+
+});
+</script>
+
+<!--#include file="/m2/act/office/layouts/footer.html"-->

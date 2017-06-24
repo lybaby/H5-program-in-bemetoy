@@ -1,0 +1,59 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name='format-detection' content='telephone=no'>
+    <meta name='viewport' content='width=device-width, minimum-scale=1.0, maximum-scale=1.0'>
+    <title>test</title>
+    <script type="text/javascript" src="../static/lib/zepto-1.1.6.min.js"></script>
+    <script type="text/javascript" src="../static/lib/require.js"></script>
+    <script type="text/javascript" src="../static-src/js/main.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="../static/css/style.css">
+    <style type="text/css">
+    </style>
+</head>
+<body>
+
+<div class="loading-book" id="J_loadingbox">
+	<div class="text">加载中：<span>0%</span></div>
+</div>
+<article class="book-page">
+	
+	
+	<div class="push_all">
+		<a href="javascript:void(0);" class="h-btn btn-push" id="J_push_all"></a>
+		<a href="javascript:void(0);" class="h-btn btn-replay" id="J_btn-replay"></a>
+		<a href="javascript:void(0);" class="h-btn btn-favorites favorites" id="J_btn-collection"></a>
+		<a href="javascript:void(0);" class="h-btn btn-share" id="J_btn-share"></a>
+	</div>
+	<div class="slide-box" id="J_slidebox">
+		<a href="javascript:void(0);" class="sbtn left">&nbsp;</a>
+		<a href="javascript:void(0);" class="sbtn right">&nbsp;</a>
+	</div>
+	<div class="show-warning">可手机横屏阅读，图片更清晰哦！</div>
+	<div class="img-block" id="img-block"><div><img id="book-img"></div><div class="page-num" id="J_pagenum">1/9</div></div>
+	<div id="J_jplayer" style="display:none;"></div>
+	<div class="footer-weixin" style="display:none;">
+		 <img src="./static/images/app-header.png" class="app">
+		 <span class="text">宝宝爱听,贝美时光说</span>
+		 <a class="download" href="http://www.bemetoy.com/download/download.html" >点击下载</a>
+	</div>
+	<div class="player" id="player" style="display:none;"></div>
+</article>
+
+
+<!-- 这里是模板 -->
+<script type="text/template" id="J_temp-songlist">
+    <% $.each(list, function(i, item){ %>
+		<audio id="J_audio-<%=i%>" src="<%=item.url %>" preload="auto" ></audio>
+    <%});%>
+</script>
+
+
+<script type="text/javascript">
+    BEME.initMinPage('book');
+</script>
+
+
+</body>
+</html>

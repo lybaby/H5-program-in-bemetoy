@@ -1,0 +1,185 @@
+<div class="cover"></div>
+<div class="login_box">
+	<div class="title"><span>登录</span><a class="btn-delete"></a></div>
+	<form class="login_form"  role="form" type="post">
+		<div class="input_div"><div class="input_label">邮箱</div><input type="text"  name="email" class="login_email" id="login_email"/></div>
+		<div class="input_div"><div class="input_label">密码</div><input type="password"  name="password" class="login_password" id="login_password"/></div>
+		<div class="lose_div"><a  href="/m2/act/office/opendoc.html">忘记密码</a></div>
+		<div class="error_str"></div>
+		<div class="form-actions">
+            <a class="btn btn-primary" id="btn-smt">登录</a>
+			<a class="btn btn-default" href="/m2/act/office/register.html">注册</a>
+        </div>
+	</form>
+</div>
+<div class="footer mbox clearfix">
+    <div class="left">
+        Copyright © 2016 Bemetoy. All Rights Reserved 深圳市贝美互动科技有限公司 版权所有 备案号：<a href="http://www.miibeian.gov.cn" target="_blank">粤ICP备15008362号-1</a>
+    </div>
+    <div class="right">
+        <a target="_blank" href="http://www.bemetoy.com">贝美互动官网</a>
+    </div>
+</div>
+
+<script type="text/javascript" src="/m2/act/office/static/js/jquery-1.11.1.min.js"></script>
+<script type="text/javascript" src="/m2/act/office/static/js/particles.min.js"></script>
+<script type="text/javascript" src="/m2/act/office/static/js/common.js"></script>
+<script type="text/javascript">
+    
+$(document.body).ready(function(){
+    var initNavigation = function(){
+        var _timer = 0,
+            _inSubnav = false;
+
+        var setMenuTab = function(index){
+            var $line = $('#J_navlist .line'),
+                _curindex = $('#J_navlist li .cur').parent().index();
+                if(index<0){
+                    $('.subnav').hide();
+                    if(_curindex>-1){
+                        index = _curindex;
+                    }else{
+                        return $line.stop().animate({
+                            width : 0
+                        }, 400);
+                    }
+                }
+
+            if($line.width()==0){
+                $line.css('left', 0);
+            }
+
+            var boff = $('#J_navlist').offset(),
+                $this = $(this),
+                $tab = $('#J_navlist li').eq(index);
+            $line.stop().animate({
+                width : $tab.width(),
+                left : $tab.offset().left - boff.left
+            }, 400);
+
+            clearTimeout(_timer);
+            var subnav = $this.attr('subnav');
+            if(subnav || _inSubnav){
+                $('.subnav[action="'+subnav+'"]').stop().slideDown();
+            }else{
+                _timer = setTimeout(function(){
+                    $('.subnav').hide();
+                }, 50);
+            }
+        };
+
+        $('#J_navlist .bk').on('mouseenter', function(){
+            setMenuTab.call(this, $(this).parent().index());
+        });
+
+        $('#J_navlist').on('mouseleave', function(){
+            _timer = setTimeout(function(){
+                setMenuTab.call(this, -1);
+            }, 50);
+        });
+
+        $('.subnav').on('mouseenter', function(){
+            _inSubnav = true;
+            setMenuTab.call(this, 4);
+        }).on('mouseleave', function(){
+            _inSubnav = false;
+            setMenuTab.call(window, -1);
+        });
+        setMenuTab.call(window, -1);
+    };
+
+    $.each(_domReady, function(i, fn){
+        fn.call(this);
+    });
+
+    initNavigation();
+	
+	$(".btn-delete").on("click",function(){
+		$(".cover").hide();
+		$('.login_box').hide();
+	});
+	
+	$(".do_login").on("click",function(){
+		$(".cover").show();
+		$('.login_box').show();
+	});
+	
+	
+	$("#btn-smt").on("click",function(){
+			login();
+	});
+	
+function login(){
+		var email = $("#login_email").val();
+		if(isEmpty(email)){
+			$(".error_str").html('邮箱不能为空');
+			return;
+		}
+		if(!isEmail(email)){
+			$(".error_str").html('邮箱格式不对');
+			$("#login_email").val('');
+			return;
+		}
+		var password =  $("#login_password").val();
+		if(isEmpty(password)){
+			$(".error_str").html('密码不能为空');
+			return;
+		}
+		$.ajax({
+			url:"/sdk/home/login/loginFromOffice",
+			data:{
+				email:email,
+				password:password
+			},
+			type:'post',
+			dataType:'json',
+			error:function(a){},
+			success:function(a){
+				if(a.success){
+					changeLoginStatus()
+					window.open("http://dev.h5.bemetoy.com/sdk/home/home/index");
+				}else{
+					$(".error_str").html(a.error_str);
+				}
+			}
+		});
+	}
+	
+	$(document).on("click",'.logout',function(){
+		$.ajax({
+			url:"/sdk/home/login/logoutFromOffice",
+			type:'post',
+			dataType:'json',
+			error:function(a){},
+			success:function(a){
+				if(a.success){
+					window.location.reload();
+				}else{
+					$(".error_str").html(a.error_str);
+				}
+			}
+		});
+	
+	});
+	
+	function changeLoginStatus(){
+		var session = getCookie('user_session_id');
+		var email=getCookie('user_email');
+		if(session&&email){
+			var html = '<a class="bk left" target="_blank" href="http://dev.h5.bemetoy.com/sdk/home/home/index">'+email+'</a>'+
+				'<i class="line left"></i>'+
+				'<a class="bk logout left" href="javascript:void(0);">注销</a>';
+			$(".nav-box .login").html(html);
+		}
+		$(".login_box").hide();
+		$(".cover").hide();
+	}
+	
+	changeLoginStatus();
+	
+	
+});
+</script>
+
+</body>
+</html>

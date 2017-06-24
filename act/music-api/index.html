@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>music api</title>
+<style type="text/css">
+body,html,h1,h2,h3{margin:0; padding: 0;}
+html,body{height: 100%;}
+body{font-family:"Microsoft YaHei",微软雅黑,"Microsoft JhengHei","宋体"; background: #fff; position: relative; min-height: 100%; font-size: 13px;}
+h1{text-align: center; height: 120px; line-height: 120px; font-size: 45px; color: #C00; letter-spacing: 15px; display: none;}
+a{text-decoration: none; outline: 0;}
+input, input:focus, input:active{outline: 0;}
+ul {list-style:none;overflow:hidden;padding:0;margin:0;}
+.input {background:#fff;border:1px #ccc solid;box-shadow:inset 0 1px 1px rgba(0,0,0,0.075);height:16px;line-height:16px;vertical-align:middle;padding:11px 6px;-webkit-border-radius:4px;-moz-border-radius:4px;border-radius:4px;-webkit-box-shadow:inset 0 1px 1px rgba(0,0,0,0.075);-moz-box-shadow:inset 0 1px 1px rgba(0,0,0,0.075);box-shadow:inset 0 1px 1px rgba(0,0,0,0.075);-webkit-transition:border linear 0.2s,box-shadow linear 0.2s;-moz-transition:border linear 0.2s,box-shadow linear 0.2s;-o-transition:border linear 0.2s,box-shadow linear 0.2s;transition:border linear 0.2s,box-shadow linear 0.2s;}
+.input:focus {border-color:rgba(82,168,236,0.8);-webkit-box-shadow:inset 0 1px 1px rgba(0,0,0,0.075),0 0 8px rgba(82,168,236,0.6);-moz-box-shadow:inset 0 1px 1px rgba(0,0,0,0.075),0 0 8px rgba(82,168,236,0.6);box-shadow:inset 0 1px 1px rgba(0,0,0,0.075),0 0 8px rgba(82,168,236,0.6);}
+.arrow-down {width:0;height:0;border-left:4px solid transparent;border-right:4px solid transparent;_border-left:4px solid white;_border-right:4px solid white;border-top:4px solid #999;overflow:hidden;display:inline-block;zoom:1;float:left;margin:9px 0 0 3px;}
+.arrow-up {border-left:4px solid transparent;border-right:4px solid transparent;_border-left:4px solid white;_border-right:4px solid white;border-top:none;border-bottom:4px solid #999;}
+.btn {height:40px;line-height:20px;vertical-align:middle;text-align:center;}
+.btn {display:inline-block;*display:inline;padding:0px 12px;margin-bottom:0;*margin-left:.3em;font-size:14px;color:#333333;text-shadow:0 1px 1px rgba(255,255,255,0.75);cursor:pointer;background-color:#f5f5f5;*background-color:#e6e6e6;background-image:-moz-linear-gradient(top,#ffffff,#e6e6e6);background-image:-webkit-gradient(linear,0 0,0 100%,from(#ffffff),to(#e6e6e6));background-image:-webkit-linear-gradient(top,#ffffff,#e6e6e6);background-image:-o-linear-gradient(top,#ffffff,#e6e6e6);background-image:linear-gradient(to bottom,#ffffff,#e6e6e6);background-repeat:repeat-x;border:1px solid #cccccc;*border:0;border-color:#e6e6e6 #e6e6e6 #bfbfbf;border-color:rgba(0,0,0,0.1) rgba(0,0,0,0.1) rgba(0,0,0,0.25);border-bottom-color:#b3b3b3;-webkit-border-radius:2px;-moz-border-radius:2px;border-radius:2px;filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffffff',endColorstr='#ffe6e6e6',GradientType=0);filter:progid:DXImageTransform.Microsoft.gradient(enabled=false);*zoom:1;-webkit-box-shadow:inset 0 1px 0 rgba(255,255,255,0.2),0 1px 2px rgba(0,0,0,0.05);-moz-box-shadow:inset 0 1px 0 rgba(255,255,255,0.2),0 1px 2px rgba(0,0,0,0.05);box-shadow:inset 0 1px 0 rgba(255,255,255,0.2),0 1px 2px rgba(0,0,0,0.05);}
+.btn:hover,.btn:focus,.btn:active,.btn.active,.btn.disabled,.btn[disabled] {color:#333333;background-color:#e6e6e6;*background-color:#d9d9d9;}
+.btn:hover,.btn:focus {color:#333333;text-decoration:none;background-position:0 -15px;-webkit-transition:background-position 0.1s linear;-moz-transition:background-position 0.1s linear;-o-transition:background-position 0.1s linear;transition:background-position 0.1s linear;}
+.btn.active,.btn:active {background-color:#cccccc \9;background-image:none;-webkit-box-shadow:inset 0 2px 4px rgba(0,0,0,0.15),0 1px 2px rgba(0,0,0,0.05);-moz-box-shadow:inset 0 2px 4px rgba(0,0,0,0.15),0 1px 2px rgba(0,0,0,0.05);box-shadow:inset 0 2px 4px rgba(0,0,0,0.15),0 1px 2px rgba(0,0,0,0.05);}
+
+.fl{float: left;}
+.search{margin:10px 0 0 10px;}
+.search .search-inp{width: 590px;}
+.music-table{margin-top: 50px; min-width: 800px; min-height: 200px; border: 1px solid #f4f4f4; border-spacing: 0; border-collapse: collapse;}
+.music-table td, .music-table th{ border: 1px solid #f4f4f4; height: 35px; line-height: 35px;}
+.music-table th{ font-size: 15px;}
+.music-table td .ing{color: #ccc; cursor: default;}
+.music-table td .red{color: #f00;}
+</style>
+
+</head>
+<body>
+
+<div class="search">
+    <form action="" method="GET" id="search-form">
+    <label>请输入音乐URL:&nbsp;</label>
+    <input type="text" class="input search-inp" name="q" id="searchbox" autofocus value="http://www.ximalaya.com/53156145/album/4717475" />
+    <input type="submit" class="btn search-btn" value="分析地址" />
+    </form>
+</div>
+
+<table class="music-table" id="J_music-table">
+    <thead>
+        <tr><th>歌曲名称</th><th>下载地址</th></tr>
+    </thead>
+    <tbody>
+    </tbody>
+</table>
+
+<script type="text/javascript" src="http://pc1.gtimg.com/softmgr/js/jquery-1.11.1.min.js"></script>
+
+<script type="text/javascript">
+(function(){
+    $.fn.createLoadMask = function(options){
+        var $sele = this,
+            temp = [
+                '<div class="ym-mask-box" style="position:fixed; left:0; right:0; top:0; bottom:0; background:rgba(255,255,255,.9); z-index:2000; display:none;">',
+                '    <div class="mask-inner" style="width:600px; min-height:200px; position:absolute; top:50%; left:50%; margin-left:-300px; margin-top:-100px; background:url(http://pc1.gtimg.com/softmgr/images/webclinic/loading.png) no-repeat center 10px;">',
+                '        <div class="mask-txt" style="margin-top:80px; text-align:center; color:#10ccfb; font-size:13px; line-height:26px;"></div>',
+                '    </div>',
+                '</div>'
+            ].join('');
+        if($sele.find('.ym-mask-box').length<1){
+            $sele.append(temp);
+        }
+
+        options = options || {};
+        if($.type(options)=='string'){
+            options = {msg:options};
+        }
+        if(!options.msg){
+            options.msg = '正在请求中，请稍等...&nbsp;<br><div style="color:#bbb;">来，跟着一起数，<span class="mask-time">1</span>只羊</div>';
+        }
+        $sele.find('.mask-txt').html(options.msg);
+
+        var sheepTimer = 0,
+            delayTimer = 0,
+            $maskbox = $sele.find('.ym-mask-box');
+        return {
+            show : function(delay){
+                clearInterval(sheepTimer);
+                delay = delay || 200;
+                delayTimer = setTimeout(function(){
+                    var time = 1;
+                    $maskbox.show();
+                    sheepTimer = setInterval(function(){
+                        $maskbox.find('.mask-time').text(++time);
+                    }, 1000);
+                }, delay);
+                return this;
+            },
+
+            hide : function(){
+                $maskbox.hide();
+                clearInterval(sheepTimer);
+                clearTimeout(delayTimer);
+                return this;
+            }
+        };
+    };
+
+    $.extend({
+        htmlEncode : (function(){
+            var $div = $('<div/>');
+            return function(text){
+                return $div.text(text).html();
+            };
+        })()
+    });
+})();
+
+$(document.body).ready(function(){
+
+var queryData = function(data, callback){
+    var _loadMask = $(document.body).createLoadMask().show();
+    return $.ajax({
+        url: './api.php',
+        type: 'post',
+        dataType: 'json',
+        data: data,
+    }).done(function(jdata) {
+        _loadMask.hide();
+        callback(jdata);
+    });
+};
+
+var _getDownloadUrl = function(urls){
+    if(urls.length<1) return ;
+
+    var info = urls.splice(0, 1)[0];
+    info['type'] = 'detail';
+    queryData(info, function(jdata){
+        if(jdata.data && jdata.data.download){
+            var $a = $('.download[tid="'+info.id+'"]').attr({
+                'href' : jdata.data.download,
+                'target' : '_blank'
+            }).removeClass('ing').text('下载');
+            if(jdata.data.title){
+                $a.closest('tr').find('.name').text(jdata.data.title);
+            }
+        }else{
+            $('.download[tid="'+info.id+'"]').addClass('red').text('获取失败');
+        }
+    }).fail(function(){
+        $('.download[tid="'+info.id+'"]').addClass('red').text('请求超时');
+    });
+
+    setTimeout(function(){
+        _getDownloadUrl(urls);
+    }, 100);
+};
+
+var getDownloadUrl = function(){
+    var urls = [];
+    $('#J_music-table .ing').each(function(i, info){
+        var $obj = $(info);
+        urls.push({id:$obj.attr('tid'), site:$obj.attr('tsite')});
+    });
+    _getDownloadUrl(urls);
+};
+
+var showList = function(list){
+    var html = '';
+    $.each(list, function(i, info){
+        html += '<tr><td class="name">'+$.htmlEncode(info.name)+'</td> <td><a class="download ing" tsite="'+$.htmlEncode(info.site)+'" tid="'+$.htmlEncode(info.id)+'" href="javascript:void(0);">正在获取地址...</a></td></tr>';
+    });
+    $('#J_music-table').html(html);
+    getDownloadUrl();
+};
+
+var parseUrl = function(url){
+    //http://www.ximalaya.com/53156145/sound/18297724
+    var match = '';
+    if(match = /ximalaya\.com\/([\d]+)\/album\/([\d]+)/.exec(url)){
+        queryData({
+            site : 'ximalaya',
+            type : 'album', url : url
+        }, function(jdata){
+            showList(jdata.data);
+        });
+    }else if(match = /ximalaya\.com\/([\d]+)\/sound\/([\d]+)/.exec(url)){
+        showList([
+            {name:"未知", site:"ximalaya", id:match[2]}
+        ]);
+    }else{
+        alert('目前只支持“喜马拉雅”，其它站点支持，请联系sue！');
+    }
+};
+
+$('#search-form').on('submit', function(){
+    var $this = $(this),
+        url = $.trim($('#searchbox').val());
+    if(!url){
+        $('#searchbox').focus();
+        return false;
+    }
+    parseUrl(url);
+    return false;
+});
+});
+</script>
+
+</body>
+</html>

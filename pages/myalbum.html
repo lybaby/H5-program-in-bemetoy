@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name='format-detection' content='telephone=no'>
+    <meta name='viewport' content='width=device-width, minimum-scale=1.0, maximum-scale=1.0'>
+    <title>创建的歌单</title>
+    <script type="text/javascript" src="../static/lib/zepto-1.1.6.min.js"></script>
+    <script type="text/javascript" src="../static/lib/require.js"></script>
+    <script type="text/javascript" src="../static-src/js/main.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="../static/css/style.css">
+
+    <style>
+    .myalbum{padding: 1.1rem 0 0.3rem 0; font-size: 16px;}
+    .myalbum .title{overflow: hidden;  height: 0.47rem;  line-height: 0.47rem;  padding: 0.2rem 2%; background: #f0edea;}
+    .myalbum .item{ position: relative}
+    .myalbum .item-a{background: url('../static//images/right.png') no-repeat right 0.2rem center;background-size: 0.2rem auto;}
+    .myalbum .img-auto{height: 0.9rem;  width: 0.9rem;padding-top: 0.1rem;    margin-left: 0.25rem;}
+    .myalbum .play-box{ background-color: #fcf8f5;}
+    .myalbum .text-over{
+        position: absolute;
+        top: 0;
+        right: 0;
+        left: 1.15rem;
+        height: 1rem;
+        line-height: 1rem;
+        border-bottom: 1px #e3e6eb solid;
+        margin-left: 0.2rem;
+        padding-left: 0.2rem
+    }
+    .myalbum .desc{
+        position: absolute;
+        top: 0;
+        right: 0.7rem;
+        line-height: 1rem;
+        height: 1rem;
+    }
+    </style>
+</head>
+<body>
+<article class="myalbum">
+	<div class="top">
+        <div class="edit">新建</div>
+        <div class="cancel">编辑</div>
+    </div>
+
+    <div class="title">
+        <a class="left check" href="javascript:void(0);" value="0"><img src="./static/images/xuanzekong.png"></a>
+        <span class="left" >我创建的歌单</span>
+        <div class="left">(<span id="J_playnum">0</span>)</div>
+		 <a class="option-btn right"  id="play_edit" href="javascript:void(0);"></a>
+    </div>
+	<div class="select-all">
+        <a class="left check_all" href="javascript:void(0);" value="0"><img src="./static/images/xuanzekong.png"></a>
+        <span class="left" >我创建的歌单</span>
+        <div class="left">(<span id="J_playnum_1">0</span>)</div>
+        <a class="right content" href="javascript:void(0);" id="cancel">取消</a>
+        <a class="right content_add"  href="javascript:void(0);" id="delete">删除</a>
+    </div>
+
+    <ul class="play-box" id="J_play_list"></ul>
+</article>
+<!-- 这里是模板 -->
+<script type="text/template" id="J_temp-pitem">
+    <% $.each(list, function(i, item){ %>
+    <li class="item"  sid="<%=item.id %>">
+        <a class="checkbox" value = '0'><img src="./static/images/xuanzekong.png"/></a>
+        <a class="item-a"  href="#!m=myplay&id=<%=item.id %>">
+            <div class="left">
+                <img class="img-auto" src="<%=BEME.func.imageUrl(item.cover)||'./static/images/default-cover.png' %>" alt="">
+            </div>
+            <div class="text-over"><%=item.name %></div>
+            <div class="desc"><%=item.count %></div>
+        </a>
+    </li>
+    <%});%>
+</script>
+
+<script type="text/javascript">
+    BEME.initPage('myalbum');
+</script>
+
+</body>
+</html>

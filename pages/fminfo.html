@@ -1,0 +1,105 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name='format-detection' content='telephone=no'>
+    <meta name='viewport' content='width=device-width, minimum-scale=1.0, maximum-scale=1.0'>
+    <title>test</title>
+    <script type="text/javascript" src="../static/lib/zepto-1.1.6.min.js"></script>
+    <script type="text/javascript" src="../static/lib/require.js"></script>
+    <script type="text/javascript" src="../static-src/js/main.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="../static/css/style.css">
+    <style type="text/css">
+        /*.fminfo-page{background: url('../static/images/pages/fminfo.jpg') no-repeat 0 0; background-size: 100% auto; height: 2000px; padding-top: 1.1rem;}*/
+    </style>
+</head>
+<body>
+
+<article class="comm-page fminfo-page">
+    <div class="top-box" id="J_top-box">
+        <div class="img-b">
+            <img imgsrc="" src="./static/images/moren_ms.jpg" class="img-cover">
+        </div>
+        <div class="uptime"></div>
+        <div class="name-box">
+            <div class="name text-over"></div>
+            <div class="playbox"></div>
+        </div>
+    </div>
+
+    <div class="info-box" style="    display:none;">
+        <a class="preson_name" id="person_name"></a>
+    </div>
+	
+	<div class="top">
+		<div class="edit">更改推送时间</div>
+		<div class="cancel">取消订阅</div>
+	</div>
+	
+    <div class="infodesc" id="J_album-desc" style="border:none;"></div>
+	
+	<div class="infoclick info-box">
+		<a class="item-a share right"  href="javascript:void(0);" >分享</a>
+		<a href="javascript:void(0);" class="item-a btn-subscribe right"><span id="J_description">订阅</span>&nbsp;(<span id="J_ordernum"></span>)</a>
+
+	</div>
+
+    <div class="action-box">
+        <a class="item-a option-btn left" href="javascript:void(0);" id="J_option-btn"></a>
+		<div class="desc left">排序(共&nbsp;<span id="J_songnum"></span>&nbsp;期节目)</div>
+		 <a class="push-title right" href="javascript:void(0);"></a>
+    </div>
+	
+
+
+    <div class="select-all">
+        <a class="left" href="javascript:void(0);" value="0"><img src="./static/images/xuanzekong.png"></a>
+        <a class="title">全选</a>
+        <a class="right content" href="javascript:void(0);" id="cancel">取消</a>
+        <a class="right content"  href="javascript:void(0);" id="add">加入歌单</a>
+
+    </div>
+
+    <ul class="song-box" id="J_song-box"></ul>
+</article>
+
+<script type="text/template" id="J_temp-item">
+    <% $.each(list, function(i, item){ %>
+    <li class="item" sid="<%=item.id %>"  md5="<%=item.md5 %>"  url="<%=item.url %>" tag="station" tagval="<%=item.tagval %>" type="3" size="<%=item.filesize %>">
+		<a class="item-a" href="javascript:void(0);">
+			<div class="num"><%=flag ? list.length-i : i+1 %></div>
+            <div class="title-box">
+                <div class="title "><%=item.name %></div>
+                <div class="<%=item.is_new == 1?"new":""%>"></div>
+            </div>
+            <div class="desc"><%=BEME.func.formatTime(item.radio_time) %></div>
+		   <div class="item-play"  href="javascript:void(0);"><img src="./static/images/more.png"></div>
+        </a>
+    </li>
+    <%});%>
+</script>
+
+<script type="text/template" id="J_temp-item-new">
+    <% $.each(list, function(i, item){ %>
+    <li class="item" sid="<%=item.id %>"  md5="<%=item.md5 %>"  url="<%=item.url %>" tag="station" tagval="<%=item.tagval %>" type="3" size="<%=item.filesize %>">
+		<a class="item-a" href="javascript:void(0);">
+			<div class="num"><%=flag ? list.length-i : i+1 %></div>
+            <div class="title-box">
+                <div class="title "><%=item.name %></div>
+                <div class="<%=item.is_new == 1?"new":""%>"></div>
+            </div>
+            <div class="desc"><%=BEME.func.formatTime(item.radio_time) %></div>
+			<div class="item-play"  href="javascript:void(0);"><img src="./static/images/feiji.png"></div>
+        </a>
+		
+    </li>
+    <%});%>
+</script>
+
+
+<script type="text/javascript">
+    BEME.initPage('fminfo');
+</script>
+
+</body>
+</html>

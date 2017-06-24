@@ -1,0 +1,89 @@
+<html>
+<head>
+</head>
+<body>
+
+<article class="book-list-page ranking-page">
+    <div class="top-box" id="J_top-box">
+        <div class="cate-box" id="J_cate-box" style="display:inline-block"></div>
+		<a class="show_more"></a>
+    </div>
+	<div class="back-cover"></div>
+	<div class="all-box" id="J_all-box"></div>
+    <ul class="book-list" id="J_book_list"></ul>
+</article>
+
+
+<!-- 这里是模板 
+<script type="text/template" id="J_temp-cate">
+    <% $.each(list, function(i, item){ %>
+    <% if(i%5==0){ %>
+    <ul class="menu-list">
+        <%}%>
+        <% if((i+1)%5==0){ %>
+		  <li style="width:10%"><span class="item-a"  href="javascript:void(0);" data-id="<%-item.id %>"><%=item.name %></span></li>
+		 </ul>
+		<%}else{%>
+		  <li style="width:22.5%"><span class="item-a"  href="javascript:void(0);" data-id="<%-item.id %>"><%=item.name %></span></li>
+		<%}%>
+    <%});%>
+</script>-->
+<script type="text/template" id="J_temp-cate">
+    <div class="menu-list swiper-wrapper">
+    <% $.each(list, function(i, item){ %>
+		  <div class="swiper-slide" ><span class="item-a"  href="javascript:void(0);" data-id="<%-item.id %>"><%=item.name %></span></div>
+    <%});%>
+	 </div>
+</script>
+
+<script type="text/template" id="J_temp-all">
+    <% $.each(list, function(i, item){ %>
+    <% if(i%4==0){ %>
+    <ul class="all-list">
+        <%}%>
+        <li><a class="item-a" href="javascript:void(0);" data-id="<%-item.id %>"><%=item.name %></a></li>
+        <% if((i+1)%4==0){ %>
+    </ul>
+	<%}else if( i === list.length-1){ if((i+1)%4 === 3){%>
+    <li></li></ul>
+    <%}else if((i+1)%4 === 2){  %>
+    <li></li><li></li></ul>
+	<%}else{  %>
+    <li></li><li></li><li></li></ul>
+    <%}}%>
+    <%});%>
+</script>
+
+<script type="text/template" id="J_temp-bookitem">
+   <% $.each(list, function(i, item){ %>
+    <li class="item">
+        <a class="item-a" href="javascript:void(0);" url="<%=item.jump_url %>" type="<%=item.screenModel %>">
+			<div class="img-b left" ><img src="<%=item.url %>" class="img-list"/></div>
+            <div class="name">
+				<div  class="text-over"><%=item.name %></div>
+				<span class="<%=item.recommend_name != ""?"recommend_name":"hide-all"%>"><%=item.recommend_name %>推荐</span>
+				<div class="desc"><%=item.description %></div>
+				<div class="time">
+					<div class="left"><%=item.readCount %>人阅读</div>
+					<div class="<%=item.is_new == 1?"new":"hide-all"%>"></div>
+					<div class="<%=item.is_hot == 1?"hot":"hide-all"%>"></div>
+				</div>
+			</div>  
+        </a>
+		<img src="./static/images/left-ip.png" class="jiantou"/>
+    </li>
+    <%});%>
+</script>
+
+<script type="text/javascript">
+    BEME.initMinPage('booklist');
+</script>
+
+
+<script type="text/javascript">
+    resizeBody();
+</script>
+
+
+</body>
+</html>

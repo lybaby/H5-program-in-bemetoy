@@ -1,0 +1,2 @@
+/*! 09-05-2016 */
+define("minpage/announcerlist",["comm/utils","comm/url","comm/request","helper/app","require","exports"],function(a,b,c,d,e,f){"use strict";var g=function(b){var c=a.template("J_temp-announceritem",{list:b.list});$("#J_announcer_list").html(c)},h=function(){c.getRequest({url:BEME.APIURL+"/announcer/announcerlist",successfn:function(a){d.loaded(),0===a.code&&g(a.data)}})},i=function(){};f.init=function(){d.setTitle("明星主播列表");b.getParams();h(),i()},f.uninit=function(){}});

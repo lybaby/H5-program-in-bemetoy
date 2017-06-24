@@ -1,0 +1,198 @@
+<!--#include file="/m2/act/office/layouts/header.html"-->
+<title>贝美开发者中心</title>
+</head>
+
+<body class="page page-scene">
+<div class="header" id="J_header">
+    <!--#include file="/m2/act/office/layouts/navigation.html"-->
+</div>
+<div class="doc_center">
+	<div class="doc">
+		<!--#include file="menulist.html"-->
+
+		
+		<div class="doc_detail">
+			<div class="">
+				<h1>家庭圈语音对讲</h1>
+				<div class="level1"><hr></div>
+			</div>
+			<div class="doc_content">
+				<div>
+					<h2>录音并发送</h2>
+					<div class="text_indent">
+						<div class="code">
+							<code>IOnRecordStatusListener mRecordStatusListener = new IOnRecordStatusListener() {</code>
+							<code class="marginl_20">@Override</code>
+							<code class="marginl_20"> public void onRecordStatus(int errCode, int status, int alplitude, int leftSeconds) {</code>
+							<code class="marginl_40"> if (errCode ==  BMErrorCode.Err_Server_Unbound)) {</code>
+							<code class="marginl_60">              //未绑定玩具</code>
+							<code class="marginl_40">} else if (errCode == BMErrorCode.Err_Local_Record_Fail) {</code>
+							<code class="marginl_60">			  //用户已经加入了该家庭圈</code>
+							<code class="marginl_40"> } else if (errCode == BMErrorCode.Err_None) {</code>
+							<code class="marginl_60">    switch (status) {</code>
+							<code class="marginl_80">    case RecordStatus.STATUS_RECORD_START:</code>
+							<code class="marginl_100">           //录音开始</code>
+							<code class="marginl_100">break;</code>
+							<code class="marginl_80">     case RecordStatus.STATUS_RECORDING:</code>
+							<code class="marginl_100">           //正在录音</code>
+							<code class="marginl_100">break;</code>
+							<code class="marginl_80">    case RecordStatus.STATUS_RECORD_END:</code>
+							<code class="marginl_100">          //录音停止，并发送</code>
+							<code class="marginl_100">break;</code>
+							<code class="marginl_80">    case RecordStatus.STATUS_RECORD_CANCEL:</code>
+							<code class="marginl_100">           //录音取消</code>
+							<code class="marginl_100">break;</code>	
+							<code class="marginl_80">   case RecordStatus.STATUS_RECORD_TOO_SHORT:</code>
+							<code class="marginl_100">           //录音时长太短</code>
+							<code class="marginl_100">break;</code>	
+							<code class="marginl_80"> default:</code>
+							<code class="marginl_100">break;</code>								
+							<code class="marginl_60"> }</code>
+							<code class="marginl_40">}</code>
+							<code class="marginl_20">}</code>
+							<code>};</code>
+							<code>监听录音状态</code>
+							<code>BMIoTClient.getIMClient().setOnRecordStatusListener(mRecordStatusListener);</code>
+							<code>BMIoTClient.getIMClient().startRecord()</code>
+						</div>
+						<div class="recommend text_i0">
+						目前语音录制只能针对家庭圈进行。录音规定最大时长为60秒，超时后自动停止录音并发到家庭圈，在家庭圈中的所有成员都能收到此消息。
+						</div>
+					</div>
+				</div>
+				<div>
+					<h2>停止录音</h2>
+					<div class="text_indent">
+						<div class="code">
+							<code>/**</code>
+							<code>&nbsp;  * 停止录音</code>
+							<code>*/</code>
+							<code>BMIoTClient.getIMClient().stopRecord();</code>
+						</div>
+					</div>
+				</div>
+				<div>
+					<h2>取消录音</h2>
+					<div class="text_indent">
+						<div class="code">
+							<code>/**</code>
+							<code>&nbsp;  * 取消录音</code>
+							<code>*/</code>
+							<code>BMIoTClient.getIMClient().cancelRecord();</code>
+						</div>
+					</div>
+				</div>
+				<div>
+					<h2>监听语音收发状态</h2>
+					<div class="text_indent">
+						<div class="code">
+							<code>IOnMessageChangeListener mMsgChangeListener = new IOnMessageChangeListener() {</code>
+							<code class="marginl_20">@Override</code>
+							<code class="marginl_20">  public void onMessageChange(int storageState, BMMessage msg) {</code>
+							<code class="marginl_40">		if (storageState == BMMessageStorageState.State_Add && null != msg) {</code>
+							<code class="marginl_60">              if (msg.direction == ConstantsComunication.MessageDirection.Direction_Send_To) {</code>
+							<code class="marginl_80">                //新发送消息</code>
+							<code class="marginl_60">            } else {</code>
+							<code class="marginl_80">                //新接收消息</code>
+							<code class="marginl_60">            }</code>
+							<code class="marginl_40">        } else if (storageState == BMMessageStorageState.State_Update && null != msg) {</code>
+							<code class="marginl_60">            if (msg.direction == ConstantsComunication.MessageDirection.Direction_Send_To) {</code>
+							<code class="marginl_80">                if (msg.status == BMMessageStatus.Status_Sending) {</code>
+							<code class="marginl_100">                    //正在发送</code>
+							<code class="marginl_80">                } else if (msg.status == BMMessageStatus.Status_Failed) {</code>
+							<code class="marginl_100">                    //发送失败</code>
+							<code class="marginl_80">                } else if (msg.status == BMMessageStatus.Status_Sent) {</code>
+							<code class="marginl_100">                    //已发送</code>
+							<code class="marginl_80">                }</code>
+							<code class="marginl_60">               } else {</code>
+							<code class="marginl_80">                if (msg.status == BMMessageStatus.Status_Unread) {</code>
+							<code class="marginl_100">                    //消息未读</code>	
+							<code class="marginl_80">                } else if (msg.status == BMMessageStatus.Status_Read) {</code>
+							<code class="marginl_100">                    //消息已读</code>
+							<code class="marginl_80">                }</code>								
+							<code class="marginl_60"> }</code>
+							<code class="marginl_40">}</code>
+							<code class="marginl_20">}</code>
+							<code>};</code>
+							<code>//设置监听</code>
+							<code>BMIoTClient.getIMClient().addOnMessageChangeListener(mMsgChangeListener);</code>
+							<code>//取消监听</code>
+							<code>BMIoTClient.getIMClient().removeOnMessageChangeListener(mMsgChangeListener);</code>
+						</div>
+					</div>
+				</div>	
+				<div>
+					<h2>获取消息总数</h2>
+					<div class="text_indent">
+						<div class="code">
+							<code>/**</code>
+							<code>&nbsp;  * 获取消息总数</code>
+							<code>*/</code>
+							<code>BMIoTClient.getIMClient().getGroupConversation().getAllMessagesCount();</code>
+						</div>
+					</div>
+				</div>	
+				<div>
+					<h2>分页加载消息</h2>
+					<div class="text_indent">
+						<div class="code">
+							<code>/**</code>
+							<code>&nbsp;  * 分页加载消息</code>
+							<code>*/</code>
+							<code>BMIoTClient.getIMClient().getGroupConversation().loadMoreMessages(startMsgId, pageSize);</code>
+						</div>
+					</div>
+				</div>	
+				<div>
+					<h2>获取未读消息数</h2>
+					<div class="text_indent">
+						<div class="code">
+							<code>/**</code>
+							<code>&nbsp;  * 获取未读消息数</code>							
+							<code>*/</code>
+							<code>BMIoTClient.getIMClient().getGroupConversation().getUnreadCount();</code>
+						</div>
+					</div>
+				</div>	
+				<div>
+					<h2>标记已读</h2>
+					<div class="text_indent">
+						<div class="code">
+							<code>/**</code>
+							<code>&nbsp;  * 标记已读</code>
+							<code>*/</code>
+							<code>BMIoTClient.getIMClient().getGroupConversation().markAllMessagesAsRead();</code>
+						</div>
+					</div>
+				</div>
+				<div>
+					<h2>删除消息</h2>
+					<div class="text_indent">
+						<div class="code">
+							<code>///删除所有消息</code>				
+							<code>/**</code>
+							<code>&nbsp;  * 删除整个聊天消息表</code>							
+							<code>*/</code>
+							<code>BMIoTClient.getIMClient().getGroupConversation().deleteAllMessages();</code>				
+							<code>/**</code>
+							<code>&nbsp;  * 删除指定消息</code>														
+							<code>*/</code>
+							<code>BMIoTClient.getIMClient().getGroupConversation().deleteMessages(msgList);</code>
+						</div>
+					</div>
+				</div>
+				
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<script type="text/javascript">
+_domReady.push(function(){
+    $('#J_navlist .bk[action="developer"]').addClass('cur');
+	$('#android006').addClass('cur');
+});
+</script>
+
+<!--#include file="/m2/act/office/layouts/footer.html"-->

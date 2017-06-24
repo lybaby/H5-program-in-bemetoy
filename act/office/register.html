@@ -1,0 +1,103 @@
+<!--#include file="layouts/header.html"-->
+<title>应用场景</title>
+</head>
+
+<body class="page page-scene">
+<div class="header" id="J_header">
+    <!--#include file="layouts/navigation.html"-->
+</div>
+
+<div class="r_body">
+	<div class="r_header">
+		<div class="r_num">
+			<div class="r_cricle r_cur ml20">1</div><hr/>
+			<div class="r_cricle">2</div><hr/>
+			<div class="r_cricle mr20">3</div>
+		</div>
+		<div class="r_tab left" style="text-align:left;">
+			填写基本信息
+		</div>
+		<div class="r_tab left">
+			后台审核
+		</div>
+		<div class="r_tab right" style="text-align:right;">
+			填写开发者资料
+		</div>
+	</div>
+	<div class="r_form r_tab_form1">
+		<div class="r_row">
+			<div class="r_label">邮箱</div><input type="text"  name="email" class="r_email"/>
+		</div>
+		<div class="r_row">
+			<div class="r_label">企业/机构名称</div><input type="text"  name="company" class="r_company"/>
+		</div>
+		<div class="r_row">
+			<div class="r_label">密码</div><input type="text"  name="password" class="r_password" id="password"/>
+			<p class="tips">字母、数字或者英文符号，最短6位，区分大小写</p>
+		</div>
+		<div class="r_row">
+			<div class="r_label">再次输入密码</div><input type="text"  name="re_password" class="r_password" id="c_password"/>	
+		</div>
+		<div class="r_row">
+			<div class="r_label">验证码</div><input type="text"  name="code" class="r_code left"/>      
+			<img style="border:0;height:45px;" class="left" src="/tmp/admin/login/change_code" onclick="this.src='/tmp/admin/login/change_code?'+Math.random()" title="看不清？点此更换">
+			<a href="javascript:void(0);" class="change_code">换一张</a>
+		</div>
+		<div class="r_row"> 
+			<input type="checkbox" name="is_agreee" class="check">我同意并遵守
+			<a href="">《贝美云平台服务条款》</a>
+		</div>
+		<br>
+		<br>
+		<hr class="hr_next"/>
+		<div class="r_footer">
+			<a class="r_btn r_no">下一步</a>
+		</div>
+	</div>
+	<div class="r_form r_tab_form2">
+	
+	</div>
+	
+	<div class="r_form r_tab_form3">
+		<div class="r_row">
+			<div class="r_label">用户名</div><input type="text"  name="name" class="r_name"/>
+			<p class="tips">字母、数字或者英文符号，最短6位，区分大小写</p>
+		</div>
+		<div class="r_row">
+			<div class="r_label">联系人姓名</div><input type="text"  name="user_name" class="r_user_name"/>
+		</div>
+		<div class="r_row">
+			<div class="r_label">联系人手机号码</div><input type="text"  name="telephone" class="r_telephone"/>
+		</div>
+		
+		<br>
+		<br>
+		<hr class="hr_next"/>
+		<div class="r_footer">
+			<a class="r_btn r_no">完成</a>
+		</div>
+	</div>
+
+
+
+</div>
+
+<script type="text/javascript">
+_domReady.push(function(){
+    $('#J_navlist .bk[action="developer"]').addClass('cur');
+	
+	$("#password").focus(function(event) {
+		$(this).attr('type','password');
+	});
+	$("#c_password").focus(function(event) {
+		$(this).attr('type','password');
+	});
+	$(".change_code").on("click",function(){
+		var $this = $(this).parent().find("img");
+		$this.attr("src",'/tmp/admin/login/change_code?'+Math.random())
+	});
+	
+});
+</script>
+
+<!--#include file="layouts/footer.html"-->

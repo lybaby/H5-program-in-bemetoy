@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+</head>
+<body>
+<article>
+<div id ="not-have-play" style="display: none;overflow:hidden;">
+    <article class="no-play">
+        <div class="image"><img src="./static/images/fail_new.png"/></div>
+        <div class="title">还没有任何内容哦</div>
+    </article>
+</div>
+<div id ="have-play" >
+ 
+    <article class="myalbum myindex_other">
+        <div class="title">
+            <a class="left" href="javascript:void(0);" >创建的歌单</a>
+            <a class="right font" href="#!m=myalbum" >查看全部</a>
+        </div>
+
+        <ul class="play-box" id="J_play_list"></ul>
+        <div class="add-album"><a id="add_myalbum">新建歌单</a></div>
+    </article>
+
+    <article class="myalbum myindex_other index" >
+        <div class="title">
+            <a class="left" href="javascript:void(0);" >收藏的专辑</a>
+            <a class="right font" href="#!m=mycollection" >查看全部</a>
+        </div>
+
+        <ul class="play-box" id="J_collection_list"></ul>
+    </article>
+
+    <article class="myalbum myindex_other " >
+        <div class="title">
+            <a class="left" href="javascript:void(0);" >收藏的绘本</a>
+            <a class="right font" href="#!m=mybook" >查看全部</a>
+        </div>
+
+        <ul class="play-box book-li" id="J_book_list"></ul>
+    </article>
+
+
+    <article class="myalbum myindex_other index">
+        <div class="title">
+            <a class="left" href="javascript:void(0);" >订阅的电台</a>
+            <a class="right font" href="#!m=mystation" >查看全部</a>
+        </div>
+
+        <ul class="play-box" id="J_description_list"></ul>
+    </article>
+</div>
+</article>
+<!-- 这里是模板 -->
+<script type="text/template" id="J_temp-mpitem">
+    <% $.each(list, function(i, item){ %>
+    <li class="item" sid="<%=item.id %>">
+        <a class="item-a" href="#!m=myplay&id=<%=item.id %>">
+            <div class="left">
+                <img class="img-auto" src="<%=BEME.func.imageUrl(item.cover)||'./static/images/default-cover.png' %>" alt="">
+            </div>
+            <div class="text-over"><%=item.name %></div>
+            <div class="desc"><%=item.count %></div>
+        </a>
+    </li>
+    <%});%>
+</script>
+
+<script type="text/template" id="J_temp-mcitem">
+    <% $.each(list, function(i, item){ %>
+    <li class="item" sid="<%=item.id %>">
+        <a class="item-a" href="<%=item.id %>" id="<%=item.album_id %>" >
+            <div class="left">
+                <img class="img-auto" src="<%=BEME.func.imageUrl(item.url)||'./static/images/default-cover.png' %>" alt="">
+            </div>
+            <%if(i == 0){%>
+            <div class="text-over no-border"><%=item.name %></div>
+            <div class="desc no-border"><%=item.count %></div>
+            <% }else{%>
+            <div class="text-over"><%=item.name %></div>
+            <div class="desc"><%=item.count %></div>
+            <%}%>
+        </a>
+    </li>
+    <%});%>
+</script>
+
+<script type="text/template" id="J_temp-mbitem">
+    <% $.each(list, function(i, item){ %>
+    <li class="item" sid="<%=item.id %>">
+        <a class="item-a" href="javascript:void(0);" url="<%=item.jump_url %>" type="<%=item.screenModel %>">
+            <div class="left">
+                <img class="img-auto" src="<%=BEME.func.imageUrl(item.url)||'./static/images/default-cover.png' %>" alt="">
+            </div>
+            <%if(i == 0){%>
+            <div class="text-over no-border"><%=item.name %></div>
+            <% }else{%>
+            <div class="text-over"><%=item.name %></div>
+            <%}%>
+        </a>
+    </li>
+    <%});%>
+</script>
+
+<script type="text/template" id="J_temp-msitem">
+    <% $.each(list, function(i, item){ %>
+    <li class="item" sid="<%=item.id %>">
+        <a class="item-a" href="#!m=fminfo&id=<%=item.id %>">
+            <div class="left">
+                <img class="img-station" src="<%=item.head_url||'./static/images/default-cover.png' %>" alt="">
+            </div>
+            <%if(i == 0){%>
+            <div class="text-over no-border"><%=item.name %></div>
+            <div class="desc no-border"><%=item.count %></div>
+            <% }else{%>
+            <div class="text-over"><%=item.name %></div>
+            <div class="desc"><%=item.count %></div>
+            <%}%>
+        </a>
+    </li>
+    <%});%>
+</script>
+
+<script type="text/javascript">
+    BEME.initPage('myindex');
+</script>
+
+</body>
+</html>

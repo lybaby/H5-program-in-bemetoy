@@ -1,0 +1,227 @@
+<!--#include file="/m2/act/office/layouts/header.html"-->
+<title>贝美开发者中心</title>
+</head>
+
+<body class="page page-scene">
+<div class="header" id="J_header">
+    <!--#include file="/m2/act/office/layouts/navigation.html"-->
+</div>
+<div class="doc_center">
+	<div class="doc">
+		<!--#include file="menulist.html"-->
+		
+		<div class="doc_detail">
+			<div class="">
+				<h1>家庭圈语音对讲</h1>
+				<div class="level1"><hr></div>
+			</div>
+			<div class="doc_content">
+				<div>
+					<h2>录音并发送</h2>
+					<div class="text_indent">
+						<div class="code">
+							<code>///RecordController</code>
+							<code>//使用RecordController录音时，先注册，使用完后注销</code>
+							<code>/**</code>
+							<code>&nbsp;  * 录音注册</code>
+							<code>*/</code>
+							<code>- (void)Register;</code>
+							<code>/**</code>
+							<code>&nbsp;  * 录音注销</code>
+							<code>*/</code>
+							<code>- (void)UnRegister;</code>
+							<code>/**</code>
+							<code>&nbsp;  * 开始录音</code> 
+							<code>&nbsp;  @uiFromID 当前用户uid</code>
+							<code>&nbsp;  @ToUsr    发送对象uid，一般是群组id</code>
+							<code> */</code>
+							<code>- (void)StartRecordingFromUsr:(UInt32)uiFromID ToUsr:(UInt32)uiToID;</code>
+						</div>
+						目前语音录制只能针对家庭圈进行。录音规定最大时长为60秒，到时后自动停止录音并发到家庭圈，在家庭圈中的所有成员都能收到此消息。
+					</div>
+				</div>
+				<div>
+					<h2>停止录音</h2>
+					<div class="text_indent">
+						<div class="code">
+							<code>///RecordController 停止录音</code>
+							<code>/**</code>
+							<code>&nbsp;  * 停止录音</code>
+							<code>*/</code>
+							<code>- (void)StopRecording;</code>
+						</div>
+					</div>
+				</div>
+				<div>
+					<h2>取消录音</h2>
+					<div class="text_indent">
+						<div class="code">
+							<code>///RecordController 取消录音</code>
+							<code>/**</code>
+							<code>&nbsp;  * 取消录音</code>
+							<code>*/</code>
+							<code>- (void)CancelRecording;</code>
+						</div>
+					</div>
+				</div>
+				<div>
+					<h2>播放语音</h2>
+					<div class="text_indent">
+						<div class="code">
+							<code>///PlayingController 播放语音</code>
+							<code>/**</code>
+							<code>&nbsp;  * 开始播放一条语音消息</code>
+							<code>*/</code>
+							<code>- (void)StartPlayMessage:(BMChatMessage *)oMsg;</code>
+						</div>
+					</div>
+				</div>
+				<div>
+					<h2>停止播放语音</h2>
+					<div class="text_indent">
+						<div class="code">
+							<code>///PlayingController 停止播放语音</code>
+							<code>/**</code>
+							<code>&nbsp;  * 停止播放一条语音消息</code>
+							<code>*/</code>
+							<code>- (void)StopPlayMessage:(BMChatMessage *)oMsg;</code>
+						</div>
+					</div>
+				</div>	
+				<div>
+					<h2>监听语音发送状态</h2>
+					<div class="text_indent">
+						<div class="code">
+							<code>///消息监听中心</code>
+							<code>//实现对应的代理，监听语音消息变化，实现IAudioToMessageExt代理</code>
+							<code>BMMessageCenter *messageCenter = [[BMMessageCenter alloc] init];</code>
+							<code>messageCenter.iAudioToMessageDelegate = self;</code>
+							<code>//IAudioToMessageExt</code>
+							<code>- (void)OnAddMessageBySender:(BMChatMessage *)oMsg;</code>
+							<code>- (void)OnAddMessageByReceiver:(BMChatMessage *)oMsg;</code>
+							<code>- (void)OnMsgSentBySender:(BMChatMessage *)oMsg;</code>
+							<code>- (void)OnErrorBySender:(BMChatMessage *)oMsg ErrNo:(int)err;</code>
+							<code>- (void)OnErrorByReceiver:(BMChatMessage *)oMsg ErrNo:(int)err;</code>
+						</div>
+					</div>
+				</div>	
+				<div>
+					<h2>监听新消息</h2>
+					<div class="text_indent">
+						<div class="code">
+							<code>///消息监听中心</code>
+							<code>//实现对应的代理，监听语音消息变化，实现IMessageExt代理</code>
+							<code>BMMessageCenter *messageCenter = [[BMMessageCenter alloc] init];</code>
+							<code>messageCenter.iMessageDelegate = self;</code>
+							<code>//IMessageExt</code>
+							<code>- (void)onMessageAdd:(BOOL)isSuccess message:(BMChatMessage*)msg;</code>
+							<code>- (void)onMessageUpdate:(BOOL)isSuccess message:(BMChatMessage *)msg;</code>
+							<code>- (void)onMessageDelete:(BOOL)isSuccess chatUserId:(UInt32)chatUId localId:(UInt32)localId;</code>
+							<code>- (void)onMessageReadStatus:(BMChatMessage *)msg;</code>
+						</div>
+					</div>
+				</div>	
+				<div>
+					<h2>获取所有消息</h2>
+					<div class="text_indent">
+						<div class="code">
+							<code>///BMMessageService</code>
+							<code>/**</code>
+							<code>&nbsp;  * 获取目标群组下所有消息</code>
+							<code>&nbsp;  * @groupId 群组id</code>
+							<code>*/</code>
+							<code>- (NSMutableArray *)getMsgWithGroupId:(UInt32)groupId;</code>
+						</div>
+					</div>
+				</div>	
+				<div>
+					<h2>获取消息总数</h2>
+					<div class="text_indent">
+						<div class="code">
+							<code>///BMMessageService</code>
+							<code>/**</code>
+							<code>&nbsp;  * 获取某个群组下消息的数目</code>
+							<code>&nbsp;  * @groupId 群组id</code>
+							<code>*/</code>
+							<code>- (UInt32)messageCountInGroup:(UInt32)groupId;</code>
+						</div>
+					</div>
+				</div>	
+				<div>
+					<h2>分页加载消息</h2>
+					<div class="text_indent">
+						<div class="code">
+							<code>///BMMessageService</code>
+							<code>/**</code>
+							<code>&nbsp;  * 获取目标localId之前已读消息</code>
+							<code>&nbsp;  * @groupId 群组id</code>
+							<code>&nbsp;  * @localId 本地数据库唯一标识一条消息的id</code>							
+							<code>&nbsp;  * @num 要获取消息的数目</code>							
+							<code>*/</code>
+							<code>- (NSMutableArray *)getMsgWithGroupId:(UInt32)groupId localId:(UInt32)localId limitNumber:(UInt32)num;</code>
+						</div>
+					</div>
+				</div>	
+				<div>
+					<h2>获取未读消息数</h2>
+					<div class="text_indent">
+						<div class="code">
+							<code>///BMMessageService</code>
+							<code>/**</code>
+							<code>&nbsp;  * 获取未读目标localId之后未读消息</code>
+							<code>&nbsp;  * @groupId 群组id</code>
+							<code>&nbsp;  * @localId 本地数据库唯一标识一条消息的id</code>							
+							<code>&nbsp;  * @num 要获取消息的数目</code>							
+							<code>*/</code>
+							<code>- (NSMutableArray *)getUnreadVoiceWithGroupId:(UInt32)groupId userId:(UInt32)userId number:(UInt32)number;</code>
+						</div>
+					</div>
+				</div>	
+				<div>
+					<h2>标记已读</h2>
+					<div class="text_indent">
+						<div class="code">
+							<code>///标记指定消息为已读</code>
+							<code>/**</code>
+							<code>&nbsp;  * 更新一条消息</code>
+							<code>*/</code>
+							<code>- (BOOL)updateMessage:(BMChatMessage*)msg;</code>
+						</div>
+					</div>
+				</div>
+				<div>
+					<h2>删除消息</h2>
+					<div class="text_indent">
+						<div class="code">
+							<code>///BMMessageService</code>
+							<code>///删除所有消息</code>				
+							<code>/**</code>
+							<code>&nbsp;  * 删除整个聊天消息表</code>
+							<code>&nbsp;  * @groupId 群组id</code>							
+							<code>*/</code>
+							<code>- (BOOL)deleteMessageTableWithGroupId:(UInt32)groupId;</code>
+							<code>///删除指定消息</code>				
+							<code>/**</code>
+							<code>&nbsp;  * 删除一条消息</code>
+							<code>&nbsp;  *  @chatUserId 用户uid</code>	
+							<code>&nbsp;  *  @localId 本地数据库唯一标识一条消息的id</code>														
+							<code>*/</code>
+							<code>- (BOOL)deleteMessage:(UInt32)chatUserId localId:(UInt32)localId;</code>
+						</div>
+					</div>
+				</div>
+				
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<script type="text/javascript">
+_domReady.push(function(){
+    $('#J_navlist .bk[action="developer"]').addClass('cur');
+	$('#ios006').addClass('cur');
+	});
+</script>
+
+<!--#include file="/m2/act/office/layouts/footer.html"-->

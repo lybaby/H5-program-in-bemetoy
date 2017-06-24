@@ -1,0 +1,36 @@
+<html>
+<head>
+</head>
+<body>
+
+<article class="mika-info-page">
+	
+	<div class="classlist">
+		<ul id="mika-classlist">
+		
+		</ul>
+	</div>
+</article>
+
+
+<script type="text/template" id="J_temp-item-class">
+    <% $.each(list, function(i, item){ %>
+    <li class="item">
+        <a class="item-a" href="#!m=bememikainfo&id=<%=item.id %>&type=<%=item.type %>">
+			<div class="mika_list_banner left" img_url="<%=item.url %>"></div>
+            <div class="name">
+				<div  class="text-over"><%=item.sub_name %></div>
+				<div class="time"><%=item.question %>更新</div>
+			</div>  
+        </a>
+		<img src="./static/images/jiantou_mika.png" class="jiantou"/>
+    </li>
+    <%});%>
+</script>
+
+
+<script type="text/javascript">
+    BEME.initMinPage('bememikalist');
+</script>
+</body>
+</html>

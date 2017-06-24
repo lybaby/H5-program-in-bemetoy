@@ -1,0 +1,81 @@
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name='format-detection' content='telephone=no'>
+<meta name='viewport' content='width=device-width, minimum-scale=1.0, maximum-scale=1.0'>
+<title>test</title>
+<script type="text/javascript" src="../static/lib/zepto-1.1.6.min.js"></script>
+<script type="text/javascript" src="../static/lib/require.js"></script>
+<script type="text/javascript" src="../static-src/js/main.js"></script>
+
+<link rel="stylesheet" type="text/css" href="../static/css/style.css">
+<style type="text/css">
+.fmindex-page{background: url('../static/images/pages/fmindex.png') no-repeat 0 0; background-size: 100% auto; height: 2000px; padding-top: 1.1rem;}
+</style>
+</head>
+<body>
+
+<article class="comm-page fmindex-page">
+	<div class="header-div">订阅电台后，节目更新即自动推送给玩具</div>
+    <ul class="top-list" id="J_recommend-fm"></ul>
+
+    <ul class="center-list" id="J_hot-fm"></ul>
+
+    <ul class="comm-fmitem" id="J_normal-fm"></ul>
+</article>
+
+<script type="text/template" id="J_temp-fmitem1">
+<% $.each(list, function(i, item){ %>
+<li><a class="item-a" href="#!m=fminfo&id=<%=item.id %>">
+	<div class='<%=item.is_new == 1?"newtag":""%>'></div>
+    <div class="img-b">
+        <img imgsrc="<%=BEME.func.imageUrlStationHead(item.url,1) %>" src="./static/images/moren_ms.jpg" alt="<%=item.name %>" class="img-cover">
+    </div>
+    <div class="uptime"><%=item.is_regular == 1?"定时更新":"每"+BEME.func.formatPushTime(item.push_time)+"更新"%></div>
+    <div class="name-box">
+        <div class="name text-over"><%=item.name %></div>
+        <div class="orderbox">订阅<span class="ordernum"><%=item.subscription_num %></span></div>
+    </div>
+</a></li>
+<%});%>
+</script>
+
+<script type="text/template" id="J_temp-fmitem2">
+<% $.each(list, function(i, item){ %>
+<li><a class="item-a" href="#!m=fminfo&id=<%=item.id %>">
+	<div class='<%=item.is_new == 1?"newtag":""%>'></div>
+    <div class="img-b">
+        <img  imgsrc="<%=BEME.func.imageUrlStationHead(item.head_url,0) %>" src="./static/images/moren_s.jpg" alt="<%=item.name %>" class="img-cover">
+    </div>
+    <div class="name-box">
+        <div class="name text-over"><%=item.name %></div>
+        <div class="orderbox">订阅<span class="ordernum"><%=item.subscription_num %></span></div>
+    </div>
+</a></li>
+<%});%>
+</script>
+
+<script type="text/template" id="J_temp-fmitem3">
+<% $.each(list, function(i, item){ %>
+<li class="fmitem">
+    <a href="#!m=fminfo&id=<%=item.id %>" class="item-a more-btn">
+	<div class='<%=item.is_new == 1?"rnewtag":""%>'></div>
+    <div class="img-b">
+        <img  imgsrc="<%=BEME.func.imageUrlStationHead(item.head_url,0) %>" src="./static/images/moren_s.jpg" alt="<%=item.name %>" class="img-auto">
+    </div>
+    <div class="info">
+        <div class="name text-over"><%=item.name %></div>
+        <div class="subnum">订阅&nbsp;<%=item.subscription_num %></div>
+        <div class="uptime text-over"><%=item.is_regular == 1?"定时更新":"每"+BEME.func.formatPushTime(item.push_time)+"更新"%></div>
+    </div>
+    </a>
+</li>
+<%});%>
+</script>
+
+<script type="text/javascript">
+    BEME.initPage('fmindex');
+</script>
+
+</body>
+</html>

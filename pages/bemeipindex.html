@@ -1,0 +1,128 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name='format-detection' content='telephone=no'>
+    <meta name='viewport' content='width=device-width, minimum-scale=1.0, maximum-scale=1.0'>
+    <title>贝美童趣馆</title>
+    <script type="text/javascript" src="../static/lib/zepto-1.1.6.min.js"></script>
+    <script type="text/javascript" src="../static/lib/require.js"></script>
+    <script type="text/javascript" src="../static-src/js/main.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="../static/css/style.css">
+    <style type="text/css">
+        /*.albuminfo-page{background: url('../static/images/pages/albuminfo.jpg') no-repeat 0 -1.1rem; background-size: 100% auto; height: 2000px; overflow: hidden;}*/
+    </style>
+</head>
+<body>
+
+<article class="ip-page">
+    <div class="title-box" value="">
+		<div class="newtag"></div>
+		<span id="new-title">1月14日刚刚更新：北京站-精彩皮影戏<span>
+	</div>
+
+    <div class="banner">
+        <img imgsrc="" src="./static/images/banner05.jpg" alt="" class="img-cover">
+        <div class="info-box">
+            <div class="title">超级飞侠故事屋</div>
+            <div class="tag">《超级飞侠》讲述了飞机机器人乐迪与一群称为“超级飞侠”的小伙伴环游世界，为小朋友递送包裹，
+            并帮助他们解决困难的故事...故事传递着善良、勇气、欢乐和友爱，让他们跟随乐迪去认识多彩绚丽的地球家园吧！</div>
+        </div>
+    </div>
+
+    <div class="recommend">
+        <div class="title">人物介绍</div>
+        <ul class="header" id="person_list">
+            <li id="ledi"><img  src="./static/images/ledi.png" alt="" class="img-cover"><a >乐迪<img src="./static/images/renwumingzi.png" ></a></li>
+            <li  id="duoduo"><img  src="./static/images/duoduo.png" alt="" class="img-cover"><a>多多<img src="./static/images/renwumingzi.png" ></a></li>
+            <li id="xiaoai"><img  src="./static/images/xiaoai.png" alt="" class="img-cover"><a >小爱<img src="./static/images/renwumingzi.png" ></a></li>
+            <li id="xiaoqing"><img  src="./static/images/xiaoqing.png" alt="" class="img-cover"><a >小青<img src="./static/images/renwumingzi.png" ></a></li>
+        </ul>
+    </div>
+    <div class="play-video">
+		<video src="http://s.bemetoy.com/dance/bd/bd494888fc3d058488c448d10e93a7d8.mp4" controls="controls" poster="./static/images/plane_cover.jpg"></video>
+	</div>
+
+
+    <div class="play-music" id="play-music">
+        <li class="music-list" >
+            <a class="title">主题曲：超级飞侠<span class="push-song" > 推送给玩具</span></a>
+        </li>
+    </div>
+
+    <div class="play-other">
+        <div class="title">杂志分期看</div>
+        <ul id="J_list-box">
+			<li class="item">
+				<div class="newtag"></div>
+				<a>第三集(20151221)：威尼斯站——贡多拉真棒</a>
+			</li>
+			<li class="item">
+				<a>第四集(20151221)：夏威夷站——赶赴舞会</a>
+			</li>
+			<li class="item">
+				<a>第五集(20151221)：英国站——公主的小狗</a>
+			</li>
+        </ul>
+        <div class="sub"><a href="#!m=fminfo&id=13">订阅电台：超级飞侠故事屋</a></div>
+    </div>
+    <div class="change"><a>切换英文版</a></div>
+	<div class="verson">正版授权：广州奥飞文化传播有限公司</div>
+	<div class="share_weixin"></div>
+	<div class="footer-weixin" style="display:none;">
+		 <img src="./static/images/app-header.png" class="app">
+		 <span class="text">宝宝爱听,贝美时光说</span>
+		 <a class="download" href="http://www.bemetoy.com/download/download.html" >点击下载</a>
+	</div>
+</article>
+
+<script type="text/template" id="J_temp-item-person">
+    <% $.each(list, function(i, item){ %>
+	 <li class="item" person_id="<%=item.id %>">
+	 <img  src="<%=item.url %>" alt="<%=item.name %>" class="img-cover">
+	 <a><%=item.name %><img src="./static/images/renwumingzi.png" ></a></li>
+    <%});%>
+</script>
+
+
+<script type="text/template" id="J_temp-item-song">
+    <% $.each(list, function(i, item){ %>
+    <li class="music-list" sid="<%=item.id %>" md5="<%=item.md5 %>"  url="<%=item.url %>" tag="ip" tagval="<%=item.tagval %>"  size="<%=item.filesize %>" type="<%=item.type %>" >
+		<a class="title"><%=item.name %><span class="push-song"> 推送给玩具</span></a>
+    </li>
+    <%});%>
+</script>
+
+
+<!-- 这里是模板 -->
+<script type="text/template" id="J_temp-item">
+    <% $.each(list, function(i, item){ %>
+    <li class="item" >
+		<a href="#!m=bemeipinfo&id=<%=item.id %>&type=<%=item.type %>">
+			<div class='<%=item.new === 1?"newtag":""%>'></div>
+			<span><%=item.title %> ：<%=item.sub_name %> </span>
+		</a>
+    </li>
+    <%});%>
+</script>
+
+<script type="text/javascript">
+		function GetQueryString(name)
+		{
+			 var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+			 var r = window.location.search.substr(1).match(reg);
+			 if(r!=null)return  r[2]; return null;
+		}
+		var weixin = GetQueryString('weixin');
+		console.log(weixin);
+		if(weixin == 1){
+			$('.footer-weixin').show();
+		}
+</script>
+
+
+<script type="text/javascript">
+    BEME.initMinPage('bemeipindex');
+</script>
+</body>
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name='format-detection' content='telephone=no'>
+    <meta name='viewport' content='width=device-width, minimum-scale=1.0, maximum-scale=1.0'>
+    <title>新年祝福</title>
+    <script type="text/javascript" src="../static/lib/zepto-1.1.6.min.js"></script>
+    <style>
+	 .bless{overflow:hidden;background:url('../static/images/beijing.jpg') no-repeat;background-size:cover;}
+	 .image-left-up{position:absolute;left:0;top:0;width:40%}
+	 .image-right-up{position:absolute;right:0;top:0;width:40%}
+	 .image-left-bottom{position:absolute;left:0;bottom:0;width:60%}
+	 .image-right-bottom{position:absolute;right:0;bottom:0;width:20%}
+	 .title{background:url('../static/images/shuo.png') no-repeat;background-size: 100%; margin-top: 25%;height: 1rem; width: 3.2rem;margin-left: 10%;}
+	.text-bless{     background-image: -webkit-linear-gradient(left, #f1ce8f 10px, transparent 10px), -webkit-linear-gradient(right, #f1ce8f 10px, transparent 10px), -webkit-linear-gradient(#f1ce8f 30px, #ff4e03 30px, #ff4e03 31px, #f1ce8f 31px);
+		background-size: 100% 100%, 100% 100%, 100% 31px;
+		line-height: 31px;
+		width: 100%;
+		border: none;
+		resize: none;
+		font-size:14px;
+		text-indent: 50px;
+		padding:0;
+		margin:0;
+	}
+	.text-bless-box {
+		position: relative;
+	}
+    .text-bless-box:after {
+		content: "\200B";
+		height: 33px;
+		width: 50px;
+	
+		position: absolute;
+		left: 0;
+		top: 0;
+		z-index: 50;
+	}
+	.text{margin: 0 10%; text-indent: 0.8rem;font-size: 22px;line-height: 1rem;color: #ff4e03;font-weight: 800;    margin-top: 0.4rem;}
+	text:after {display: block;content: "\200B";height: 2px;width: 100%;background-color: #e74c3c;}
+	 img{width:100%;}
+	 .image-line{position:absolute;left:0;right:0;top:0;bottom:0;}
+    </style>
+	
+</head>
+<body style="margin:0;padding:0;">
+<article class="bless" id ="bless">
+	<img class="image-line" src="../static/images/line.png">
+	<div><img src="../static/images/zuoshang.png" class="image-left-up"/></div>
+	<div ><img src="../static/images/youshang.png" class="image-right-up"/></div>
+    <div ><img src="../static/images/erweima3.png" class="image-left-bottom"/></div>
+    <div ><img src="../static/images/youxia.png" class="image-right-bottom"/></div>
+	<div class="title"></div>
+	<div class="text" id= "text">亲爱的小宝，新的一年，祝你身体健康，快快长大~</div>
+</article>
+<script type="text/javascript">
+		function GetQueryString(name)
+		{
+			 var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+			 var r = window.location.search.substr(1).match(reg);
+			 if(r!=null)return  decodeURI(r[2]); return null;
+		}
+		var docEl = document.documentElement;
+		docEl.style.fontSize = docEl.clientWidth/7.5+'px';
+		document.getElementById('bless').style.height = docEl.clientHeight+'px';
+		document.getElementById('text').innerHTML  = GetQueryString('text');
+		document.ontouchstart = function(){return false;};
+</script>
+
+</body>
+</html>

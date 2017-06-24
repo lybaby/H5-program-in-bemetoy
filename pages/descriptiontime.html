@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name='format-detection' content='telephone=no'>
+    <meta name='viewport' content='width=device-width, minimum-scale=1.0, maximum-scale=1.0'>
+    <title>创建的歌单</title>
+    <style>
+        .description {padding: 1.1rem 0 0.3rem 0; font-size: 16px;background-color:#fcf8f5;text-align:center;}
+        .description .title {text-align:center;font-size:18px;margin:2%}
+        .description .content{font-size:14px;margin:2% 0 2% 0;}
+        .description .time-box{list-style:none;margin:0;padding:0;}
+        .description li{width:100%;-webkit-box-flex:1}
+        .description li a{width:22%;display:inline-block;height:2.5rem;background:#f9eaeb;line-height:2.5rem;border: 1px solid #fad1d4;margin:1%;border-radius: 5px;}
+        .description .time-box .active {background: url('duihao.png') repeat-x left bottom;background-color:#e6f4c6;border: 1px solid #e6f4c6;}
+        .description .init-time{margin:4rem 0 4rem 0;}
+        .description .init-time a{height:2.5rem;display:inline-block;line-height:2.5rem;width:12rem;border: 1px solid #fad1d4;border-radius: 5px;}
+    </style>
+
+</head>
+<body>
+<article class="description">
+    <div class="title"> 请设定推送时间</div>
+    <div class="content"> 节目一有更新，就会在这个时间直接推送给宝宝听哦</div>
+    <ul class="time-box">
+        <li><div><a>07:00</a></div><div><a>08:00</a></div><div><a>09:00</a></div><div><a>10:00</a></div></li>
+        <li><div><a>11:00</a></div><div><a>12:00</a></div><div><a>13:00</a></div><div><a>14:00</a></div></li>
+        <li><div><a>15:00</a></div><div><a>16:00</a></div><div><a>17:00</a></div><div><a>18:00</a></div></li>
+        <li><div><a>19:00</a></div><div><a>20:00</a></div><div><a>21:00</a></div><div><a>22:00</a></div></li>
+    </ul>
+    <div class="init-time"><a>默认推送时间：<span id="init_time">17:00</span></a></div>
+</article>
+
+<script type="text/javascript">
+    BEME.initPage('descriptiontime');
+</script>
+</body>
+</html>

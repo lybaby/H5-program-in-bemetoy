@@ -1,0 +1,411 @@
+<html>
+<head>
+<meta charset="UTF-8">
+<title>童趣</title>
+<meta name='viewport' content='width=device-width, minimum-scale=1.0, maximum-scale=1.0'>
+<meta name='format-detection' content='telephone=no'>
+<meta name="screen-orientation"content="portrait">
+<meta name="x5-orientation" content="portrait">
+
+<script type="text/javascript">
+    var resizeBody = function(){
+        var docEl = document.documentElement;
+        docEl.style.fontSize = docEl.clientWidth/7.5+'px';
+    };
+    window.addEventListener('orientationchange', resizeBody);
+    resizeBody();
+</script>
+
+<link rel="stylesheet" type="text/css" href="./static/css/style.css">
+</head>
+<body>
+
+<div class="loading-box" id="J_loading-box">
+    <div class='uil-ripple-css' style='transform:scale(0.2);'><div></div><div></div></div>
+    <div class="text">loading：<span>0%</span></div>
+</div>
+
+<div class="initpage" id="J_initpage">
+    <div class="title titlein"></div>
+    <div class="version"></div>
+</div>
+
+<div class="main" id="J_mainbox">
+    <div class="toyboxout clearfix">
+        <div class="toybox" id="J_toybox">
+            <img class="autow" src="./static/images/01p.png">
+        </div>
+    </div>
+
+    <div class="text-en" id="J_texten">
+        
+    </div>
+    <div class="text-zh" id="J_textzh"></div>
+</div>
+
+
+<div class="slide-box" id="J_slidebox">
+    <a href="javascript:void(0);" class="sbtn left">&nbsp;</a>
+    <a href="javascript:void(0);" class="sbtn right">&nbsp;</a>
+</div>
+
+<div class="btns-box" id="J_btnsbox">
+    <a href="javascript:void(0);" class="btn btn-push" id="J_btn-pushtoy">推送给玩具</a>
+    <a href="javascript:void(0);" class="btn btn-play" id="J_btn-replay">再听一遍</a>
+</div>
+
+<div class="page-num" id="J_pagenum">1/9</div>
+
+<div id="J_jplayer" style="display:none;">
+    <audio id="J_audio-1" src="./static/mp3/1.japanese.mp3" preload="auto" autoplay="false"></audio>
+    <audio id="J_audio-2" src="./static/mp3/2.sailor.mp3" preload="auto" autoplay="false"></audio>
+    <audio id="J_audio-3" src="./static/mp3/3.queen.mp3" preload="auto" autoplay="false"></audio>
+    <audio id="J_audio-4" src="./static/mp3/4.nurse.mp3" preload="auto" autoplay="false"></audio>
+    <audio id="J_audio-5" src="./static/mp3/5.indian.mp3" preload="auto" autoplay="false"></audio>
+    <audio id="J_audio-6" src="./static/mp3/6.clown.mp3" preload="auto" autoplay="false"></audio>
+    <audio id="J_audio-7" src="./static/mp3/7.fairy.mp3" preload="auto" autoplay="false"></audio>
+    <audio id="J_audio-8" src="./static/mp3/8.A Fashion Show.mp3" preload="auto" autoplay="false"></audio>
+</div>
+
+<script type="text/javascript" src="./static/js/zepto-1.1.6.min.js"></script>
+<script type="text/javascript" src="./static/js/jquery.jplayer.min.js"></script>
+<script type="text/javascript" src="./static/js/utils.js"></script>
+
+<script type="text/javascript">
+$(document.body).on('touchstart', function(e){
+    e.preventDefault();
+});
+
+$(document.body).ready(function(){
+var pageItems = [
+    {
+        en : 'Look,I am a Japanese girl!',
+        zh : '看，我是一个日本女孩！',
+        mp3 : '1.japanese.mp3',
+        color : '#ffee76'
+    },
+    {
+        en : 'Look,I am a sailor!',
+        zh : '看，我是一个水手！',
+        mp3 : '2.sailor.mp3',
+        color : '#77d7ff'
+    },
+    {
+        en : 'Look,I am a queen!',
+        zh : '看，我是一个女王！',
+        mp3 : '3.queen.mp3',
+        color : '#ffee76'
+    },
+    {
+        en : 'Look,I am a nurse!',
+        zh : '看，我是一个护士！',
+        mp3 : '4.nurse.mp3',
+        color : '#77d7ff'
+    },
+    {
+        en : 'Look,I am an Indian!',
+        zh : '看，我是一个印第安人！',
+        mp3 : '5.indian.mp3',
+        color : '#ffc05e'
+    },
+    {
+        en : 'Look,I am a clown!',
+        zh : '看，我是一个小丑！',
+        mp3 : '6.clown.mp3',
+        color : '#5cd493'
+    },
+    {
+        en : 'Look,I am a fairy!',
+        zh : '看，我是一个仙女！',
+        mp3 : '7.fairy.mp3',
+        color : '#77d7ff'
+    },{
+        mp3 : '8.A Fashion Show.mp3',
+        color : '#ffdf00'
+    },{
+        color : '#ffffff'
+    }
+];
+var imgObjs = false,
+    mp3Objs = false,
+    pageIndex = -1,
+    totalPage = 9,
+    pageSlideOk = false,
+    playerObj = null,
+    $jPlayer = $('#J_jplayer');
+
+var _processInfo = {imgNum:0, mp3Num:0, totalNum:0};
+
+function playAudio(src){
+    $jPlayer.jPlayer("setMedia", {
+        mp3 : src
+    });
+    $jPlayer.jPlayer("play");
+}
+
+function pageOut(pageIndex){
+    if(pageIndex==-1){
+        $('#J_initpage').hide();
+        $('#J_mainbox').show();
+        $('#J_slidebox .left').removeClass('leftin');
+        $('#J_slidebox .right').removeClass('rightin').css('zoom');
+        pageIndex = totalPage+pageIndex;
+    }
+
+    pageSlideOk = false;
+
+    var $toy = $('#J_toybox'),
+        d = $.Deferred(),
+        info = pageItems[pageIndex];
+
+    if(pageIndex==7||pageIndex==8){
+        $toy.addAnim('toy8out').done(function(){
+            $toy.removeClass('toy8 toy8in toy8out');
+            d.resolve();
+        });
+        $('#J_slidebox .left').removeClass('leftin');
+        $('#J_slidebox .right').removeClass('rightin');
+        return d.promise();
+    }
+
+    $toy.removeClass('toybox-anim');
+    $toy.addAnim('toybox-animout', 1200).done(function(){
+        $toy.removeClass('toybox-anim toybox-animout');
+        $toy.removeClass('toy8 toy8in toy8out');
+        d.resolve();
+    });
+    $('#J_texten').addAnim('flipOutX');//.stepText(info.en, true);
+    $('#J_textzh').removeClass('flipInX').css('opacity', 1);
+    $('#J_textzh').addAnim('flipOutX').done(function(){
+        $('#J_textzh').removeClass('flipInX flipOutX').attr('style', null);
+        $('#J_texten').removeClass('flipOutX').text('');
+    });
+    
+    $('#J_slidebox .left').removeClass('leftin');
+    $('#J_slidebox .right').removeClass('rightin');
+    return d.promise();
+}
+
+function pageIn(){
+    var $toy = $('#J_toybox'),
+        info = pageItems[pageIndex];
+
+    $('#J_mainbox').css('background', info.color);
+    $toy.find('img').replaceWith(imgObjs['./static/images/p0'+(pageIndex+1)+'.png']);
+    $toy.removeClass('toy8 toy8in toy8out');
+    
+    if(info.mp3){
+        $('#J_btnsbox').show();
+    }else{
+        $('#J_btnsbox').hide();
+    }
+
+    if(!info.en){
+        $('#J_texten, #J_textzh').text('');
+    }
+
+    $('#J_pagenum').show().text((pageIndex+1)+'/'+totalPage);
+
+    if(pageIndex==7 || pageIndex==8){
+        $toy.addClass('toy8');
+        $toy.addAnim('toy8in').done(function(){
+            $('#J_slidebox .left').addAnim('leftin').done(function(){
+                pageSlideOk = true;
+            });
+            return $('#J_slidebox .right').addAnim('rightin');
+        });
+        return ;
+    }
+
+    $toy.removeClass('toybox-anim toybox-animout').css('zoom');
+    $toy.addAnim('toybox-anim', 1200).done(function(){
+        $('#J_texten').stepText(info.en).done(function(){
+            $('#J_textzh').text(info.zh).addAnim('flipInX');
+
+            $('#J_slidebox').show();
+            $('#J_slidebox .left').addAnim('leftin').done(function(){
+                pageSlideOk = true;
+            });
+            $('#J_slidebox .right').addAnim('rightin');
+        });
+    });
+}
+
+function slidePage(flag){
+    if(!pageSlideOk){
+        return false;
+    }
+    pageSlideOk = false;
+
+    var _page = pageIndex;
+
+    if(pageIndex==-1 && flag<0){ //初始
+        pageIndex = 0;
+    }
+
+    pageIndex += flag;
+    if(pageIndex<0){
+        pageIndex += totalPage;
+    }else{
+        pageIndex = pageIndex % totalPage;
+    }
+
+    if(playerObj){
+        playerObj.pause();
+    }
+    if(pageItems[pageIndex].mp3){
+        playerObj = mp3Objs['./static/mp3/'+pageItems[pageIndex].mp3];
+        playerObj.currentTime = 0;
+        playerObj.volume = 1;
+        playerObj.play();
+    }
+
+    if(pageIndex==0){
+        $('#J_initpage').remove();
+        $('#J_mainbox').show();
+        $('#J_slidebox .left').removeClass('leftin');
+        $('#J_slidebox .right').removeClass('rightin').css('zoom');
+        return pageIn();
+    }
+
+    pageOut(_page).done(function(){
+        pageIn();
+    });
+    return false;
+}
+
+function updateProcess(){
+    var loadedNum = _processInfo.imgNum+_processInfo.mp3Num,
+        perNum = 100.0/_processInfo.totalNum,
+        process = Math.floor(loadedNum*perNum+(Math.random()*perNum));
+    if(process>100){
+        process = 100;
+    }
+    return $('#J_loading-box .text span').text(process+'%');
+}
+
+function main(){
+    updateProcess();
+    if(!imgObjs || !mp3Objs){
+        return ;
+    }
+
+    $('#J_loading-box').remove();
+
+    $('#J_initpage').show().css('zoom');
+    $('#J_initpage').addAnim('initpagein').done(function(){
+        $('#J_initpage .title').addAnim('slideInDown').done(function(){
+            $('#J_initpage .title').removeClass('titlein slideInDown').css('zoom');
+            $('#J_initpage .title').addAnim('rubberBand').done(function(){
+                $('#J_slidebox').show();
+                $('#J_slidebox .left').addAnim('leftin');
+                $('#J_slidebox .right').addAnim('rightin').done(function(){
+                    pageSlideOk = true;
+                });
+            });
+        });
+    });
+
+    $('#J_btn-replay').on('touchstart', function(){
+        playerObj.play();
+    });
+
+    //推送给玩偶
+    $('#J_btn-pushtoy').on('touchstart', function(){
+        alert('待实现');
+    });
+
+    $('#J_slidebox .sbtn').on('touchstart', function(){
+        var flag = 1;
+        if($(this).hasClass('left')){
+            flag = -1;
+        }
+        slidePage(flag);
+    });
+
+    $(document.body).swipeAsyn(function(e, direction){
+        direction = direction.toLowerCase();
+        if(direction=='left'||direction=='right'){
+            var flag = direction=='left' ? 1 : -1;
+            slidePage(flag);
+        }
+        //$(document.body).prepend(e.target.tagName+'_'+direction);
+        e.preventDefault();
+    });
+
+    $(document.body).one('touchstart', function(){
+        var keys = Object.keys(mp3Objs);
+        for(var i=0; i<keys.length; i++){
+            var playerObj = mp3Objs[keys[i]];
+            playerObj.volume = 0;
+            playerObj.play();
+            playerObj.pause();
+        }
+    });
+}
+
+/*$jPlayer.jPlayer({
+    ready: function(){
+        $jPlayer.jPlayer("setMedia", {
+            mp3 : './static/mp3/'+pageItems[0].mp3
+        });
+    },
+
+    smoothPlayBar: true,
+    supplied: "mp3",
+    preload : "auto",
+    wmode: "window"
+});*/
+
+var _mp3Objs = {},
+    _mp3Arrs = [];
+var audios = $('#J_jplayer audio').each(function(){
+    var $this = $(this),
+        src = $this.attr('src');
+    _mp3Objs[src] = this;
+    _mp3Arrs.push(src);
+}).on('canplay', function(){
+    this.pause();
+    var $this = $(this),
+        src = $this.attr('src'),
+        index = _mp3Arrs.indexOf(src);
+    
+    _mp3Arrs.splice(index, 1);
+    if(_mp3Arrs.length<1){
+        mp3Objs = _mp3Objs;
+        main();
+    }
+});
+_processInfo.mp3Num = _mp3Arrs.length;
+playerObj = audios[0];
+
+/***************************************/
+
+//所有的图片
+var allImgs = [];
+for(var i=1; i<10; i++){
+    allImgs.push('./static/images/p0'+i+'.png');
+}
+allImgs = allImgs.concat([
+    './static/images/icons.png', './static/images/slide-bg.png',
+    './static/images/main-bg.jpg', './static/images/version.png',
+    './static/images/title.png']);
+
+/**********************************/
+_processInfo.totalNum = allImgs.length+_mp3Arrs.length; //+mp3Srcs.length;
+setTimeout(function(){
+    loadImages(allImgs, function(isend, num, _objs){
+        _processInfo.imgNum = num;
+        if(isend){
+            imgObjs = _objs;
+        }
+        main();
+    });
+}, 10);
+
+});
+
+</script>
+
+</body>
+</html>

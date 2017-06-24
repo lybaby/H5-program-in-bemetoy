@@ -1,0 +1,85 @@
+<!--#include file="/m2/act/office/layouts/header.html"-->
+<title>贝美开发者中心</title>
+</head>
+
+<body class="page page-scene">
+<div class="header" id="J_header">
+    <!--#include file="/m2/act/office/layouts/navigation.html"-->
+</div>
+<div class="doc_center">
+	<div class="doc">
+		<!--#include file="menulist.html"-->
+		
+		<div class="doc_detail">
+			<div class="">
+				<h1>账号管理</h1>
+				<div class="level1"><hr></div>
+			</div>
+			<div class="doc_content">
+				<div>
+					<h2>获取家庭圈信息</h2>
+					<div class="text_indent">
+						<div class="code">
+							<code>- (BMGroup *)currentFriendGroup;</code>
+						</div>
+					</div>
+				</div>
+				<div>
+					<h2>获取家庭圈除自身外的所有成员</h2>
+					<div class="text_indent">
+						<div class="code">
+							<code>- (BMGroup *)currentFriendGroup;</code>
+						</div>
+					</div>
+				</div>
+				<div>
+					<h2>获取家庭圈所有玩具的信息</h2>
+					<div class="text_indent">
+						<div class="code">
+							<code>- (NSMutableArray *)getToyContactsArray;</code>
+						</div>
+					</div>
+				</div>
+				<div>
+					<h2>获取某成员信息</h2>
+					<div class="text_indent">
+						<div class="code">
+							<code>- (BMContact *)obtainContactWithContactUserId:(uint)userId;</code>
+						</div>
+					</div>
+				</div>
+				<div>
+					<h2>监听家庭圈和成员的信息变化</h2>
+					<div class="text_indent">
+						<div class="code">
+							<code>//消息监听中心</code>
+							<code>//实现对应的代理，监听家庭圈消息变化，实现IContactExt IGroupExt代理</code>
+							<code>BMMessageCenter *messageCenter = [[BMMessageCenter alloc] init];</code>
+							<code>messageCenter.iMessageDelegate = self;</code><br>
+							<code>//IGroupExt</code>
+							<code>- (void)onGroupAdd:(BOOL)isSuccess bmgroup:(BMGroup*)group;</code>
+							<code>- (void)onGroupUpdate:(BOOL)isSuccess bmgroup:(BMGroup*)group;</code>
+							<code>- (void)onGroupDelete:(BOOL)isSuccess groupid:(UInt32)guid;</code>
+							<code>- (void)onGroupKick:(BOOL)isSuccess bmgroup:(BMGroup *)group;</code>
+							<code>- (void)onGroupQuit:(BOOL)isSuccess bmgroup:(BMGroup *)group;</code>
+							<code>//IContactExt</code><br>
+							<code>- (void)onContactAdd:(BOOL)isSuccess bmcontact:(BMContact*)contact;</code>
+							<code>- (void)onContactUpdate:(BOOL)isSuccess bmcontact:(BMContact*)contact;</code>
+							<code>- (void)onContactDelete:(BOOL)isSuccess contact:(BMContact*)contact;</code>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<script type="text/javascript">
+_domReady.push(function(){
+    $('#J_navlist .bk[action="developer"]').addClass('cur');
+	$('#ios003').addClass('cur');	
+});
+</script>
+
+<!--#include file="/m2/act/office/layouts/footer.html"-->

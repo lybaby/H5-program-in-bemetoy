@@ -1,0 +1,191 @@
+<!--#include file="/m2/act/office/layouts/header.html"-->
+<title>贝美开发者中心</title>
+</head>
+
+<body class="page page-scene">
+<div class="header" id="J_header">
+    <!--#include file="/m2/act/office/layouts/navigation.html"-->
+</div>
+<div class="doc_center">
+	<div class="doc">
+		<!--#include file="menulist.html"-->
+		
+		<div class="doc_detail">
+			<div class="">
+				<h1>绑定、邀请和申请关注操作</h1>
+				<div class="level1"><hr></div>
+			</div>
+			<div class="doc_content">
+				<div>
+					<h2>搜索附近设备</h2>
+					<div class="text_indent">
+						<div class="code">
+							<code>///BMSearchToyService.h</code>
+							<code>/**</code>
+							<code>&nbsp; * 开始搜索附近的玩偶，每搜索到一个玩具会回调一次</code>
+							<code>&nbsp; * 参数：time              最大搜索时间，值为0的时候默认20s</code>
+							<code>&nbsp; * 参数：completionBlock   搜索结束回调，返回错误信息或者搜索到的所有玩偶</code>
+							<code>&nbsp; *  |______toyArray       搜索到的所有玩具</code>
+							<code>&nbsp; *  |______endOfSearch    YES表示搜索结束，NO表示还在搜索</code>
+							<code>&nbsp; *  |______errCode        错误码，0表示正常</code>
+							<code>*/</code>
+							<code>- (void)startSearchToyWithTimeOut:(NSTimeInterval)time </code>
+							<code>completionBlock:(searchToyCompletionBlock)completionBlock;</code>
+						</div>
+					</div>
+				</div>
+				<div>
+					<h2>停止搜索</h2>
+					<div class="text_indent">
+						<div class="code">
+							<code>///BMSearchToyService.h</code>
+							<code>/**</code>
+							<code>&nbsp; * 停止搜索，调用此方法不会执行搜索回调</code>
+							<code>*/</code>
+							<code>-	(void)stopSearch;</code>
+						</div>
+					</div>
+					<div class="notice_str">
+						注：销毁页面时务必记得调用此方法停止搜索，否则会导致内存泄漏，建议在-dealloc方法中调用一次此方法做保险
+					</div>
+				</div>
+				<div>
+					<h2>语音定位设备</h2>
+					<div class="text_indent">
+						<div class="code">
+							<code>///BMSearchToyService.h</code>
+							<code>/**</code>
+							<code>&nbsp;  * 定位附近的玩偶</code>
+							<code>&nbsp;  * 参数：info  玩偶的信息</code>
+							<code>*/</code>
+							<code>- (void)locateToyWithInfo:(BMToyInfo *)info;</code>
+						</div>
+					</div>
+				</div>
+				<div>
+					<h2>绑定设备</h2>
+					<div class="text_indent">  
+						<div class="code">
+							<code>///BMAccountService.h</code>
+							<code>/**</code>
+							<code>&nbsp;  * 绑定玩偶</code>
+							<code>&nbsp;  * 参数：info  玩偶的信息</code>
+							<code>&nbsp;  * 参数：completionBlock  绑定结束回调，返回成功或者失败的信息</code>
+							<code>*/</code>
+							<code>-	(void)bindToyWithInfo:(BMToyInfo *)info completionBlock:(bindToyCompletionBlock)completionBlock;</code>
+							<code>///绑定的错误码</code>
+							<code>typedef enum {</code> 
+							<code>&nbsp;      BindToyErrCode_OK = 0,                              ///0  绑定成功</code>
+							<code>&nbsp;      BindToyErrCode_Binded = -1,                         ///-1 已被其他用户绑定</code>
+							<code>&nbsp;      BindToyErrCode_Toy_Id_Not_Exist = -2,               ///-2 玩具id不存在</code>
+							<code>&nbsp;      BindToyErrCode_Toy_Multi_Toy_Not_Support = -3,      ///-3 当前版本不支持多玩偶绑定</code>
+							<code>&nbsp;      BindToyErrCode_Has_Bound_This_Toy = -4,             ///-4 已经被自己绑定</code>
+							<code>&nbsp;      BindToyErrCode_Toy_EXCEED_MAX = -5,                 ///-5 绑定的玩具已经达到最大数量</code>
+							<code>&nbsp;      BindToyErrCode_Bound_Other_Group = -6,              ///-6 已被其他账户绑定</code>
+							<code>&nbsp;      BindToyErrCode_Dissolve_Group = -7                  ///-7 玩偶的群组已经被解散</code>
+							<code>} BindToyErrCode;</code>
+						</div>
+					</div>
+				</div>
+				<div>
+					<h2>邀请其他人加入家庭圈</h2>
+					<div class="text_indent text_i0">
+						<div class="code">
+							<code>- (void)inviteFriendFromUserOpenId:(NSString *)fromUserOpenId 
+							toUserOpenId:(NSString *)toUserOpenId  content:(NSString *)content callBack:^(BOOL isSuccess, int errorCode) </code>
+							<code>{</code>
+							<code class="marginl_20"> if (status == BMErrorTypeNone)</code>
+							<code class="marginl_20">{</code>
+							<code class="marginl_40">                //邀请成功</code>
+							<code class="marginl_20"> }</code>
+							<code class="marginl_20">else if (status == BMErrorTypeHasEntryGroup)</code>
+							<code class="marginl_20">{</code>
+							<code class="marginl_40">                //用户已经加入了该家庭圈</code>
+							<code class="marginl_20"> }</code>
+							<code class="marginl_20">else if (status == BMErrorTypeUserNotExist)</code>
+							<code class="marginl_20">{</code>
+							<code class="marginl_40">                //用户不存在</code>
+							<code class="marginl_20"> }</code>
+							<code class="marginl_20"> else if (status == BMErrorTypeUserHasEntryOtherGroup)</code>
+							<code class="marginl_20">{</code>
+							<code class="marginl_40">                //用户已经加入其它家庭圈</code>
+							<code class="marginl_20"> }</code>
+							<code>}];</code>	
+						</div>
+					</div>
+				</div>
+				<div>
+					<h2>申请加入家庭圈</h2>
+					<div class="text_indent text_i0">
+						<div class="code">
+							<code>- (void)askForBindToyWithContent:(NSString *)content toUserId:(NSNumber *)toUserId 
+							groupId:(NSNumber *)groupId callBack:^(BOOL isSuccess, NSString *message) </code>
+							<code>{</code>
+							<code class="marginl_20"> if (isSuccess)</code>
+							<code class="marginl_20">{</code>
+							<code class="marginl_40">                //申请成功</code>
+							<code class="marginl_20"> }</code>
+							<code class="marginl_20">else</code>
+							<code class="marginl_20">{</code>
+							<code class="marginl_40">                //申请失败</code>
+							<code class="marginl_20"> }</code>
+							<code>}];</code>	
+						</div>
+					</div>
+				</div>
+				<div>
+					<h2>监听加入家庭圈请求</h2>
+					<div class="text_indent">
+						<div class="code">
+							<code>- (void)onSystemMsgAdd:(BOOL)isSuccess systemMessage:(BMSystemMessage*)systemMsg;</code>
+						</div>
+					</div>
+				</div>
+				<div>
+					<h2>同意加入家庭圈</h2>
+					<div class="text_indent">
+						<div class="code">
+							<code>- (void)acceptApplyOrInvite:message callBack:^(BOOL isSuccess, NSString *messageStr) { </code>
+							<code>}];</code>
+						</div>
+					</div>
+				</div>
+				<div>
+					<h2>退出家庭圈</h2>
+					<div class="text_indent">
+						<div class="code">
+							<code>- (void)quitFamilyGroup;</code>
+						</div>
+						<div class="notice_str">
+						注：当前用户为普通成员时，表示该用户退出家庭圈；当前用户为管理员时，表示解散整个家庭圈
+						</div>
+					</div>
+				</div>
+				<div>
+					<h2>将用户踢出家庭圈</h2>
+					<div class="text_indent">
+						<div class="code">
+							<code>- (void)kickOutContactWithUserId:(UInt32)userId;</code>
+						</div>
+						<div class="notice_str">
+							注：该接口只有管理员才能使用
+						</div>
+					</div>
+				</div>
+				
+				
+				
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<script type="text/javascript">
+_domReady.push(function(){
+    $('#J_navlist .bk[action="developer"]').addClass('cur');
+	$('#ios005').addClass('cur');
+	});
+</script>
+
+<!--#include file="/m2/act/office/layouts/footer.html"-->

@@ -1,0 +1,90 @@
+<html>
+
+<body>
+
+<article class="comm-page animation-page ranking-page">
+    <div class="imgbox">
+        <img src="" alt="" id="J_banner_img">
+    </div>
+    <div class="desc" id="J_iplist_desc"></div>
+
+    <a href="javascript:void(0);" class="a-btn toysbox clearfix">
+        <div class="img"><img class="img-cover" src="" alt="" id="preson_1"></div>
+        <div class="img"><img class="img-cover" src="" alt="" id="preson_2"></div>
+        <div class="img"><img class="img-cover" src="" alt="" id="preson_3"></div>
+        <div class="more-block title" id="show_family"><span class="family_name"></span>家族</div>
+    </a>
+
+    <div class="toysinfo hide-all">
+        <div class="title"><span class="family_name"></span>家族成员介绍</div>
+        <ul class="toyslist" id="J_preson-box">
+			
+		
+            <li class="toys-hide">
+                <a href="javascript:void(0);" class="a-btn btn-hide">点击收起</a>
+            </li>
+        </ul>
+    </div>
+
+    <div class="videobox">
+        <div class="top-box videomenu" id="J_top-box">
+            <div class="cate-box" id="J_cate-box"></div>
+        </div>
+
+        <ul class="videolist" id="J_video-list"></ul>
+    </div>
+</article>
+
+<!-- 这里是模板 -->
+<script type="text/template" id="J_temp-person">
+    <% $.each(list, function(i,item){ %>
+        <li class="toysitem">
+            <div class="name"><%=item.name %></div>
+            <div class="info clearfix">
+				 <div class="left">
+						<span>性格特点：</span><%=item.personal %><br>
+						<span>口号：</span><%=item.catchword %><br>
+						<span>介绍：</span><%=item.recommend %><br>
+				</div>
+				<div class="right"><img class="img-auto" src="<%=item.url %>" alt=""></div>
+            </div>
+        </li>
+    <%});%>
+</script>
+
+<!-- 这里是模板 -->
+<script type="text/template" id="J_temp-tag">
+    <% $.each(list, function(i, item){ %>
+        <% if(i%4==0){ %>
+        <ul class="menu-list">
+            <%}%>
+            <li><span class="item-a" href="javascript:void(0);" data-id="<%-item.id %>"><%=item.name %></span></li>
+            <% if((i+1)%4==0){ %>
+        </ul>
+        <%}%>
+    <%});%>
+</script>
+
+<script type="text/template" id="J_temp-list">
+    <% $.each(list, function(i, item){ %>
+    <li class="videoitem">
+        <a class="item-a clearfix" href="#!m=ipinfo&id=<%=item.id%>">
+            <div class="left"><img class="img-cover" src="<%=item.url%>"></div>
+            <div class="right">
+                <div class="name new"><%=item.name%><i class="<%=item.is_new == 1?"newflag":""%>""></i></div>
+                <div class="time"><%=item.update_time%></div>
+            </div>
+        </a>
+    </li>
+    <%});%>
+</script>
+
+
+
+
+<script type="text/javascript">
+    BEME.initMinPage('ipindex');
+</script>
+
+</body>
+</html>

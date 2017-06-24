@@ -1,0 +1,2 @@
+/*! 09-05-2016 */
+define("page/albummain",["comm/utils","comm/url","comm/request","helper/app","helper/temphtml","require","exports"],function(a,b,c,d,e,f,g){"use strict";var h=function(){d.loaded(),d.backScroll()},i=function(){};g.init=function(){d.setTitle("专辑分类"),$(".back-btn").show(),a.headerMenu(),$("#myplay").show(),d.showHeader(),h(),i()},g.uninit=function(){}});

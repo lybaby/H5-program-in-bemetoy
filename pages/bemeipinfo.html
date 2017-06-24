@@ -1,0 +1,154 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name='format-detection' content='telephone=no'>
+    <meta name='viewport' content='width=device-width, minimum-scale=1.0, maximum-scale=1.0'>
+    <title>贝美童趣馆</title>
+    <script type="text/javascript" src="../static/lib/zepto-1.1.6.min.js"></script>
+    <script type="text/javascript" src="../static/lib/require.js"></script>
+    <script type="text/javascript" src="../static-src/js/main.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="../static/css/style.css">
+    <style type="text/css">
+        /*.albuminfo-page{background: url('../static/images/pages/albuminfo.jpg') no-repeat 0 -1.1rem; background-size: 100% auto; height: 2000px; overflow: hidden;}*/
+    </style>
+</head>
+<body>
+
+<article class="comm-page main-page ipinfo-page">
+    <div class="banner">
+        <img imgsrc="" src="./static/images/banner06.jpg" alt="" class="img-cover">
+        <div class="info-box">
+            <div class="sub-title">北京站-精彩皮影戏</div>
+			 <div class="sub-day">1月14日更新</div>
+        </div>
+    </div>
+	
+	
+	<div class="content">
+		<div class="title">故事简介</div>
+		<div class="description_ip"></div>
+	</div>
+	
+	<div class="say">
+		<div class="title">本站目的地：</div>
+		<div class="place"></div>
+		<div class="title">本站问候语：</div>
+		<div class="hello"></div>
+		<div class="title">给宝贝提个问题<span>(拉到最后找答案)</span>：</div>
+		<div class="question"></div>
+	</div>
+
+    <div class="personal">
+        <div class="title">本期出场飞侠</div>
+        <ul class="header"  id="J_plane-box">
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+    </div>
+
+    <div class="play-video">
+	</div>
+
+
+    <div class="play-music" id="play-music">
+		<li >
+			<a class="title music-list" style="text-align:center;">听听本期故事<span> 推送给玩具</span></a>
+		</li>
+    </div>
+
+     <div class="play-other">
+        <div class="title">更多超级飞侠故事</div>
+        <ul id="J_list-box_children">
+			<li class="item">
+				<div class="newtag"></div>
+				<a>第三集(20151221)：威尼斯站——贡多拉真棒</a>
+			</li>
+			<li class="item">
+				<a>第四集(20151221)：夏威夷站——赶赴舞会</a>
+			</li>
+			<li class="item">
+				<a>第五集(20151221)：英国站——公主的小狗</a>
+			</li>
+        </ul>
+    </div>
+    <div class="back-ip"><a href="#!m=bemeipindex&type=1">进入超级飞侠电子杂志</a></div>
+	<div class="answer"><div class="title">答案揭晓：</div><div class="answer_content"></div></div>
+	<div class="share_weixin"></div>
+	<div class="footer-weixin" style="display:none;">
+		 <img src="./static/images/app-header.png" class="app">
+		 <span class="text">宝宝爱听,贝美时光说</span>
+		 <a class="download" href="http://www.bemetoy.com/download/download.html" >点击下载</a>
+	</div>
+</article>
+
+<!-- 这里是模板 -->
+<script type="text/template" id="J_temp-personitem">
+    <% $.each(list, function(i, item){ %>
+    <% if(i%3 == 0) {%>
+    <ul class="list" >
+        <%}%>
+        <li>
+			<a class="item-a" person_id="<%=item.id %>">
+				<div class="img-b">
+					<img src="<%-item.url %>" alt="<%-item.name %>" class="img-auto">
+				</div>
+				<div class="name "><%=item.name %></div>
+			</a>
+		</li>
+        <% if(i%3 == 2) {%>
+    </ul>
+    <%}else if( i === list.length-1){ if(i%3 === 1){%>
+    <li style="background: #fcf8f5"></li></ul>
+    <%}else{  %>
+    <li style="background: #fcf8f5"></li>
+    <li style="background: #fcf8f5"></li></ul>
+    <%}}%>
+    <%});%>
+</script>
+
+
+<!-- 这里是模板 -->
+<script type="text/template" id="J_temp-item-song">
+    <% $.each(list, function(i, item){ %>
+    <li  sid="<%=item.id %>" md5="<%=item.md5 %>"  url="<%=item.url %>" tag="ip" tagval="<%=item.tagval %>"  size="<%=item.filesize %>" type="<%=item.type %>" >
+		<a class="title music-list" style="text-align:center;">听听本期故事<span class="push-song"> 推送给玩具</span></a>
+    </li>
+    <%});%>
+</script>
+
+
+
+<!-- 这里是模板 -->
+<script type="text/template" id="J_temp-item">
+    <% $.each(list, function(i, item){ %>
+    <li class="item" >
+		<a  href_url ="#!m=bemeipinfo&id=<%=item.id %>&type=<%=item.type %>">
+			<div class='<%=item.new === 1?"newtag":""%>'></div>
+			<span><%=item.title %> ：<%=item.sub_name %></span>
+		</a>
+    </li>
+    <%});%>
+</script>
+
+<script type="text/javascript">
+		function GetQueryString(name)
+		{
+			 var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+			 var r = window.location.search.substr(1).match(reg);
+			 if(r!=null)return  r[2]; return null;
+		}
+		var weixin = GetQueryString('weixin');
+		console.log(weixin);
+		if(weixin == 1){
+			$('.footer-weixin').show();
+		}
+</script>
+
+<script type="text/javascript">
+    BEME.initMinPage('bemeipinfo');
+</script>
+</body>
+</html>

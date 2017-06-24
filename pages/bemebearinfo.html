@@ -1,0 +1,141 @@
+<html>
+<head>
+</head>
+<body>
+
+<article class="bear-info-page ">
+	
+	<div class="title-box" value="">
+		<div><span id="new-title">最三期：Drive my car</span><span id="new-day" class="right">1月14日更新</span></div>
+	</div>
+	
+	<div class="play-video">
+		<video src="http://s.bemetoy.com/dance/bd/bd494888fc3d058488c448d10e93a7d8.mp4" controls="controls" poster="./static/images/video_mika.jpg"></video>
+	</div>
+
+	<div id="bear-song-list">
+		<div class="music" id="play-music"> 
+		</div>
+	</div>
+	
+	<div class="task">
+		<div class="title"><span class="circle"></span><span>本期引导任务</span><span class="circle"></span></div>
+		<div class="task-text">带宝贝走在路上时，请引导Ta念汽车的英文Car.</div>
+		<div class="word">
+			<div class="word-title">单词：</div><div class="word-text single-word">Car（汽车）    Car(汽车)         Car(汽车)     Car(汽车) Car(汽车) Car(汽车) Car(汽车) Car(汽车)</div>
+		</div>
+		<div class="word">
+			<div class="word-title">短句：</div><div class="word-text sentence-word">Car（汽车）    Car(汽车)         Car(汽车)     Car(汽车) Car(汽车) Car(汽车) Car(汽车) Car(汽车)</div>
+		</div>
+	</div>
+	
+
+
+
+
+    <div class="play-other">
+        <div class="title">更多小囧熊杂志</div>
+        <table class="bear-table">
+			<tr><td>1</td><td>2</td><td class="choose">3</td><td>4</td><td>5</td><td class="border-none">6</td></tr>
+			<tr><td>7</td><td>8</td><td>9</td><td>10</td><td>11</td><td class="border-none">12</td></tr>
+			<tr><td>13</td><td>14</td><td>15</td><td>16</td><td>17</td><td class="border-none">18</td></tr>
+			<tr><td>19</td><td>20</td><td>21</td><td>22</td><td>23</td><td class="border-none">24</td></tr>
+        </table>
+		<div class="more-all">查看全部</div>
+    </div>
+	
+	<div class="song-list albuminfo-page">	
+		<div class="song-title">更多小囧熊英文儿歌</div>
+		<ul class="song-box" id ="song-list-box">
+		</ul>
+	</div>
+    <div class="back-ip"><a href="#!m=bemebearindex&type=2" class="back-index">进入小囧熊英文乐园首页</a></div>
+	<div class="verson">正版授权：北京欧蓝达文化传播有限公司</div>
+	<div class="share_weixin"></div>
+	<div class="footer-weixin" style="display:none;">
+		 <img src="./static/images/app-header.png" class="app">
+		 <span class="text">宝宝爱听,贝美时光说</span>
+		 <a class="download" href="http://www.bemetoy.com/download/download.html" >点击下载</a>
+	</div>
+</article>
+
+
+<script type="text/template" id="J_temp-item-song">
+    <% $.each(list, function(i, item){ %>
+    <li class="music-list" sid="<%=item.id %>" md5="<%=item.md5 %>"  url="<%=item.url %>" tag="ip" tagval="<%=item.tagval %>"  size="<%=item.filesize %>" type="<%=item.type %>" >
+		<a class="title">听听本期儿歌</a>
+		<div class="push-bear-song">推送给玩具</div>
+    </li>
+    <%});%>
+</script>
+
+
+<!-- 这里是模板 -->
+<script type="text/template" id="J_temp-item">
+	<% $.each(list, function(i, item){ %>
+		 <% if(i%6 == 0 ) {%>
+		<tr>
+		<%}%>
+		<td href="#!m=bemebearinfo&id=<%=item.id %>&type=<%=item.type %>" class="<%=item.isCurrent == 1?"choose":""%>"><%=item.sequence %></td>
+		 <% if(i%6 == 5) {%>
+			</tr >
+		<%}%>
+    <%});%>
+	</tr>
+</script>
+
+<script type="text/template" id="J_temp-item-somg">
+    <% $.each(list, function(i, item){ %>
+    <li class="item" sid="<%=item.id %>" md5="<%=item.md5 %>"  url="<%=item.url %>" tag="album" tagval="<%=item.tagval %>"  size="<%=item.filesize %>" type="<%=item.type %>" >
+        <a class="item-a" href="javascript:void(0);">
+            <div class="title text-over"><%=item.name %></div>
+            <div class="desc"><%=BEME.func.formatTime(item.song_time) %></div>
+			 <a class="item-play" href="javascript:void(0);"><img src="./static/images/more.png"></a>
+        </a>
+    </li>
+    <%});%>
+</script>
+
+<script type="text/template" id="J_temp-item-song-new">
+    <% $.each(list, function(i, item){ %>
+    <li class="item" sid="<%=item.id %>" md5="<%=item.md5 %>"  url="<%=item.url %>" tag="album" tagval="<%=item.tagval %>"  size="<%=item.filesize %>" type="<%=item.type %>" >
+        <a class="item-a" href="javascript:void(0);">
+            <div class="title text-over"><%=item.name %></div>
+            <div class="desc"><%=BEME.func.formatTime(item.song_time) %></div>
+			 <a class="item-play" href="javascript:void(0);"><img src="./static/images/feiji.png"></a>
+        </a>
+    </li>
+    <%});%>
+</script>
+
+<script type="text/template" id="J_temp-item-weixin">
+    <% $.each(list, function(i, item){ %>
+    <li class="item" sid="<%=item.id %>" md5="<%=item.md5 %>"  url="<%=item.url %>" tag="album" tagval="<%=item.tagval %>"  size="<%=item.filesize %>" type="<%=item.type %>" >
+        <a class="item-a" href="javascript:void(0);">
+            <div class="title text-over"><%=item.name %> <span class="desc"><%=item.song_time ?BEME.func.formatTime(item.song_time):BEME.func.formatTime(item.radio_time)%></span></div>
+        </a>
+    </li>
+    <%});%>
+</script>
+
+<script type="text/javascript">
+		function GetQueryString(name)
+		{
+			 var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+			 var r = window.location.search.substr(1).match(reg);
+			 if(r!=null)return  r[2]; return null;
+		}
+		var weixin = GetQueryString('weixin');
+		console.log(weixin);
+		if(weixin == 1){
+			$('.footer-weixin').show();
+		}
+</script>
+
+
+
+<script type="text/javascript">
+    BEME.initMinPage('bemebearinfo');
+</script>
+</body>
+</html>

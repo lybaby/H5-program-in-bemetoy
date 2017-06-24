@@ -1,0 +1,94 @@
+<html>
+<head>
+</head>
+<body>
+
+<article class="bear-info-page mika-info-page">
+	
+	<div class="title-box" value="">
+		<div><span id="new-title">最三期：Drive my car</span><span id="new-day" class="right">1月14日更新</span></div>
+	</div>
+	
+	<div class="play-video">
+		<video src="http://s.bemetoy.com/dance/bd/bd494888fc3d058488c448d10e93a7d8.mp4" controls="controls" poster="./static/images/video_mika.jpg"></video>
+	</div>
+
+	<div id="bear-song-list">
+		<div class="music" id="play-music"> 
+		</div>
+	</div>
+	
+	<div class="task">
+		<div class="title"><span class="circle"></span><span>本期引导任务</span><span class="circle"></span></div>
+		<div class="problem-text" style="font-size:16px;    line-height: 0.5rem;">问宝贝一个问题：<span style="font-size:14px;">（答案在最下面哦）</span></div>
+		<div class="problem" style="font-size:14px;">
+			寒冬来临的时候，小动物们都在森林里做什么呢？
+		</div>
+	</div>
+	
+
+<div class="play-other">
+        <div class="title">杂志分期看</div>
+        <ul id="J_list-box">
+	
+        </ul>
+    </div>
+	<div>
+		<ul class="page-list">
+		</ul>
+	</div>
+	
+	<div class="answer-mika">	
+		<div class="answer-text" style="font-size:16px;    line-height: 0.5rem;">答案揭晓：</div>
+		<div class="answer" style="font-size:14px;">小动物们进入冬眠，睡觉觉~小朋友答对了么？</div>
+	</div>
+    <div class="back-ip"><a class="back-index" style="background: #19bdb4;">进入米卡成长天地首页</a></div>
+	<div class="share_weixin"></div>
+	<div class="footer-weixin" style="display:none;">
+		 <img src="./static/images/app-header.png" class="app">
+		 <span class="text">宝宝爱听,贝美时光说</span>
+		 <a class="download" href="http://www.bemetoy.com/download/download.html" >点击下载</a>
+	</div>
+</article>
+
+
+<script type="text/template" id="J_temp-mika-song">
+    <% $.each(list, function(i, item){ %>
+    <li class="music-list" sid="<%=item.id %>" md5="<%=item.md5 %>"  url="<%=item.url %>" tag="ip" tagval="<%=item.tagval %>"  size="<%=item.filesize %>" type="<%=item.type %>" >
+		<div class="title"><span class="circle"/>听听本期儿歌<span class="circle"/></div>
+		<div class="push-mika-song">推送给玩具</div>
+    </li>
+    <%});%>
+</script>
+
+
+<!-- 这里是模板 -->
+<script type="text/template" id="J_temp-item">
+	 <% $.each(list, function(i, item){ %>
+    <li class="item" >
+		<a  href ="#!m=bememikainfo&id=<%=item.id %>&type=<%=item.type %>">
+			<div class="text-over"><%=item.content %></div>
+		</a>
+    </li>
+    <%});%>
+</script>
+
+<script type="text/javascript">
+		function GetQueryString(name)
+		{
+			 var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+			 var r = window.location.search.substr(1).match(reg);
+			 if(r!=null)return  r[2]; return null;
+		}
+		var weixin = GetQueryString('weixin');
+		console.log(weixin);
+		if(weixin == 1){
+			$('.footer-weixin').show();
+		}
+</script>
+
+<script type="text/javascript">
+    BEME.initMinPage('bememikainfo');
+</script>
+</body>
+</html>

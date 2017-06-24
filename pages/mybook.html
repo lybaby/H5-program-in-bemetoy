@@ -1,0 +1,37 @@
+<html>
+<head>
+</head>
+<body>
+
+<article class="book-list-page">
+     <ul class="book-list" id="J_book_list"></ul>
+</article>
+
+<script type="text/template" id="J_temp-bookitem">
+   <% $.each(list, function(i, item){ %>
+    <li class="item">
+        <a class="item-a" href="javascript:void(0);" url="<%=item.jump_url %>" type="<%=item.screenModel %>">
+			<div class="img-b left" ><img src="<%=item.url %>" class="img-list"/></div>
+            <div class="name">
+				<div  class="text-over"><%=item.name %></div>
+				<div class="desc"><%=item.description %></div>
+				<div class="time"><%=item.readCount %>人阅读</div>
+			</div>  
+        </a>
+		<img src="./static/images/left-ip.png" class="jiantou"/>
+    </li>
+    <%});%>
+</script>
+
+<script type="text/javascript">
+    BEME.initPage('mybook');
+</script>
+
+
+<script type="text/javascript">
+    resizeBody();
+</script>
+
+
+</body>
+</html>

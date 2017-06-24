@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<body>
+<article>
+<div id ="not-have-history" class="no-history">
+    <article class="song-fail">
+        <div class="image"><img src="./static/images/fail_new.png"/></div>
+        <div class="title">还没有任何点播历史哦，</div>
+        <div class="title2">快去点几首歌给宝宝听吧！</div>
+    </article>
+</div>
+<div id ="have-history" class="myhistory"  style="display:none;">
+	<div class="header">
+		<ul>
+			<li><a class=" h_unhave" _type="1" href="javascript:void(0);">待接收</a></li>
+			<li><a class=" h_have cur" _type="2" href="javascript:void(0);">已接收</a></li>
+			<li><a class="h_play" _type="3" href="javascript:void(0);">已播放</a></li>
+		</ul>
+	</div>
+	<div class="no_song">
+		<article class="playing">
+			<div class="title delete-btn" id="delete-noplay">
+				<a class="left" href="javascript:void(0);" >玩具待接收：</a>
+			</div>			
+			<ul class="play-box" id="J_noplay_list"></ul>
+		</article>
+	</div>
+	
+	<div class="have_song ">
+		<article class="playing">
+			<div class="title">
+				<a class="left" href="javascript:void(0);" >玩具正在播放：</a>
+			</div>
+
+			<ul class="play-box" id="J_play_list"></ul>
+		</article>
+
+		<article class="myindex_other waiting_play" >
+			<div class="title">
+				<a class="left" href="javascript:void(0);" >等待播放的歌曲：</a>
+			</div>
+
+			<ul class="play-box" id="J_waiting_list"></ul>
+		</article>
+	</div>
+	
+    <div class="have_played">
+		<article class="myindex_other played">
+			<div class="title delete-btn" id="delete-played">
+				<a class="left" href="javascript:void(0);" >已播放歌曲：</a>
+			</div>
+			<div class="select-all" _type="2">
+				<a class="left" href="javascript:void(0);" value="0"><img src="./static/images/xuanzekong.png"></a>
+				<a class="title" style="line-height: 0.8rem;">全选</a>
+				<a class="right content" href="javascript:void(0);" id="cancel">取消</a>
+				<a class="right content_add"  href="javascript:void(0);" id="delete1">删除</a>
+			</div>
+			<ul class="play-box" id="J_played_list"></ul>
+		</article>
+	</div>
+</div>
+<div id ="have-new-history" class="myhistory" style="display:none;">
+	<div class="header newheader">
+		<ul>
+			<li><a class="h_unplay cur" _type="1" href="javascript:void(0);">待播放</a></li>
+			<li><a class="h_played" _type="2" href="javascript:void(0);">已播放</a></li>
+		</ul>
+	</div>
+	<div class="have_song ">
+		<article class="playing">
+			<div class="title">
+				<a class="left" href="javascript:void(0);" >玩具正在播放：</a>
+			</div>
+
+			<ul class="play-box" id="J_new_playing"></ul>
+		</article>
+
+		<article class="myindex_other waiting_play" >
+			<div class="title delete-btn" id="delete-new-unplayed">
+				<a class="left" href="javascript:void(0);" >等待播放的歌曲：</a>
+			</div>
+			<ul class="play-box" id="J_new_unplay"></ul>
+		</article>
+	</div>
+	
+    <div class="have_played">
+		<article class="myindex_other played">
+			<div class="title delete-btn" id="delete-new-played">
+				<a class="left" href="javascript:void(0);" >已播放歌曲：</a>
+			</div>
+			<ul class="play-box" id="J_new_played"></ul>
+		</article>
+	</div>
+</div>
+</article>
+<!-- 这里是模板 -->
+<script type="text/template" id="J_temp-nitem">
+    <% $.each(list, function(i, item){ %>
+    <li class="item" rid="<%=item.relate_id %>" sid="<%=item.id %>" user="<%=item.user %>" md5="<%=item.md5 %>"  url="<%=item.url %>" size="<%=item.filesize %>"  tag="<%=item.tag %>" tagval="<%=item.tagval %>" type="<%=item.type %>">
+		<a class="item-c" href="javascript:void(0);">
+			<span class="checkbox" value = '0'><img src="./static/images/xuanzekong.png"></span>
+            <div class="title text-over" ><%=item.name %></div>
+            <div class="desc"><%=BEME.func.formatTime(item.song_time) %></div>
+			<div class="item-b" href="javascript:void(0);">
+				<div class="name text-over"><%=item.user_name %></div>
+				<div class="desc"><%=item.push_time%></div>
+			</div>
+        </a>
+		<a class="item-play" href="javascript:void(0);"><img src="./static/images/more.png"></a>
+    </li>
+    <%});%>
+</script>
+
+<script type="text/javascript">
+    BEME.initPage('myhistory');
+</script>
+
+</body>
+</html>

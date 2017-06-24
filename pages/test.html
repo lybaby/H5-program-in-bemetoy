@@ -1,0 +1,101 @@
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name='format-detection' content='telephone=no'>
+<meta name='viewport' content='width=device-width, minimum-scale=1.0, maximum-scale=1.0'>
+<title>test</title>
+<script type="text/javascript" src="../static/lib/zepto-1.1.6.min.js"></script>
+<script type="text/javascript" src="../static/lib/require.js"></script>
+<script type="text/javascript" src="../static-src/js/main.js"></script>
+
+<link rel="stylesheet" type="text/css" href="../static/css/style.css">
+<style type="text/css">
+.fminfo-page{background: url('../static/images/pages/fminfo.jpg') no-repeat 0 0; background-size: 100% auto; height: 2000px; padding-top: 1.1rem;}
+
+.fminfo-page .top-box{position: relative;}
+.fminfo-page .top-box .img-b{height: 2.85rem;}
+.fminfo-page .top-box .uptime{position: absolute; right: 0; top: 0.25rem; color: #fff; background:url('../static/images/icon-uptime.png') rgba(0, 0, 0, 0.6) no-repeat 0.1rem center; background-size: 0.2rem auto; padding: 0 0.1rem 0 0.4rem; border-top-left-radius:0.35rem; border-bottom-left-radius:0.35rem; height: 0.35rem; line-height: 0.35rem;}
+.fminfo-page .top-box .name-box{position: absolute; padding:0 0 0.1rem 0.15rem; bottom: 0; right:0; left: 0; height: 0.5rem; line-height: 0.5rem; color: #fff; background: url('../static/images/info-box-bg.png') repeat-x left bottom; background-size: auto 100%;}
+.fminfo-page .top-box .name{float: left; font-size: 17px;}
+.fminfo-page .top-box .playbox{float: right; margin-right: 0.2rem; font-size: 12px; background: url('../static/images/bofangw.png') no-repeat 0.1rem center; background-size: 0.25rem auto; padding-left: 0.4rem;}
+
+.fminfo-page .info-box{ margin: 0.15rem 2% 0 2%; overflow: hidden;}
+.fminfo-page .info-box .tags{float: left; overflow: hidden; margin-top: 0.1rem;}
+.fminfo-page .info-box .tags li{float: left; margin-right: 0.1rem; height: 0.32rem; line-height: 0.31rem; padding: 0 0.08rem; border:1px #f00 solid; border-radius: 10%;}
+.fminfo-page .info-box .btn-subscribe{float: right; padding-left: 0.6rem; font-size: 13px; height: 0.48rem; line-height: 0.48rem; background: url('../static/images/icon-subscribe.png') no-repeat 0.2rem center; background-size: 0.35rem auto; color: #ff8698; border: 1px #ff8698 solid; border-radius: 3px;}
+.fminfo-page .info-box .btn-subscribed{border-color: #b5b6b6; color: #b5b6b6; background: url('../static/images/icon-subscribed.png') no-repeat 0.2rem center; background-size: 0.35rem auto;}
+.fminfo-page .infodesc{color: #666; margin: 0.1rem 2% 0 2%; line-height: 0.35rem; font-size: 13.5px; overflow: hidden; display: -webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical;}
+
+.fminfo-page .action-box{overflow: hidden; height: 0.47rem; line-height: 0.47rem; padding: 0.2rem 2%; margin-top: 0.2rem; background: #f0edea; }
+.fminfo-page .action-box .desc{margin-left: 0.1rem; font-size: 15px; color: #999;}
+.fminfo-page .action-box .option-btn{background: url('../static/images/paixu.png') no-repeat center center; background-size: 0.37rem auto; width: 0.47rem; height: 0.47rem;}
+.fminfo-page .song-box .item{ border-bottom: 1px #d6dae2 solid; position: relative;}
+.fminfo-page .song-box .item .item-a{ height: 0.7rem; padding: 0.15rem 2%; background: url('../images/dianbo.png') no-repeat right 0.2rem center; background-size: 0.5rem auto;}
+.fminfo-page .song-box .title{height: 0.4rem; line-height: 0.4rem; font-size: 16px; max-width: 5rem;}
+.fminfo-page .song-box .desc{color: #999; height: 0.4rem; line-height: 0.4rem;}
+.fminfo-page .song-box .title,.fminfo-page .song-box .desc{margin-left: 0.55rem;}
+.fminfo-page .song-box .num{position: absolute; height: 1rem; line-height: 1.1rem; text-align: center; left: 0; top: 0; width: 0.65rem; font-size: 17px; color: #999;}
+.fminfo-page .song-box .title-box{overflow: hidden;}
+.fminfo-page .song-box .title{float: left;}
+.fminfo-page .song-box .new{background: url('../static/images/icon-newtxt.png') no-repeat center center; background-size: 0.87rem auto; width: 0.87rem; height: 0.4rem; float: left;}
+
+</style>
+</head>
+<body>
+
+<article class="comm-page fminfo-page">
+    <div class="top-box">
+        <div class="img-b">
+            <img src="http://s.bemetoy.com/img/10/10f3c6d258d2278e0f489936bce726f5.png" alt="" class="img-cover">
+        </div>
+        <div class="uptime">每周一、周日更新</div>
+        <div class="name-box">
+            <div class="name text-over">道格叔叔讲故事</div>
+            <div class="playbox">11万</div>
+        </div>
+    </div>
+
+    <div class="info-box">
+        <ul class="tags">
+            <li>经典</li><li>起床</li><li>英语</li>
+        </ul>
+        <a href="javascript:void(0);" class="item-a btn-subscribe btn-subscribed">订阅&nbsp;698</a>
+    </div>
+    <div class="infodesc">
+        炎炎夏日，声声雷雨，小朋友们一起来听听夏天是如何唱歌的炎炎夏日，声声雷雨，小朋友们一起来听听夏天是如何唱歌的炎炎夏日，声声雷雨，小朋友们一起
+    </div>
+    
+    <div class="action-box">
+        <div class="desc left">共&nbsp;108&nbsp;期节目</div>
+        <a class="item-a option-btn right" href="javascript:void(0);" ></a>
+    </div>
+
+    <ul class="song-box" id="J_song-box">
+        <li class="item" sid="241">
+            <a class="item-a" href="javascript:void(0);">
+                <div class="num">7</div>
+                <div class="title-box">
+                    <div class="title text-over">白雪公主白雪公主白雪公白雪公主白雪公主白雪公白雪公主白雪公主白雪公</div>
+                    <div class="new"></div>
+                </div>
+                
+                <div class="desc">00:00</div>
+            </a>
+        </li>
+    </ul>
+</article>
+
+<script type="text/template" id="J_temp-fmitem3">
+<% $.each(list, function(i, item){ %>
+<li class="fmitem">
+
+</li>
+<%});%>
+</script>
+
+<script type="text/javascript">
+    BEME.initPage('fminfo');
+</script>
+
+</body>
+</html>

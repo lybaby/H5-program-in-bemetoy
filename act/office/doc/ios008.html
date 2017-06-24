@@ -1,0 +1,82 @@
+<!--#include file="/m2/act/office/layouts/header.html"-->
+<title>贝美开发者中心</title>
+</head>
+
+<body class="page page-scene">
+<div class="header" id="J_header">
+    <!--#include file="/m2/act/office/layouts/navigation.html"-->
+</div>
+<div class="doc_center">
+	<div class="doc">
+		<!--#include file="menulist.html"-->
+		
+		<div class="doc_detail">
+			<div class="">
+				<h1>订阅电台</h1>
+				<div class="level1"><hr></div>
+			</div>
+			<div class="doc_content">
+				<div>
+					<h2>订阅电台</h2>
+					<div class="text_indent text_i0">
+						<div class="code">
+							<code>BMIoTResourcePullService *service = [[BMIoTResourcePullService alloc]init]; </code>
+							<code>[service subscribeRadio:radioId forToy:toyId complection:^(int errCode)</code>
+							<code>{</code>
+							<code class="marginl_20">if (errCode == kBMErrorNone)</code>
+							<code class="marginl_20">{</code>
+							<code class="marginl_40">                //订阅成功</code>
+							<code class="marginl_20"> }</code>
+							<code class="marginl_20">else if (errCode == kBMErrorServerUnbound)</code>
+							<code class="marginl_20">{</code>
+							<code class="marginl_40">                //未绑定设备</code>
+							<code class="marginl_20"> }</code>
+							<code class="marginl_20">else if (errCode == kBMErrorServerResNotFound)</code>
+							<code class="marginl_20">{</code>
+							<code class="marginl_40">                //资源不存在</code>
+							<code class="marginl_20"> }</code>
+							<code class="marginl_20"> else if (errCode == kBMErrorNetAnomaly)</code>
+							<code class="marginl_20">{</code>
+							<code class="marginl_40">                //网络异常</code>
+							<code class="marginl_20"> }</code>
+							<code>}];</code>	
+						</div>
+					</div>
+				</div>
+				<div>
+					<h2>取消订阅</h2>
+					<div class="text_indent text_i0">
+						<div class="code">
+							<code>BMIoTResourcePullService *service = [[BMIoTResourcePullService alloc]init]; </code>
+							<code>[service unsubscribeRadio:radioId forToy:toyId complection:^(int errCode)</code>
+							<code>{</code>
+							<code class="marginl_20">if (errCode == kBMErrorNone)</code>
+							<code class="marginl_20">{</code>
+							<code class="marginl_40">                //取消订阅成功</code>
+							<code class="marginl_20"> }</code>
+							<code class="marginl_20">else if (errCode == kBMErrorServerUnbound)</code>
+							<code class="marginl_20">{</code>
+							<code class="marginl_40">                //未绑定设备</code>
+							<code class="marginl_20"> }</code>
+							<code class="marginl_20"> else if (errCode == kBMErrorNetAnomaly)</code>
+							<code class="marginl_20">{</code>
+							<code class="marginl_40">                //网络异常</code>
+							<code class="marginl_20"> }</code>
+							<code>}];</code>	
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<script type="text/javascript">
+_domReady.push(function(){
+    $('#J_navlist .bk[action="developer"]').addClass('cur');
+	$('#ios008').addClass('cur');
+});
+</script>
+
+<!--#include file="/m2/act/office/layouts/footer.html"-->

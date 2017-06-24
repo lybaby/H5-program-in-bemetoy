@@ -1,0 +1,167 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name='format-detection' content='telephone=no'>
+    <meta name='viewport' content='width=device-width, minimum-scale=1.0, maximum-scale=1.0,user-scalable=no'>
+    <title></title>
+
+<script type="text/javascript">
+    var resizeBody = function(){
+        var docEl = document.documentElement;
+        docEl.style.fontSize = docEl.clientWidth/7.5+'px';
+    };
+    window.addEventListener('orientationchange', resizeBody);
+	function addH5log(log){
+		try{
+			console.log(log);
+			window.bemetoy.writeH5Log(log,'');
+		}catch(e){
+		}
+	}
+	addH5log('H5:start loading framework  index.html!');
+</script>
+
+
+
+
+
+<script type="text/javascript">
+var _g_currentCacheVersion = 'v3.8';
+
+function main(){
+	addH5log('H5:start loading framework js!');
+    //check all cache version.
+    var cacheVerInfo = LocalCheck.get('version');
+    if(cacheVerInfo.content!=_g_currentCacheVersion){
+        LocalCheck.clear();
+        LocalCheck.set('version', _g_currentCacheVersion);
+    }
+
+    //load css
+    LocalCheck.require({url:'./static/css/style.css',
+        unique:gCSSFileHashConfig['css/style.min'], type:'css'
+    
+    }).done(function(){
+		addH5log('H5:css loading success!');
+        resizeBody();
+		addH5log('H5:resizeBody  success!');
+        //load requirejs
+        LocalCheck.require({
+            url : './static/js/zepto-require.js'
+        }).done(function(){
+			addH5log('H5:loading zepto-require framework  success!');
+			
+            initRequirejsLoader();
+			
+			addH5log('H5:init localcheck framework  success!');
+			
+            LocalCheck.require({
+                url : './static-src/js/main.js',
+                unique : gJSFileHashConfig['main']
+            }).done(function(){
+				addH5log('H5:loading requireJs main  success!');
+                BEME.initPage('index');
+				
+				addH5log('H5:loading'+window.location.href);
+            });
+        });
+    });
+}
+
+addH5log('H5:loading main function success!');
+</script>
+
+<script type="text/javascript">
+/*<localcheck id="gHTMLFileHashConfig">*/
+var gHTMLFileHashConfig={"main":"70fbc9","albumindex":"42f190","albuminfo":"bac2c0","fmindex":"b56c7a","fminfo":"781dce","albummain":"c1dd9e","bemebearindex":"fd82371","search":"6ace41","myindex":"6fbe632","grow":"23d0f21","book":"ac73e7","bemebearinfo":"827bc1","bememikainfo":"153b9c","bememikaindex":"a04dfa","bemeipinfo":"ce9e9e","bemeipindex":"c525f3","newmain":"379e62"};
+/*</localcheck>*/
+
+/*<localcheck id="gCSSFileHashConfig">*/
+var gCSSFileHashConfig={"css/style.min":"931da1"};
+/*</localcheck>*/
+
+/*<localcheck id="gJSFileHashConfig">*/
+var gJSFileHashConfig={"main":"b00e31","navigator":"eeeeee","jplayer":"e15ab1","comm/clickevent":"3ff8c2","comm/pushsong":"224ad4","comm/request":"187ea2","comm/swipe":"6adba8","comm/touch":"b706d7","comm/unveil":"5f0b59","comm/url":"dd6cfb","comm/utils":"7e23ba","comm/zeptodata":"715776","helper/app":"73ddda","helper/jrange":"b9e247","helper/playerbar":"cf8388","helper/singleplayer":"30d09c","helper/temphtml":"2afa8f","minpage/albumweixin":"55ae9b","minpage/announcerlist":"ba2ce7","minpage/bemebearindex":"f528bf","minpage/bemebearinfo":"92b6e5","minpage/bemeipindex":"3b1c60","minpage/bemeipinfo":"44b86f","minpage/bememikaindex":"9f6322","minpage/bememikainfo":"ed69eb","minpage/bememikalist":"0dab57","minpage/booklist":"7dc4c2","minpage/grow":"4a0e83","minpage/growlist":"dbb253","minpage/iplist":"820794","minpage/pushfail":"393c4c","minpage/search":"46c2b8","minpage/topicinfo":"debaba","minpage/weixin":"292d41","page/albumindex":"04d00b","page/albuminfo":"474a71","page/albummain":"bd3767","page/fmindex":"27b318","page/fminfo":"0a3534","page/index":"76da20","page/main":"871eb9","page/myalbum":"c2d2c8","page/myhistory":"fd22d8","page/myindex":"81bae2","page/myplay":"64aaff","page/mystation":"80d6a8","page/newmain":"d36368","page/ranking":"65a1c6"};
+/*</localcheck>*/
+
+/*<localinclude file="./static/lib/localcheck.min.js">*/
+/*! 10-05-2016 */
+!function(a){"use strict";var b=function(){},c=a.escape,d=a.unescape,e=6,f="/*",g="*/",h={},i="localcheck-",j=5e3,k=a.localStorage||{setItem:b,getItem:b,removeItem:b,clear:b,length:0},l=function(){var a={},b={isOver:!1,done:function(c){return b.isOver=!0,a.success=c,b.data&&c&&c.call(this,b.data),this},fail:function(c){return b.isOver=!0,a.fail=c,a.failargs&&c&&c.call(this,a.failargs),this}},c={resolve:function(c){a.success?a.success.call(this,c):(b.isOver=!0,b.data=c),b.callback&&b.callback()},reject:function(c){a.fail?a.fail.call(this,c):(b.isOver=!0,b.error=c),b.callback&&b.callback()},promise:function(){return b}};return c};l.all=function(a){for(var b,c=l(),d=[],e=function(){for(var e=a.length-1;e>-1;e--)b=a[e],b.isOver&&(a.splice(e,1),d.push(b.data)),a.length<1&&c.resolve(d)},f=a.length-1;f>-1;f--)a[f].callback=e;return e(),c.promise()};var m=function(a){var b=m.class2type||{},c=b.toString,d="Boolean Number String Function Array Date RegExp Object Error".split(" ");if(!m.class2type){for(var e=0,f=d.length;f>e;e++)b["[object "+d[e]+"]"]=d[e].toLowerCase();m.class2type=b}return b[c.call(a)]},n={};n.getXHR=function(){return a.XMLHttpRequest?new XMLHttpRequest:new ActiveXObject("Microsoft.XMLHTTP")},n.send=function(a,c){c=c||{};var d=this.getXHR(),e=c.success||b,f=c.error||b,g=c.timeout||0,h=0,i=function(a,b){h&&clearTimeout(h),a>=200&&300>a||304===a?e({content:d.responseText,type:d.getResponseHeader("content-type")},d):f({code:a,msg:b},d)};return d.open("GET",a,!0),d.onreadystatechange=function(){4==d.readyState&&i(d.status,"status error")},g>0&&(h=setTimeout(function(){d.abort("timeout"),i(-100,"timeout")},g)),d.send(),d};var o=function(a,b){if(!a)return"";var d,h,i,j,k=[];for(d in b)j=m(b[d]),!b.hasOwnProperty(d)||"string"!=j&&"number"!=j||k.push(c(d)+"="+c(b[d]));return h=k.join("&"),i=h.length,a+=f+h+"#"+new Array(e-(""+i).length+1).join("0")+i+g},p=function(a){if(!a)return!1;var b,c,h,i=-g.length-e,j=a.substr(i,e),k={};j=parseInt(j,10),b=a.substr(i-j-1,j),c=b.split("&");for(var l=c.length-1;l>-1;l--)h=c[l].split("="),k[d(h[0])]=d(h[1]);return{content:a.substr(0,a.length-j-f.length+i-1),ext:k}},q=function(a){var b=a?new Date(a):new Date,c=b.getMonth()+1,d=b.getDate(),e=b.getFullYear();return e+"-"+(10>c?"0"+c:c)+"-"+(10>d?"0"+d:d)},r=function(a){if(!(k.length<1)){var b,c,d=[],e=+new Date;for(b in localStorage)0===b.indexOf(i)&&(c=p(localStorage[b]),c.ext._key=b,c.ext.expire<=e?k.removeItem(b):d.push(c.ext));if(a&&!(d.length<1)){d.sort(function(a,b){return a.stamp-b.stamp});var f=d[0],g=q(),h=q(f.stamp);if(h==g)return k.removeItem(f._key);for(var j=d.length;j>-1;j--)if(f=d[j],h==q(f.stamp))return k.removeItem(f._key)}}},s=function(a,b,c){b=b||"",a=i+a,c=c||{};try{return localStorage.setItem(a,o(b,c)),!0}catch(d){return d.name.toUpperCase().indexOf("QUOTA")>=0?(r(!0),s(a,b,c)):!1}},t=function(b){b.content&&(a.execScript||function(b){a.eval.call(a,b)})(b.content)},u={"default":t},v=function(a){return a.ext.type&&u[a.ext.type]?u[a.ext.type](a):u["default"](a)},w={};w.isValidItem=null,w.get=function(a){return a=i+a,p(k.getItem(a))},w.set=function(a,b,c){if(a){var d=y(c||{});return s(a,b,d)}return!1},w.remove=function(a){return a=i+a,k.removeItem(a),this},w.clear=function(a){if(a)r();else for(var b in localStorage)0===b.indexOf(i)&&k.removeItem(b);return this},w.clearOther=function(){for(var a in localStorage)0!==a.indexOf(i)&&k.removeItem(a);return this};var x=function(a,b){return!a||a.ext.expire-+new Date<0||b.unique!=a.ext.unique||w.isValidItem&&!w.isValidItem(a,b)},y=function(a,b){b=b||{};var c=+new Date;return a.originalType=b.type||"",a.type=a.type||a.originalType,a.stamp=c,a.expire=c+60*(a.expire||j)*60*1e3,a.hasOwnProperty("unique")&&(a.unique=a.unique||""),a},z=function(a){var b=l(),c=a.formatFn,d="",e=a._url;return delete a._url,n.send(e,{success:function(e){var f=y(a,e);d=c?c(e.content):e.content,!a.skipCache&&d&&s(a.key,d,f),b.resolve({ext:a,content:d})},error:function(a){b.reject(a)}}),b.promise()},A=function(a){if(a.url){var b,c,d;if(a.key=a.key||a.url,b=w.get(a.key),a.execute=a.execute!==!1,d=x(b,a),a._url=a.url,a.live||d)a.unique&&(a._url+=(a.url.indexOf("?")>0?"&":"?")+"localcheck-unique="+a.unique),c=z(a);else{b.ext.type=a.type||b.ext.originalType,b.ext.execute=a.execute;var e=l();e.resolve(b),c=e.promise()}return c}},B=function(a,b){var c=m(a);if("string"==c)b[a]={url:a};else if("array"==c)for(var d=0,e=a.length;e>d;d++)B(a[d],b);else"object"==c&&a.url&&(b[a.url]=a)};return w.require=function(){if(!(arguments.length<1)){for(var a,b=l(),c={},d=0,e=arguments.length;e>d;d++)a=arguments[d],B(a,c);var f=[];for(var g in c)c.hasOwnProperty(g)&&f.push(A(c[g]));return l.all(f).done(function(a){for(var c=0,d=a.length;d>c;c++)a[c]&&a[c].ext.execute&&v(a[c]);b.resolve(1==a.length?a[0]:a)}),b.promise()}},w.addHandler=function(a,b){var c=m(a);"array"!=c&&(a=[a]);for(var d=0,e=a.length;e>d;d++)u[a[d]]=b},w.removeHandler=function(a){w.addHandler(a,void 0)},w.setOption=function(a,b){var c={};"string"==m(a)?c[a]=b:c=a;for(var d in c)c.hasOwnProperty(d)&&(h[d]=c[d])},w.clear(!0),a.LocalCheck=w,w}(this,document);
+/*</localinclude>*/
+
+/*<localinclude file="./static/lib/localcheck-css.min.js">*/
+/*! 09-05-2016 */
+!function(){function a(a,b){var c=document.createElement("style");c.setAttribute("type","text/css");var d=document.getElementsByTagName("head")[0];return a?d.insertBefore(c,a):d.appendChild(c),c.styleSheet&&c.styleSheet.disabled?(d.removeChild(c),b("Unable to add any more stylesheets because you have exceeded the maximum allowable stylesheets. See KB262161 for more information.")):void b(null,c)}function b(a,b,c){try{return a.styleSheet?a.styleSheet.cssText=b:"textContent"in a?a.textContent=b:a.appendChild(document.createTextNode(b)),c(null)}catch(d){c(d)}}function c(a){"STYLE"===a.tagName&&a.parentNode&&a.parentNode.removeChild(a)}function d(d,e){!f.ignoreKB262161&&document.styleSheets.length>=31&&e("Unable to add any more stylesheets because you have exceeded the maximum allowable stylesheets. See KB262161 for more information."),a(d.replace?d.replace.nextSibling:d.insertBefore,function(a,f){a?e(a):b(f,d.css||"",function(a){a?(c(f),e(a)):(d.replace&&c(d.replace),e(null,f))})})}var e=function(){},f=([["start",+new Date]],{});f.ignoreKB262161=!1,f={appendStyleSheet:function(a,b){b=b||e,d({css:a},b)},insertStyleSheetBefore:function(a,b,c){c=c||e,d({insertBefore:a,css:b},c)},replaceStyleSheet:function(a,b,c){c=c||e,d({replace:a,css:b},c)},removeStyleSheet:c},LocalCheck.addHandler(["text/css","css"],function(a){f.appendStyleSheet(a.content)})}();
+/*</localinclude>*/
+
+function initRequirejsLoader(){
+/*<localinclude file="./static/lib/requirejs-localcheck.min.js">*/
+/*! 10-05-2016 */
+return;
+!function(){var a=requirejs.load;requirejs.load=function(b,c,d){var e=requirejs.s.contexts._.config,f=e.localcheck||{};if(f.unique=f.unique||{},f.excludes=f.excludes||{},f.excludes[c]||f.mustUnique&&!f.unique[c])a(b,c,d);else{var g=f.unique[c]||!1;requirejs.nextTick(function(){var a={url:d,unique:g};LocalCheck.require(a).done(function(){b.completeLoad(c)}).fail(function(a){b.onError(a)})})}}}();
+/*</localinclude>*/
+}
+
+
+addH5log('H5:loading localcheck temp success!');
+window.BEME = {APP_STATUS:"dev"};
+main();
+</script>
+
+</head>
+<body  class="loading">
+
+<header class="main-header">
+</header>
+<div id="J_body-tips" class="body-tips"></div>
+<div id="J_wrapper-prepare" style="display:none;"></div>
+<div id="J_wrapper" class="wrapper"></div>
+<div  class="footer_blank"></div>
+
+<div id="J_score-tips" class="score-tips" style="display: none">
+    <div class="title">贝壳</div>
+    <div class="point"></div>
+</div>
+
+<div class="body-mask" id="J_body-mask"></div>
+<div class="alert-box" id="J_alert-box" style="display: none">
+    <div class="content">
+        <div class="desc">确定不再收藏该专辑？</div>
+    </div>
+    <div class="footer">
+        <a href="javascript:void(0);"  class="btn-cancel">取消</a>
+        <a href="javascript:void(0);"  class="btn-ok">确定</a>
+    </div>
+</div>
+
+<div class="alert-box" id="J_newplay-box" style="display: none">
+    <div class="header">
+        <div class="play_title">新建歌单</div>
+        <input type="text" id="play_name"  placeholder="歌单名称" class="text" value=""/>
+        <input type="text" id="play_id"   style="display: none" value=""/>
+    </div>
+    <div class="footer">
+        <a href="javascript:void(0);"  class="btn-cancel">取消</a>
+        <a href="javascript:void(0);" style="color: #acacac" class="btn-ok">确定</a>
+    </div>
+</div>
+
+<div class="loading-box" >
+    <div class="loading-anim"></div>
+    <div class="waiting">正在加载，请稍候...</div>
+</div>
+
+<div class="loading-fail-box">
+    <div class="loading-fail"></div>
+    <div class="waiting">加载失败，点击重试</a></div>
+</div>
+
+
+
+</body>
+
+<script>
+	addH5log('H5:loading main html temp success!');
+</script>
+
+</html>

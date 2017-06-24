@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name='format-detection' content='telephone=no'>
+    <meta name='viewport' content='width=device-width, minimum-scale=1.0, maximum-scale=1.0'>
+    <title>推送失败</title>
+    <script type="text/javascript" src="../static/lib/zepto-1.1.6.min.js"></script>
+    <script type="text/javascript" src="../static/lib/require.js"></script>
+    <script type="text/javascript" src="../static-src/js/main.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="../static/css/style.css">
+    <style>
+        .album-main{padding: 1.1rem 0 0.3rem 0; font-size: 16px; text-align: center}
+        .album-main .head,.album-main .classify{padding: 2%;}
+        .album-main img{width: 100%;}
+        .album-main .classify .first-ul{display: -webkit-box;padding-bottom: 2%}
+        .album-main .classify .first-ul li{width: 48%;-webkit-box-flex: 1;}
+        .album-main .classify .first-ul .m-left{margin-left: 2%;}
+        .album-main .classify .first-ul .m-right{margin-right: 2%;}
+        .album-main .classify  .m-top{margin-top: 5%;}
+        .album-main .classify .second-ul{display: -webkit-box;width: 48%;font-size: 14px}
+        .album-main .classify .second-ul li{width: 24%;text-align: center}
+        .album-main .classify .second-ul div{height: 1rem;text-align: center;line-height: 1rem;}
+        .album-main .classify .first-ul .baby{width: 24%;line-height: 2rem;margin-left: 4%;}
+        .album-main .classify .first-ul .baby img{height: 1rem;width: 0.7rem;vertical-align: middle}
+        .album-main .classify .first-ul .text{width: 24%;font-size: 14px;line-height: 2rem;text-align: center;}
+
+    </style>
+
+</head>
+<body>
+<article class="album-main">
+    <section class="head">
+        <a href="#!m=albumindex"><img src="./static/images/quanbuzhuanji.png"/></a>
+    </section>
+    <section class="classify">
+        <ul class="first-ul">
+            <li class="m-right">
+                <a href="#!m=albumindex&id=122"> <img  src="./static/images/ergetongyao.png"/></a>
+            </li>
+            <li class="m-left">
+                <a href="#!m=albumindex&id=123"><img  src="./static/images/gushichengbao.png"/></a>
+                <a href="#!m=albumindex&id=124"><img  class="m-top" src="./static/images/chunyinyue.png"/></a>
+            </li>
+        </ul>
+        <ul class="first-ul">
+            <li class="m-right">
+                <a href="#!m=albumindex&id=125"> <img src="./static/images/jierihuange.png"/></a>
+            </li>
+            <li class="m-left">
+                <a href="#!m=albumindex&id=126"> <img src="./static/images/kuailexiaoxuetang.png"/></a>
+            </li>
+        </ul>
+        <ul class="first-ul">
+            <li class="m-right">
+                <a href="#!m=albumindex&id=127"> <img src="./static/images/shuiqianxilie.png"/></a>
+            </li>
+            <li class="m-left">
+                <a href="#!m=albumindex&id=128"> <img src="./static/images/baobeihaoxiguan.png"/></a>
+            </li>
+        </ul>
+        <ul class="first-ul">
+            <li class="m-right">
+                <a href="#!m=albumindex&id=129"> <img src="./static/images/yingyuleyuan.png"/></a>
+            </li>
+            <li class="m-left">
+                <a href="#!m=albumindex&id=130"><img src="./static/images/guoxuejingdian.png"/></a>
+            </li>
+        </ul>
+        <ul class="first-ul">
+            <li class="m-right baby">
+                <a href="#!m=albumindex&id=131"><img src="./static/images/baby.png"/></a>
+            </li>
+            <li class="m-right text">
+                <div><a href="#!m=albumindex&id=131">0-24个月</a></div>
+            </li>
+            <ul class="m-left second-ul">
+                <li style="width: 24%">
+                    <div><a class="div1" href="#!m=albumindex&id=132">2-3岁</a></div>
+                    <div><a class="div2" href="#!m=albumindex&id=134">4-5岁</a></div>
+                </li>
+                <li style="width: 24%">
+                    <div><a class="div3" href="#!m=albumindex&id=133">3-4岁</a></div>
+                    <div><a class="div4" href="#!m=albumindex&id=135">5岁以上</a></div>
+                </li>
+            </ul>
+        </ul>
+    </section>
+</article>
+<script type="text/javascript">
+    BEME.initPage('albummain');
+</script>
+
+</body>
+</html>

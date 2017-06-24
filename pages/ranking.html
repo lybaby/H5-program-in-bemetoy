@@ -1,0 +1,94 @@
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name='format-detection' content='telephone=no'>
+<meta name='viewport' content='width=device-width, minimum-scale=1.0, maximum-scale=1.0'>
+<title>test</title>
+<script type="text/javascript" src="../static/lib/zepto-1.1.6.min.js"></script>
+<script type="text/javascript" src="../static/lib/require.js"></script>
+<script type="text/javascript" src="../static-src/js/main.js"></script>
+
+<link rel="stylesheet" type="text/css" href="../static/css/style.css">
+<style type="text/css">
+/*.ranking-page{background: url('../static/images/pages/ranking.png') no-repeat 0 0; background-size: 100% auto; height: 2000px;}*/
+</style>
+</head>
+<body>
+
+<article class="comm-page albuminfo-page ranking-page book-list-page">
+    <div class="top-box" id="J_top-box">
+        <div class="cate-box" id="J_cate-box"></div>
+		<a class="show_more"></a>
+    </div>
+	<div class="back-cover"></div>
+	<div class="all-box" id="J_all-box"></div>
+    <div class="caction-box">
+        <a class="item-a play-btn left" href="javascript:void(0);" value="0">全部推送至玩具</a>
+        <div class="desc left">(共<span id="J_songnum">0</span>首)</div>
+    </div>
+
+    <ul class="song-box" id="J_song-box"></ul>
+</article>
+
+<!-- 这里是模板 -->
+<script type="text/template" id="J_temp-item">
+    <% $.each(list, function(i, item){ %>
+    <li class="item" sid="<%=item.id %>" md5="<%=item.md5 %>"  url="<%=item.url %>" size="<%=item.filesize %>" type="<%=item.type %>" tag="<%=item.tag %>" tagval="<%=item.tagval %>">
+        <a class="item-a" href="javascript:void(0);">
+			<div class="num"><%=i+1 %></div>
+            <div class="title text-over"><%=item.name %></div>
+            <div class="desc"><%=BEME.func.formatTime(item.song_time) %></div>
+			<a class="item-play" href="javascript:void(0);"><img src="./static/images/more.png"></a>
+        </a>
+    </li>
+    <%});%>
+</script>
+
+<!-- 这里是模板 -->
+<script type="text/template" id="J_temp-item-new">
+    <% $.each(list, function(i, item){ %>
+    <li class="item" sid="<%=item.id %>" md5="<%=item.md5 %>"  url="<%=item.url %>" size="<%=item.filesize %>" type="<%=item.type %>" tag="<%=item.tag %>" tagval="<%=item.tagval %>">
+        <a class="item-a" href="javascript:void(0);">
+			<div class="num"><%=i+1 %></div>
+            <div class="title text-over"><%=item.name %></div>
+            <div class="desc"><%=BEME.func.formatTime(item.song_time) %></div>
+			<a class="item-play" href="javascript:void(0);"><img src="./static/images/feiji.png"></a>
+        </a>
+    </li>
+    <%});%>
+</script>
+
+<script type="text/template" id="J_temp-all">
+    <% $.each(list, function(i, item){ %>
+    <% if(i%4==0){ %>
+    <ul class="all-list">
+        <%}%>
+        <li><a class="item-a" href="javascript:void(0);" data-id="<%-item.id %>"><%=item.name %></a></li>
+        <% if((i+1)%4==0){ %>
+    </ul>
+	<%}else if( i === list.length-1){ if((i+1)%4 === 3){%>
+    <li></li></ul>
+    <%}else if((i+1)%4 === 2){  %>
+    <li></li><li></li></ul>
+	<%}else{  %>
+    <li></li><li></li><li></li></ul>
+    <%}}%>
+    <%});%>
+</script>
+
+
+
+<script type="text/template" id="J_temp-cate">
+    <div class="menu-list swiper-wrapper">
+    <% $.each(list, function(i, item){ %>
+		  <div class="swiper-slide" ><span class="item-a"  href="javascript:void(0);" data-id="<%-item.id %>"><%=item.name %></span></div>
+    <%});%>
+	 </div>
+</script>
+
+<script type="text/javascript">
+    BEME.initPage('ranking');
+</script>
+
+</body>
+</html>

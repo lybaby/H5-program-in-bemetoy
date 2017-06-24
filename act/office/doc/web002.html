@@ -1,0 +1,96 @@
+<!--#include file="/m2/act/office/layouts/header.html"-->
+<title>贝美开发者中心</title>
+</head>
+
+<body class="page page-scene">
+<div class="header" id="J_header">
+    <!--#include file="/m2/act/office/layouts/navigation.html"-->
+</div>
+<div class="doc_center">
+	<div class="doc">
+		<!--#include file="menulist.html"-->
+		
+		<div class="doc_detail">
+			<div class="">
+				<h1>获取token模块</h1>
+				<div class="level1"><hr></div>
+			</div>
+			<div class="doc_content">
+				<div>
+					<h2>获取token</h2>
+					<div class="text_indent">
+						<div class="recommend text_i0"> 所有使用贝美云的用户以access_token为接口调用凭据，来调用接口，
+							所有接口的调用需要先获取access_token，access_token，在2小时内有效，
+							过期需要重新获取，但1天内获取次数有限，开发者需自行存储。
+							为了保证用户的唯一性，所有用户都通过注册时产生的appID和appKey进行获取token。
+						</div><br>
+						<strong>接口调用请求说明</strong><br>
+						<div class="code">
+							<code>http请求方式: POST</code>
+							<code>https://api.bemetoy.com/cgi_bin/token</code>
+							<code>post数据包{</code>
+							<code class="marginl_20">appID：APPID,</code>
+							<code class="marginl_20">timestamp:’cur’</code>
+							<code>}</code>
+						</div>
+						<strong>参数说明</strong><br>
+						<table border="1" cellspacing="0" cellpadding="4" align="center" width="640px">
+							<tbody>
+								<tr>
+									<th style="width:120px">参数</th>
+									<th style="width:120px">是否必须</th>
+									<th>说明</th>
+								</tr>
+								<tr>
+									<td> timestamp</td>
+									<td> 是</td>
+									<td> 获取access_token填写当前的Unix时间,该时间应在贝美服务器时间300s之内，贝美云所用时间为北京时间</td>
+								</tr>
+								<tr>
+									<td> appid</td>
+									<td> 是</td>
+									<td> 第三方用户唯一凭证</td>
+								</tr>
+							</tbody>
+						</table>
+						<strong>返回说明</strong><br>
+						<p>正常情况下，贝美会返回下述JSON数据包：</p>
+						<div class="code">
+							<code>{"access_token":"ACCESS_TOKEN","expires_in":7200}</code>
+						</div>
+						<table border="1" cellspacing="0" cellpadding="4" align="center" width="640px">
+							<tbody>
+								<tr>
+									<th style="width:120px">参数</th>
+									<th>说明</th>
+								</tr>
+								<tr>
+									<td> access_token</td>
+									<td> 获取到的凭证</td>
+								</tr>
+								<tr>
+									<td> expires_in</td>
+									<td> 凭证有效时间，单位：秒</td>
+								</tr>
+							</tbody>
+						</table>
+						<p>错误时贝美会返回错误码等信息，JSON数据包示例如下（该示例为AppID无效错误)：</p>
+						<div class="code">
+							<code>{"errcode":10001,"errmsg":"invalid appid"}</code>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<script type="text/javascript">
+_domReady.push(function(){
+    $('#J_navlist .bk[action="developer"]').addClass('cur');
+	$('#web002').addClass('cur');
+});
+</script>
+
+<!--#include file="/m2/act/office/layouts/footer.html"-->

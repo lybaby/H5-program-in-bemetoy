@@ -1,0 +1,89 @@
+html,body,ul,dl,dt,dd,h1,h2,h3,h4,input{padding: 0; margin: 0;}
+html, body{height: 100%;}
+body{font-family:"Microsoft YaHei",Arial,Helvetica,sans-serif; background: #fadb5e; overflow-x: hidden; position: relative;}
+a{text-decoration: none;}
+img{vertical-align: top;}
+table{border-collapse: collapse; border:0; border-spacing:0;}
+.clearfix:before,.clearfix:after{content:'';display:table}
+.clearfix:after{clear:both}
+.clearfix{*zoom:1}
+.autow{width: 100%; height: auto;}
+.autoh{height: 100%; width: auto;}
+
+.loading-box{position: absolute; width: 200px; height: 200px; top: 50%; left: 50%; margin: -100px 0 0 -100px;}
+.loading-box .text{position: absolute; bottom: 40px; left: 0; right: 0; font-size: 13px; text-align: center; height: 30px; line-height: 30px; color: #5cffd6;}
+.loading-box .text span{font-family: georgia; font-size: 20px; line-height: 30px; vertical-align: top;}
+
+.share_weixin{position:fixed;right:2%;background:url('http://m2.bemetoy.com/static/images/fenxiang.png') no-repeat;;height:0.8rem;width:1.3rem;bottom:0.2rem;background-size:100%;display: none;}
+
+.weixin-page .weixin-box {    font-size: 14px;display: inline-block;height: 0.9rem;line-height: 0.9rem;padding-left:0.2rem;margin-top:0.2rem;width: 100%;color: #ff8698;background:#f0edea;}
+.weixin-page .item{  position: relative;display: inline-flex;width: 100%; background: url('../images/weixin-play.png') 0.2rem no-repeat;   background-size: 0.4rem auto;}
+.weixin-page .item .item-a{ height: 0.7rem;border-bottom: 1px #d6dae2 solid; padding: 0.15rem 0;width: 100%; background-size: 0.5rem auto; -webkit-tap-highlight-color: rgba(0,0,0,0.1);}
+.weixin-page .item .title{height: 0.7rem; line-height: 0.7rem; font-size: 16px; max-width: 5rem;margin-left: 1rem; }
+.weixin-page .desc{font-size: 14px;color:#999;}
+.weixin-page .weixin{padding-bottom:1rem;}
+.footer-weixin{position:fixed;display:inline-block;height:1.2rem;line-height:1.2rem;background: #ff8698;bottom:0;width:100%;left:0;}
+.footer-weixin .app{width:1rem;padding:0.1rem;}
+.footer-weixin  .text{position: absolute;font-size: 16px;color: white;}
+.footer-weixin .download{position: absolute; right: 0.2rem;background: #999;width: 2rem;text-align: center;margin: 0.2rem 0;border-radius: 5px;font-size: 16px;color: white;height: 0.8rem;line-height: 0.8rem; -webkit-tap-highlight-color: rgba(255,255,255,0.1)}
+
+
+@-webkit-keyframes swing {
+  0%{
+    -webkit-transform: translate3d(0, -100%, 0);
+    transform: translate3d(0, -100%, 0);
+    opacity: 0;
+  }
+  50%{
+    opacity: 1;
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+  }
+  60% {
+    -webkit-transform: rotate3d(0, 0, 1, 15deg);
+    transform: rotate3d(0, 0, 1, 15deg);
+  }
+
+  70% {
+    -webkit-transform: rotate3d(0, 0, 1, -10deg);
+    transform: rotate3d(0, 0, 1, -10deg);
+  }
+
+  80% {
+    -webkit-transform: rotate3d(0, 0, 1, 5deg);
+    transform: rotate3d(0, 0, 1, 5deg);
+  }
+
+  90% {
+    -webkit-transform: rotate3d(0, 0, 1, -5deg);
+    transform: rotate3d(0, 0, 1, -5deg);
+  }
+
+  to {
+    -webkit-transform: rotate3d(0, 0, 1, 0deg);
+    transform: rotate3d(0, 0, 1, 0deg);
+  }
+}
+
+.swing {
+  -webkit-animation:swing 1200ms ease-in-out forwards;
+  -webkit-backface-visibility: visible !important; backface-visibility: visible !important;
+  -webkit-transform-origin: top center;
+  transform-origin: top center;
+}
+
+
+@-webkit-keyframes uil-ripple {
+  0% { width: 0; height: 0; opacity: 0; margin: 0 0 0 0;}
+  33% { width: 44%; height: 44%; margin: -22% 0 0 -22%; opacity: 1;}
+  100% { width: 88%; height: 88%; margin: -44% 0 0 -44%; opacity: 0;}
+}
+@keyframes uil-ripple {
+  0% { width: 0; height: 0; opacity: 0; margin: 0 0 0 0;}
+  33% { width: 44%; height: 44%; margin: -22% 0 0 -22%; opacity: 1;}
+  100% { width: 88%; height: 88%; margin: -44% 0 0 -44%; opacity: 0;}
+}
+.uil-ripple-css {width: 200px; height: 200px; z-index: 100;}
+.uil-ripple-css div { position: absolute; top: 50%; left: 50%; margin: 0; width: 0; height: 0; opacity: 0; border-radius: 50%; border-width: 12px; border-style: solid; -webkit-animation: uil-ripple 2s ease-out infinite; animation: uil-ripple 2s ease-out infinite; transform: translateZ(0); -webkit-transform: translateZ(0);}
+.uil-ripple-css div:nth-of-type(1) { border-color: #ffffff;}
+.uil-ripple-css div:nth-of-type(2) { border-color: #5cffd6; -webkit-animation-delay: 1s; animation-delay: 1s; transform: translateZ(0); -webkit-transform: translateZ(0);}

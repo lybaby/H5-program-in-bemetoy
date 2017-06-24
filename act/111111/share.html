@@ -1,0 +1,166 @@
+<html>
+<head>
+<meta charset="UTF-8">
+<title>六一儿童节，贝美许愿季</title>
+<meta name='viewport' content='width=device-width, minimum-scale=1.0, maximum-scale=1.0'>
+<meta name='format-detection' content='telephone=no'>
+<meta name="screen-orientation"content="portrait">
+<meta name="x5-orientation" content="portrait">
+
+<script type="text/javascript">
+    var resizeBody = function(){
+        var docEl = document.documentElement;
+        docEl.style.fontSize = docEl.clientWidth/7.5+'px';
+    };
+    var key = "onorientationchange" in window ? "orientationchange" : "resize";
+    window.addEventListener(key, resizeBody, false);
+
+    resizeBody();
+</script>
+
+<style type="text/css">
+html,body,ul,dl,dt,dd,h1,h2,h3,h4,input{padding: 0; margin: 0;}
+body textarea{font-family:"Microsoft YaHei",Arial,Helvetica,sans-serif;}
+body{background: #fffcdc; overflow-x: hidden; position: relative; font-size: 14px;}
+a{text-decoration: none;}
+img{border: 0;}
+.clearfix:before,.clearfix:after{content:'';display:table}
+.clearfix:after{clear:both}
+.clearfix{*zoom:1}
+
+.left{float: left;}
+.right{float: right;}
+.autow{width: 100%; height: auto;}
+.textover{white-space:nowrap; text-overflow:ellipsis; overflow: hidden;}
+
+.main{padding-bottom: 1.6rem;}
+.body-tips{position:fixed; top:-1.2rem; left:0; right:0; z-index:70; height:.85rem; line-height:.85rem; text-align:center; background:#fff6e4; font-size:16px; color:#ff8698; -webkit-transition:all .5s ease-in-out;}
+.tips-in{top:0}
+.tips-out{top:-1.2rem}
+
+.main{padding-top: 0.3rem;}
+.main .text1{width: 6.5rem; margin: 0 auto; line-height: 24px; font-size: 15px;}
+.main .p img{width: 100%; height: auto;}
+.main .p1{padding: 0.4rem 0; }
+.main .p3{margin-top: 0.4rem;}
+.main .submited .textarea:focus{outline: 0;}
+
+.main .uinfo{width: 6.6rem; height: 4.7rem; background: url('./static/images/share-p2.png') #ffbebf 0.2rem 0.3rem no-repeat; background-size: auto 0.4rem; margin: 0 auto; border-radius: 0.15rem; position: relative;}
+.main .textarea{border:0; background: transparent; position: absolute; width: 5.2rem; top: 1rem; left: 0.75rem; height: 2.3rem; line-height: 25px; font-size: 14px; color: #fff;}
+.main .uinfo .desc{display: block; color: #fb3d58; border-top: 1px #fd7e8b solid; height: 0.9rem; line-height: 0.9rem; text-align: center; position: absolute; bottom: 0; left: 0.3rem; width: 6rem; font-size: 13px;}
+
+.footer-weixin{position:fixed;display:inline-block;height:1.2rem;line-height:1.2rem;background: #ff8698;bottom:0;width:100%;left:0;}
+.footer-weixin .app{width:1rem;padding:0.1rem;}
+.footer-weixin  .text{position: absolute;font-size: 16px;color: white;}
+.footer-weixin .download{position: absolute; right: 0.2rem;background: #999;width: 2rem;text-align: center;margin: 0.2rem 0;border-radius: 5px;font-size: 16px;color: white;height: 0.8rem;line-height: 0.8rem; -webkit-tap-highlight-color: rgba(255,255,255,0.1)}
+</style>
+
+</head>
+<body>
+
+<div class="main" id="J_mainbox">
+    <div class="text1">
+        我在“贝美时光说”为宝宝许下了一个小心愿，还差几个赞就能实现，请你为宝贝点赞助力~
+    </div>
+    
+    <div class="p p1">
+        <img src="./static/images/share-p1.png">
+    </div>
+
+    <div class="uinfo">
+        <div class="textarea" id="J_textarea"></div>
+        <div class="desc textover">下载“贝美时光说”即可为宝贝点赞助力哦！</div>
+    </div>
+
+    <div class="p p3">
+        <img src="./static/images/share-p3.png">
+    </div>
+</div>
+
+<div class="footer-weixin">
+    <img src="http://m2.bemetoy.com/static/images/app-header.png" class="app">
+    <span class="text">宝宝爱听,贝美时光说</span>
+    <a class="download" href="http://www.bemetoy.com/download/download.html">点击下载</a>
+</div>
+
+<div id="J_body-tips" class="body-tips">您尚未绑定玩具!</div>
+
+<script type="text/javascript" src="./static/js/zepto-1.1.6.min.js"></script>
+<script type="text/javascript" src="./static/js/utils.js"></script>
+<script type="text/javascript" src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+
+
+<script type="text/javascript">
+$(document.body).ready(function(){
+
+var _baseUrl = 'http://dev.h5.bemetoy.com/app/m2/active/',
+    id = bemeObject.getQueryString('id');
+function getTextInfo(){
+    $.ajax({
+        url : _baseUrl+'getDescById',
+        data : {
+            id : id,
+            test : 1
+        },
+        cache : false,
+        dataType : 'json',
+        timeout : 3000,
+        xhrFields : {"withCredentials":true},
+        success : function(data){
+            $('#J_textarea').text(data.data.desc);
+        },
+        error : function(){
+            bemeObject.showAlert('网络请求出错啦，稍后重试！', function(){
+                location.reload();
+            }, {hidecancel:true});
+        }
+    });
+}
+
+function initWeixin(){
+    var url = location.href; 
+    $.ajax({
+        url : '/app/m2/weixin/getWeixinConfig',
+        data:{url:url},
+        dataType: "json", 
+        success: function(jdata){
+            setWeixinInfo(jdata.data);
+        }
+    });
+}
+
+function setWeixinInfo(jdata){
+    wx.config({
+            debug: false,
+            appId: jdata.appid,
+            timestamp: jdata.time,
+            nonceStr: jdata.nonce,
+            signature: jdata.sign,
+            jsApiList: ['onMenuShareAppMessage','onMenuShareTimeline','onMenuShareQQ','onMenuShareWeibo','onMenuShareQZone'] // 必填，需要使用的JS接口列表，所有JS接口列表见附录2
+    });
+    var shareConfig = {
+        title : "六一儿童节，贝美许愿季",
+        desc : '我在“贝美时光说”为宝宝许下了一个小心愿，还差几个赞就能实现，请你为宝贝点赞助力~', //分享给朋友需要
+        link : location.href, //如果不加统计参数,
+        imgUrl : 'http://h5.bemetoy.com/m2/act/111111/static/images/share-img.jpg'
+    };
+    wx.ready(function(){
+        wx.onMenuShareTimeline(shareConfig);
+        wx.onMenuShareAppMessage(shareConfig);
+        wx.onMenuShareQQ(shareConfig);
+        wx.onMenuShareWeibo(shareConfig);
+        wx.onMenuShareQZone(shareConfig);
+    });
+    wx.error(function(res){
+        alert(res);
+    });
+}
+
+getTextInfo();
+initWeixin();
+
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>x</title>
+<meta name='viewport' content='width=device-width, minimum-scale=1.0, maximum-scale=1.0'>
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<link rel="stylesheet" type="text/css" href="./static/css/style.css">
+<style type="text/css">
+.page{display: none;}
+.page h2{font-family: "Agency FB"; text-align: center; color: #666; font-style: normal; padding: 0.4rem 0;}
+.page_no .logo{text-align: center; margin-top: 2rem;}
+.page_no .logo img{max-width: 2rem;}
+.page_no .desc{color: #f97a96; text-align: center; margin-top: 0.6rem;}
+.page_no .desc a{text-decoration: underline; }
+
+.input, .textarea, .select{background-color: #fff; padding: 0; padding-left: 0.8rem; padding-right: 0.2rem; -webkit-appearance:none; border:0; line-height: 0.8rem; width: 100%; vertical-align: top;}
+.select{height: 100%; border: 0; padding: 0 0.3rem 0 0.3rem; outline: none; color:#999; background: #fff; -webkit-appearance: none; background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAJBAMAAAD5iKAgAAAAIVBMVEX///++vr74+Pjz8/Pt7e3m5ube3t7X19fPz8/KysrExMTsHNz5AAAANElEQVQI12NoFBQUlGAwBJLCDOxAsoCBCUgqMDAkCooxMDBwCS4AkqyCAQxAMJMBBFwYGACL4ATJ2lqExgAAAABJRU5ErkJggg=='); background-position : right 5px center; background-repeat: no-repeat; text-align-last:center; text-align: -webkit-center; width: 80%; float: right; margin-right: 0.1rem;}
+.btn{background: #387ef5; border :1px #0c60ee solid; width: 90%; text-align: center; height: 0.8rem; line-height: 0.8rem; text-align: center; color: #fff;}
+
+.textarea{height: 2rem;}
+.no-result{height: 2rem; line-height: 2rem; color: #999; font-size: 14px; text-align: center;}
+
+.list-box{}
+.list-box .item{margin-bottom: 0.3rem; background: #fff;}
+.page_apply .list-box .input-name{background-image: url('./static/images/i-name.png'); background-repeat: no-repeat; background-position: 0.2rem center; background-size: 0.5rem auto; }
+.page_apply .list-box .input-phone{background-image: url('./static/images/i-phone.png'); background-repeat: no-repeat; background-position: 0.2rem center; background-size: 0.4rem auto; }
+.page_apply .list-box .input-address{background-image: url('./static/images/i-address.png'); background-repeat: no-repeat; background-position: 0.3rem 0.2rem; background-size: 0.3rem auto; line-height: 26px; padding: 0.2rem; padding-left: 0.8rem;}
+.page_apply .footer{text-align: center; margin-top: 0.2rem;}
+
+.page_list{}
+.page_list .item{line-height: 1rem; border-top: 1px #ddd solid; background: #fff; color: #444; padding: 0 5%; width: 100%; text-align: center;}
+.page_list .header{background: #f2f2f2; font-size: 14px; line-height: 0.8rem; border: 0;}
+.page_list .name{width: 45%; text-align: left;}
+.page_list .num{width: 15%;}
+.page_list .date{width: 40%;}
+.page_list .textover{height: 1rem;}
+
+.page_list .add-btn{font-size: 16px; background: #11c1f3; border:1px #0a9dc7 solid; color: #fff; margin-top: 0;}
+.page_list .add-btn i{display: inline-block; height: 0.6rem; width: 0.6rem; vertical-align: middle; background-image: url('./static/images/i-plus.png'); background-repeat: no-repeat; background-size: 100% auto; margin-right: 0.3rem; }
+
+.page_list .user-info{background: #fff; padding: 0.2rem; background: url('./static/images/right.png') no-repeat #fff right 0.2rem center; background-size: auto 30%;}
+.page_list .logo{width: 0.8rem; height: 0.8rem; border:1px #ff8698 solid; padding: 0.1rem; background: #fff;}
+.page_list .logo img{width: 100%; }
+.page_list .info{width: 5.8rem;}
+.page_list .info .username{line-height: 0.5rem;}
+.page_list .info .address{font-size: 12px; color: #ccc;}
+
+.page_sale .pic-box{padding: 0.2rem 0;}
+.page_sale .pic-box .pic{width: 1.3rem; height: 1.3rem; margin:0.1rem; background: #fdddc8; border:1px #fb8536 solid; float: left; padding: 3px; position: relative;}
+.page_sale .pic-box .pic img{width: 100%; height: 100%;}
+.page_sale .pic-box .pic .x{width: 16px; height: 16px; display: block; position: absolute; background: url('./static/images/close.png') no-repeat center center; right: 0; top: 0; background-size: 100% auto; }
+
+.page_sale .pic-box .add-pic{background: #fff; border-color: #000; padding: 0.1rem;}
+.page_sale .pic-box .input-file{position: absolute; background: transparent; border:0; top: 0; left: 0; width: 100%; height: 100%; opacity: 0;}
+
+.page_sale .label{width: 1.5rem; line-height: 0.8rem; padding-left: 0.2rem;}
+.page_sale .input, .page_sale .select{width: 5.7rem; padding-left: 0.2rem;}
+.page_sale .footer{text-align: center; margin-top: 0.2rem;}
+.page_sale .footer .btn{width: 25%;}
+</style>
+
+<script type="text/javascript">
+var resizeBody = function(){
+    var docEl = document.documentElement;
+    docEl.style.fontSize = docEl.clientWidth/7.5+'px';
+};
+resizeBody();
+</script>
+</head>
+<body>
+
+<div class="page page_no" id="J_page_no">
+    <div class="logo">
+        <img src="./static/images/header.png" alt="">
+    </div>
+    <div class="desc">你还不是贝美经销商，<a href="javascript:void(0);" id="J_btn-join">申请加入</a></div>
+</div>
+
+<div class="page page_apply" id="J_page_apply">
+    <form action="" id="J_form-apply">
+        <h2>申请成为经销商</h2>
+        <div class="list-box clearfix">
+            <div class="item">
+                <input class="input input-name" name="name" type="text" placeholder="输入经销商名">
+            </div>
+            <div class="item">
+                <input class="input input-phone" name="telphone" type="text" placeholder="输入联系方式">
+            </div>
+            <div class="item clearfix">
+                <textarea class="textarea input-address" name="address" type="text" placeholder="输入店铺所在地点"></textarea>
+            </div>
+        </div>
+
+        <div class="footer clearfix">
+            <input class="btn" type="submit" value="提交申请" />
+        </div>
+    </form>
+</div>
+
+<div class="page page_list" id="J_page_list">
+    <div class="user-info clearfix" id="J_user-info">
+        <div class="logo left">
+            <img src="" class="img">
+        </div>
+        <div class="info right">
+            <div class="username"></div>
+            <div class="address"></div>
+        </div>
+    </div>
+
+    <div class="item clearfix header">
+        <div class="name left">类型</div>
+        <div class="num left">数量</div>
+        <div class="date right">日期</div>
+    </div>
+
+    <div class="item-list">
+        <div class="no-result">还没有添加任何记录</div>
+    </div>
+    <div class="item clearfix add-btn" id="J_addsale-btn">
+        <i></i>点击添加
+    </div>
+</div>
+
+<div class="page page_sale" id="J_page_sale">
+    <form action="" id="J_form-sale">
+        <input type="hidden" name='id' value="0"> 
+        <h2>提交玩偶销售记录</h2>
+        <div class="list-box clearfix">
+            <div class="item clearfix">
+                <div class="label left">玩偶类型</div>
+                <div class="left">
+                    <select class="select input-toytype" name="toytype">
+                        <option value="xiaoxiong">贝美小熊</option>
+                        <option value="feixia">飞侠</option>
+                        <option value="weini">维尼</option>
+                        <option value="mengmeng">萌萌</option>
+                        <option value="xiangxiang">响响</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="item clearfix">
+                <div class="label left">售出个数</div>
+                <input class="input input-num left" name="toynum" type="number" placeholder="输入数字" value="1">
+            </div>
+            
+            <div class="item clearfix pic-box" id="J_pic-box">
+                <div class="pic add-pic" id="J_add-pic">
+                    <img src="./static/images/upload-pic.png">
+                    <input class="input-file" type="file" value="" accept="image/*" id="J_file-input"/>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer clearfix">
+            <input class="btn" type="submit" value="提交" />
+            <input class="btn" type="button" action="cancel" value="返回" />
+            <input class="btn" type="button" action="delete" value="删除" />
+        </div>
+    </form>
+</div>
+
+<div class="body-mask" id="J_body-mask"></div>
+<div class="alert-box" id="J_alert-box" style="display: none">
+    <div class="content">
+        <div class="desc">确定不再收藏该专辑？</div>
+    </div>
+    <div class="footer">
+        <a href="javascript:void(0);"  class="btn-cancel">取消</a>
+        <a href="javascript:void(0);"  class="btn-ok">确定</a>
+    </div>
+</div>
+
+<script type="text/template" id="J_temp-file">
+<div class="pic xpic">
+    <img src="{src}">
+    <a href="javascript:void(0);" class="x"></a>
+</div>
+</script>
+
+<script type="text/template" id="J_temp-sale">
+<div class="item clearfix">
+    <div class="name textover left"></div>
+    <div class="num textover left"></div>
+    <div class="date textover right"></div>
+</div>
+</script>
+
+<script type="text/javascript" src="./static/js/zepto-1.1.6.min.js"></script>
+<script type="text/javascript" src="./static/js/fastclick.min.js"></script>
+<script type="text/javascript" src="./static/js/uploadpic.js"></script>
+<script type="text/javascript" src="./static/js/main.js"></script>
+
+<script type="text/javascript">
+FastClick.attach(document.body);
+</script>
+</body>
+</html>
+
+

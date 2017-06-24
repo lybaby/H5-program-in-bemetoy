@@ -1,0 +1,93 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name='format-detection' content='telephone=no'>
+    <meta name='viewport' content='width=device-width, minimum-scale=1.0, maximum-scale=1.0'>
+    <title>微信试听</title>
+    <script type="text/javascript" src="../static/lib/zepto-1.1.6.min.js"></script>
+    <script type="text/javascript" src="../static/lib/require.js"></script>
+    <script type="text/javascript" src="../static-src/js/main.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="../static/css/style.css">
+    <style type="text/css">
+        /*.albuminfo-page{background: url('../static/images/pages/albuminfo.jpg') no-repeat 0 -1.1rem; background-size: 100% auto; height: 2000px; overflow: hidden;}*/
+    </style>
+</head>
+<body>
+
+<article class="comm-page albuminfo-page weixin-page">
+    <div class="album-box" id="J_album-box">
+        <div class="img-box">
+            <img imgsrc="" src="./static/images/moren04.jpg" alt="" class="img-cover">
+        </div>
+		
+		 <div class="info-box">
+            <div class="title text-over"></div>
+            <ul class="tags"></ul>
+			<div class="desc" id="J_album-desc"></div>
+        </div>
+    </div>
+	
+	<div class="topic-box" id="J_topic-box">
+		<div class="topic-img">
+            <img imgsrc="" src="./static/images/moren_ms.jpg" alt="" class="img-cover">
+        </div>
+		 <div class="top-box">
+            <div class="title text-over"></div>
+        </div>
+	</div>
+
+    <div class="weixin-box">
+       想用玩具播放？打开“贝美时光说”app 点播吧~
+    </div>
+
+    <ul class="weixin" id="J_song-box"></ul>
+
+	<div class="footer-weixin">
+	 <img src="./static/images/app-header.png" class="app">
+	 <span class="text">宝宝爱听,贝美时光说</span>
+	 <a class="download" href="http://www.bemetoy.com/download/download.html" >点击下载</a>
+	</div>
+</article>
+
+<article class="song-page">
+	<div class="song-image">
+		<img  src="./static/images/moren04.jpg" alt="" class="song-cover image">
+		<div class="header-image"></div>
+		<div class="cover">
+			<img src="./static/images/mengban.png" class="song-cover">
+		</div>
+		<div class="cover">
+			<img src="./static/images/bofang.png" class="play-cover pause">
+		</div>
+	</div>
+	<div class="name">我是一只小小鸟</div>
+	<div class="play"></div>
+	<div class="footer-weixin" style="display:block;">
+	 <img src="./static/images/app-header.png" class="app">
+	 <span class="text">宝宝爱听,贝美时光说</span>
+	 <a class="download" href="http://www.bemetoy.com/download/download.html" >点击下载</a>
+	</div>
+</article>
+
+
+
+
+<!-- 这里是模板 -->
+<script type="text/template" id="J_temp-item">
+    <% $.each(list, function(i, item){ %>
+    <li class="item" sid="<%=item.id %>" md5="<%=item.md5 %>"  url="<%=item.url %>" tag="album" tagval="<%=item.tagval %>"  size="<%=item.filesize %>" type="<%=item.type %>" >
+        <a class="item-a" href="javascript:void(0);">
+            <div class="title text-over"><%=item.name %> <span class="desc"><%=item.song_time ?BEME.func.formatTime(item.song_time):BEME.func.formatTime(item.radio_time)%></span></div>
+        </a>
+    </li>
+    <%});%>
+</script>
+
+
+
+<script type="text/javascript">
+    BEME.initMinPage('weixin');
+</script>
+</body>
+</html>

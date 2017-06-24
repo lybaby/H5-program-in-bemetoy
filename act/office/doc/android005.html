@@ -1,0 +1,206 @@
+<!--#include file="/m2/act/office/layouts/header.html"-->
+<title>贝美开发者中心</title>
+</head>
+
+<body class="page page-scene">
+<div class="header" id="J_header">
+    <!--#include file="/m2/act/office/layouts/navigation.html"-->
+</div>
+<div class="doc_center">
+	<div class="doc">
+		<!--#include file="menulist.html"-->
+		
+		<div class="doc_detail">
+			<div class="">
+				<h1>绑定、邀请和申请关注操作</h1>
+				<div class="level1"><hr></div>
+			</div>
+			<div class="doc_content">
+				<div>
+					<h2>搜索附近设备</h2>
+					<div class="text_indent">
+						<div class="code">
+							<code>IOnToySearchListener searchListener = new IOnToySearchListener() {</code>
+							<code class="marginl_20">@Override</code>
+							<code class="marginl_20"> public void onToyFound(SearchedToyInfo toyInfo) {</code>
+							<code class="marginl_40"> if (status == BMErrorCode.Err_System_Net_Unusable) {</code>
+							<code class="marginl_60">//网络不可用</code>
+							<code class="marginl_40"> } else if (status == BMErrorCode.Err_Local_Search_End) {</code>
+							<code class="marginl_60"> //搜索结束</code>
+							<code class="marginl_40">}</code>
+							<code class="marginl_20">}</code>
+							<code>};</code>
+							<code>BMIoTClient.getBMContactsManager().startSearchingToys(timeoutSeconds, searchListener); </code>
+						</div>
+						<div class="recommend text_i0">
+							timeoutSeconds超时时间<=0时，将设置为默认时间10s
+						</div>
+					</div>
+				</div>
+				<div>
+					<h2>停止搜索</h2>
+					<div class="text_indent">
+						<div class="code">
+							<code>/**</code>
+							<code>&nbsp; * 停止搜索，调用此方法不会执行搜索回调</code>
+							<code>*/</code>
+							<code>BMIoTClient.getBMContactsManager().stopSearch();</code>
+						</div>
+					</div>
+				</div>
+				<div>
+					<h2>语音定位设备</h2>
+					<div class="text_indent">
+						<div class="code">
+							<code>/**</code>
+							<code>&nbsp;  * 定位附近的玩偶</code>
+							<code>&nbsp;  * toyInfo  玩偶的信息</code>
+							<code>*/</code>
+							<code>BMIoTClient.getBMContactsManager().voiceLocateToy(toyInfo);</code>
+						</div>
+					</div>
+				</div>
+				<div>
+					<h2>绑定设备</h2>
+					<div class="text_indent">  
+						<div class="code">
+							<code>IOnBindToyResultListener bindToyResultListener = new IOnBindToyResultListener() {</code>
+							<code class="marginl_20">@Override</code>
+							<code class="marginl_20">public void onBindToyResult(int status, BindExtraInfo extraInfo) {</code>
+							<code class="marginl_40"> if (status == BMErrorCode.Err_None) {</code>
+							<code class="marginl_60">              //设备已绑定成功</code>
+							<code class="marginl_40">} else if (status  == BMErrorCode.Err_Server_Binded) {</code>
+							<code class="marginl_60">			  //设备已被别人绑定，但可以申请加入</code>
+							<code class="marginl_40"> } else if (status  ==  BMErrorCode.Err_Server_Device_Id_Not_Exist) {</code>
+							<code class="marginl_60">             //无法识别的设备</code>
+							<code class="marginl_40"> } else if (status  ==  BMErrorCode.Err_Server_Has_Bound_This_Device) {</code>
+							<code class="marginl_60">           //你已经绑定了该设备，无需再次绑定</code>
+							<code class="marginl_40"> } else if (status  ==   BMErrorCode.Err_Server_Device_Exceed_Max) {</code>
+							<code class="marginl_60">           //绑定的设备超过最大数</code>
+							<code class="marginl_40"> } else if (status  ==  BMErrorCode.Err_Server_Bound_Other_Group) {</code>
+							<code class="marginl_60">           //设备已被别人绑定，无法再绑定</code>
+							<code class="marginl_40">} else if (status  == BMConstantValues.BMErrorCode.Err_Net_Anomaly) {</code>
+							<code class="marginl_60">			//网络异常</code>
+							<code class="marginl_40">}</code>
+							<code class="marginl_20">}</code>
+							<code>};</code>
+							<code>BMIoTClient.getBMContactsManager().bindToy(toyInfo, bindToyResultListener);</code>
+						</div>
+					</div>
+				</div>
+				<div>
+					<h2>邀请其他人加入家庭圈</h2>
+					<div class="text_indent text_i0">
+						<div class="code">
+							<code>IOnInviteResultListener inviteResultListener = new IOnInviteResultListener() {</code>
+							<code class="marginl_20">@Override</code>
+							<code class="marginl_20">public void onBindToyResult(int status, BindExtraInfo extraInfo) {</code>
+							<code class="marginl_40"> if (status == BMErrorCode.Err_None) {</code>
+							<code class="marginl_60">              //邀请成功</code>
+							<code class="marginl_40">} else if (status  ==   BMErrorCode.Err_Server_Has_Entry_Group) {</code>
+							<code class="marginl_60">			  //用户已经加入了该家庭圈</code>
+							<code class="marginl_40"> } else if (status  == BMErrorCode.Err_Server_User_Not_Exist) {</code>
+							<code class="marginl_60">             //用户不存在</code>
+							<code class="marginl_40"> } else if (status  ==  BMErrorCode.Err_Server_User_Has_Entry_Other_Group) {</code>
+							<code class="marginl_60">           //用户已经加入其它家庭圈</code>
+							<code class="marginl_40"> } else if (status  ==    BMErrorCode.Err_Server_Group_Dissolved) {</code>
+							<code class="marginl_60">           //家庭圈已经被解散</code>
+							<code class="marginl_40"> } else if (status  ==  BMErrorCode.Err_Local_Invalid_Args) {</code>
+							<code class="marginl_60">            //本地参数错误</code>
+							<code class="marginl_40">} else if (status  == BMErrorCode.Err_Net_Anomaly) {</code>
+							<code class="marginl_60">			//网络异常</code>
+							<code class="marginl_40"> } else if (status  ==  BMErrorCode.Err_Local_Not_Admin) {</code>
+							<code class="marginl_60">       	   //非管理员无权限错误</code>
+							<code class="marginl_40">}</code>
+							<code class="marginl_20">}</code>
+							<code>};</code>
+							<code>BMIoTClient.getBMContactsManager().invite(openId, content, inviteResultListener);</code>
+						</div>
+						<div class="notice_str">
+						注：该接口只有管理员才能使用
+						</div>
+					</div>
+				</div>
+				<div>
+					<h2>申请加入家庭圈</h2>
+					<div class="text_indent text_i0">
+						<div class="code">
+							<code>IOnApplyResultListener applyResultListener = new IOnApplyResultListener() {</code>
+							<code class="marginl_20">@Override</code>
+							<code class="marginl_20"> public void onApplyResult(boolean success) {</code>
+							<code class="marginl_40"> if (success) {</code>
+							<code class="marginl_60">//发送成功</code>
+							<code class="marginl_40"> } else {</code>
+							<code class="marginl_60"> //发送失败</code>
+							<code class="marginl_40">}</code>
+							<code class="marginl_20">}</code>
+							<code>};</code>
+							<code>BMIoTClient.getBMContactsManager().apply(extraInfo, content, applyResultListener); </code>
+						</div>
+					</div>
+				</div>
+				<div>
+					<h2>监听加入家庭圈请求</h2>
+					<div class="text_indent">
+						<div class="code">
+							<code>IOnEntryGroupRequestListener entryGroupRequestListener = new IOnEntryGroupRequestListener() {</code>
+							<code class="marginl_20">@Override</code>
+							<code class="marginl_20">public void onRequest(EnterGroupRequestInfo requestInfo) {</code>
+							<code class="marginl_40"> if (requestInfo.getRequestType() == EnterGroupRequestType.Type_Invite) {</code>
+							<code class="marginl_60">//用户收到被邀请加入家庭圈</code>
+							<code class="marginl_40">} else if (requestInfo.getRequestType() == EnterGroupRequestType.Type_Apply) {</code>
+							<code class="marginl_60"> //管理员收到用户申请加入家庭圈</code>
+							<code class="marginl_40">}</code>
+							<code class="marginl_20">}</code>
+							<code>};</code>
+							<code>BMIoTClient.getBMContactsManager().setOnEntryGroupRequestListener(entryGroupRequestListener);</code>
+						</div>
+					</div>
+				</div>
+				<div>
+					<h2>同意加入家庭圈</h2>
+					<div class="text_indent">
+						<div class="code">
+							<code>BMIoTClient.getBMContactsManager().agreeEntryGroup(requestInfo);</code>
+						</div>
+					</div>
+				</div>
+				<div>
+					<h2>退出家庭圈</h2>
+					<div class="text_indent">
+						<div class="code">
+							<code>BMIoTClient.getBMContactsManager().quitGroup();</code>
+						</div>
+						<div class="notice_str">
+						注：当前用户为普通成员时，表示该用户退出家庭圈；当前用户为管理员时，表示解散整个家庭圈
+						</div>
+					</div>
+				</div>
+				<div>
+					<h2>将用户踢出家庭圈</h2>
+					<div class="text_indent">
+						<div class="code">
+							<code>BMIoTClient.getBMContactsManager().kickContact(openId);</code>
+						</div>
+						<div class="notice_str">
+							注：该接口只有管理员才能使用，管理员不能将自己踢出群
+						</div>
+					</div>
+				</div>
+				
+				
+				
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<script type="text/javascript">
+_domReady.push(function(){
+    $('#J_navlist .bk[action="developer"]').addClass('cur');
+	$('#android005').addClass('cur');
+});
+</script>
+
+<!--#include file="/m2/act/office/layouts/footer.html"-->

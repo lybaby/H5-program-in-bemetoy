@@ -1,0 +1,32 @@
+<div class="footer mbox clearfix">
+        Copyright © 2016 Bemetoy. All Rights Reserved
+</div>
+
+<script type="text/javascript" src="./static/js/zepto-1.1.6.min.js"></script>
+<script type="text/javascript" src="./static/js/fastclick.min.js"></script>
+<script type="text/javascript">
+$(document.body).ready(function(){
+    var initNavigation = function(){
+        $('#J_nav-list .icon').on('click', function(){
+            $('#J_nav-list').toggleClass('on');
+        });
+    };
+
+    $(document.body).on('click', function(e){
+        if($(e.target).closest('#J_nav-list').length<1){
+            $('#J_nav-list').removeClass('on');
+        }
+    });
+
+    $.each(_domReady, function(i, fn){
+        fn.call(this);
+    });
+
+    initNavigation();
+    
+    FastClick.attach(document.body);
+});
+</script>
+
+</body>
+</html>

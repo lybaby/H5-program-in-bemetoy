@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name='format-detection' content='telephone=no'>
+    <meta name='viewport' content='width=device-width, minimum-scale=1.0, maximum-scale=1.0'>
+    <title>创建的歌单</title>
+    <script type="text/javascript" src="../static/lib/zepto-1.1.6.min.js"></script>
+    <script type="text/javascript" src="../static/lib/require.js"></script>
+    <script type="text/javascript" src="../static-src/js/main.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="../static/css/style.css">
+
+</head>
+<body>
+<article class="myalbum">
+    <div class="title">
+        <a class="left" href="javascript:void(0);" >订阅的电台</a>
+        <div class="left">(<span id="J_descriptionnum">-</span>)</div>
+    </div>
+
+    <ul class="play-box" id="J_description_list"></ul>
+</article>
+<!-- 这里是模板 -->
+<script type="text/template" id="J_temp-ditem">
+    <% $.each(list, function(i, item){ %>
+    <li class="item"  sid="<%=item.id %>">
+        <a class="item-a"  href="#!m=fminfo&id=<%=item.id %>">
+            <div class="left">
+                <img class="img-station" src="<%=item.head_url||'../static/images/default-cover.png' %>" alt="">
+            </div>
+            <div class="text-over"><%=item.name %></div>
+            <div class="desc"><%=item.count %></div>
+        </a>
+    </li>
+    <%});%>
+</script>
+
+<script type="text/javascript">
+    BEME.initPage('mystation');
+</script>
+
+</body>
+</html>

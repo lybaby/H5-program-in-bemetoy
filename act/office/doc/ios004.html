@@ -1,0 +1,131 @@
+<!--#include file="/m2/act/office/layouts/header.html"-->
+<title>贝美开发者中心</title>
+</head>
+
+<body class="page page-scene">
+<div class="header" id="J_header">
+    <!--#include file="/m2/act/office/layouts/navigation.html"-->
+</div>
+<div class="doc_center">
+	<div class="doc">
+		<!--#include file="menulist.html"-->
+		
+		<div class="doc_detail">
+			<div class="">
+				<h1>PEPPER配网</h1>
+				<div class="level1"><hr></div>
+			</div>
+			<div class="doc_content">
+				<div>
+					<h2>权限设置</h2>
+					<div class="text_indent text_i0">
+						使用Pepper SDK，首先需要获得麦克风访问权限：
+						<div class="code">
+							<code>首先需要导入系统动态库AVFoundation.framework，并在项目中导入头文件：</code>
+							<code>#import <AVFoundation/AVFoundation.h></code>
+							<code>- (BOOL)checkAudioPermission</code>
+							<code>{</code>
+							<code class="marginl_20">    __block BOOL canRecord = YES;</code>
+							<code class="marginl_20">    AVAudioSession *audioSession = [AVAudioSession sharedInstance];</code>
+							<code class="marginl_20">    if ([audioSession respondsToSelector:@selector(requestRecordPermission:)])</code>
+							<code class="marginl_20">    {</code>
+							<code class="marginl_40">        [audioSession performSelector:@selector(requestRecordPermission:) withObject:^(BOOL granted) </code>
+							<code class="marginl_40">        {</code>
+							<code class="marginl_60">            if (granted) {</code>
+							<code class="marginl_80">                canRecord = YES;</code>
+							<code class="marginl_60">            } else {</code>
+							<code class="marginl_80">                canRecord = NO;</code>
+							<code class="marginl_60">            }</code>
+							<code class="marginl_40">        }];</code>
+							<code class="marginl_20">    return canRecord;</code>
+							<code>}</code>	
+						</div>
+					</div>
+				</div>
+				<div>
+					<h2>初始化</h2>
+					<div class="text_indent text_i0">
+						初始化资源，并且向服务器进行身份鉴权。此过程中会发起异步网络请求操作，并通过block将结果回调。
+						<div class="code">
+							<code>Pepper联网需要依赖到系统动态库AVFoundation.framework，
+							首先需要在Link Binary with Libraries中导入AVFoundation.framework，然后实现以下代码即可配网。</code>
+							<code>[[BMPepperAuthService shareInstance] startAuthWithAppId:appId andAppkey:appKey callBack:^(int status)</code>
+							<code>{</code>
+							<code class="marginl_20"> if (status == kPepperAuthStatusNone)</code>
+							<code class="marginl_20">{</code>
+							<code class="marginl_40">                //未鉴权</code>
+							<code class="marginl_20"> }</code>
+							<code class="marginl_20">else if (status == kPepperAuthStatusAuthing)</code>
+							<code class="marginl_20">{</code>
+							<code class="marginl_40">                //鉴权中</code>
+							<code class="marginl_20"> }</code>
+							<code class="marginl_20">else if (status == kPepperAuthStatusFailed)</code>
+							<code class="marginl_20">{</code>
+							<code class="marginl_40">                //鉴权失败</code>
+							<code class="marginl_20"> }</code>
+							<code class="marginl_20"> else if (status == kPepperAuthStatusSuccess)</code>
+							<code class="marginl_20">{</code>
+							<code class="marginl_40">                //鉴权成功</code>
+							<code class="marginl_20"> }</code>
+							<code>}];</code>	
+						</div>
+					</div>
+				</div>
+				<div>
+					<h2>开启配置网络</h2>
+					<div class="text_indent text_i0">
+						初始化资源，并且向服务器进行身份鉴权。此过程中会发起异步网络请求操作，并通过block将结果回调。
+						<div class="code">
+							<code>[[BMPepperService shareInstance] startConfigWithSSid:ssid andPwd:password callBack:^(NSError *err, int errCode) </code>
+							<code>{</code>
+							<code class="marginl_20"> if (status == kPepperErrorTypeNode)</code>
+							<code class="marginl_20">{</code>
+							<code class="marginl_40">                //配网成功</code>
+							<code class="marginl_20"> }</code>
+							<code class="marginl_20">else if (status == kPepperErrorTypeNotAuth)</code>
+							<code class="marginl_20">{</code>
+							<code class="marginl_40">                //未鉴权</code>
+							<code class="marginl_20"> }</code>
+							<code class="marginl_20">else if (status == kPepperErrorTypeInvalidArgs)</code>
+							<code class="marginl_20">{</code>
+							<code class="marginl_40">                //参数错误</code>
+							<code class="marginl_20"> }</code>
+							<code class="marginl_20"> else if (status == kPepperErrorTypeTimeOut)</code>
+							<code class="marginl_20">{</code>
+							<code class="marginl_40">                //配网超时</code>
+							<code class="marginl_20"> }</code>
+							<code class="marginl_20"> else if (status == kPepperErrorTypeNetError)</code>
+							<code class="marginl_20">{</code>
+							<code class="marginl_40">                //网络异常</code>
+							<code class="marginl_20"> }</code>
+							<code>}];</code>	
+							<code> //打开或者关闭声纹</code>
+							<code> [[BMPepperService shareInstance] disableWave:YES];</code>
+							<code> //打开或者关闭组播</code>
+							<code> [[BMPepperService shareInstance] disableWormhole:YES];</code>
+						</div>
+						超时时间timeoutS <= 0时，表示永不超时，此时只有在获得配置结果或者用户主动调用stopConfig函数才会停止配网
+					</div>
+				</div>
+				<div>
+					<h2>停止配网</h2>
+					<div class="text_indent">
+						<div class="code">
+							<code>[[BMPepperService shareInstance] stopConfig];</code>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<script type="text/javascript">
+_domReady.push(function(){
+    $('#J_navlist .bk[action="developer"]').addClass('cur');
+	$('#ios004').addClass('cur');
+	});
+</script>
+
+<!--#include file="/m2/act/office/layouts/footer.html"-->

@@ -1,0 +1,30 @@
+<html>
+<head>
+</head>
+<body>
+
+<article class="book-list-page">
+     <ul class="book-list" id="J_announcer_list"></ul>
+</article>
+
+<script type="text/template" id="J_temp-announceritem">
+   <% $.each(list, function(i, item){ %>
+    <li class="item">
+        <a class="item-a" href="<%=item.jump_url %>">
+			<div class="img-b left"  ><img src="<%=item.url %>" style="height:2rem;width: auto;"/></div>
+            <div class="name">
+				<div  class="text-over"><%=item.name %></div>
+				<div class="desc"><%=item.desc %></div>
+			</div>  
+        </a>
+		<img src="./static/images/left-ip.png" class="jiantou"/>
+    </li>
+    <%});%>
+</script>
+
+<script type="text/javascript">
+    BEME.initMinPage('announcerlist');
+</script>
+
+</body>
+</html>

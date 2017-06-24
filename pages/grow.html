@@ -1,0 +1,132 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name='format-detection' content='telephone=no'>
+    <meta name='viewport' content='width=device-width, minimum-scale=1.0, maximum-scale=1.0'>
+    <title>test</title>
+    <script type="text/javascript" src="../static/lib/zepto-1.1.6.min.js"></script>
+    <script type="text/javascript" src="../static/lib/require.js"></script>
+    <script type="text/javascript" src="../static-src/js/main.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="../static/css/style.css">
+    <style type="text/css">
+    </style>
+</head>
+<body>
+
+<article class="grow-page main-page albuminfo-page">
+    <div class="grow-banner-box">
+        <div class="img-b">
+            <img src="" alt="" class="img-cover">
+        </div>
+        <div class="grow_name"></div>
+    </div>
+	<div  class="abstract-box" id = "abstract"></div>
+    <div class="description-box" id = "description"> </div>
+
+
+    <div class="song_list" style="display:none;">
+        <div class="song_list_name" id="song_list_name">推荐歌曲</div>
+        <ul class="song-box" id="J_song-box"></ul>
+    </div>
+
+    <div class="album" style="display:none;">
+        <div class="album_list_name" id="album_list_name">推荐专辑</div>
+        <ul class="album-box content-item" id="J_album-box"></ul>
+    </div>
+	<div  class="footer_blank"></div>
+	<div class="share_weixin"></div>
+	<div class="footer-weixin" style="display:none;">
+		 <img src="./static/images/app-header.png" class="app">
+		 <span class="text">宝宝爱听,贝美时光说</span>
+		 <a class="download" href="http://www.bemetoy.com/download/download.html" >点击下载</a>
+	</div>
+</article>
+
+
+<!-- 这里是模板 -->
+<script type="text/template" id="J_temp-item">
+    <% $.each(list, function(i, item){ %>
+    <li class="item" sid="<%=item.id %>" md5="<%=item.md5 %>"  url="<%=item.url %>" tag="album" tagval="<%=item.tagval %>"  size="<%=item.filesize %>" type="<%=item.type %>" >
+        <a class="item-a" href="javascript:void(0);">
+            <span class="checkbox" value = '0'><img src="./static/images/xuanzekong.png"></span>
+            <div class="title text-over"><%=item.name %></div>
+            <div class="desc"><%=BEME.func.formatTime(item.song_time) %></div>
+            <a class="item-play" href="javascript:void(0);"><img src="./static/images/more.png"></a>
+        </a>
+    </li>
+    <%});%>
+</script>
+
+<!-- 这里是模板 -->
+<script type="text/template" id="J_temp-item-new">
+    <% $.each(list, function(i, item){ %>
+    <li class="item" sid="<%=item.id %>" md5="<%=item.md5 %>"  url="<%=item.url %>" tag="album" tagval="<%=item.tagval %>"  size="<%=item.filesize %>" type="<%=item.type %>" >
+        <a class="item-a" href="javascript:void(0);">
+            <div class="title text-over"><%=item.name %></div>
+            <div class="desc"><%=BEME.func.formatTime(item.song_time) %></div>
+        </a>
+		 <a class="item-play" href="javascript:void(0);"><img src="./static/images/feiji.png"></a>
+    </li>
+    <%});%>
+</script>
+
+
+<!-- 这里是模板 -->
+<script type="text/template" id="J_temp-albumitem">
+    <% $.each(list, function(i, item){ %>
+    <% if(i%3 == 0) {%>
+    <ul class="list" >
+        <%}%>
+        <li><a class="item-a" href="<%=item.id %>" id="<%=item.album_id %>">
+            <div class="img-b">
+                <img data-src="<%-BEME.func.imageUrl(item.url) %>" onerror="this.onerror=null; this.src='./static/images/moren04.jpg';" src="./static/images/moren04.jpg" alt="<%-item.name %>" class="lazy img-auto">
+                <div class="info-box" style="display:block;">
+                    <div class="tag left"><%=item.cnt %></div>
+                    <div class="tag right">0</div>
+                </div>
+            </div>
+            <div class="name"><%=item.name %></div>
+        </a></li>
+        <% if(i%3 == 2) {%>
+    </ul>
+    <%}else if( i === list.length-1){ if(i%3 === 1){%>
+    <li style="background: #fcf8f5"></li></ul>
+    <%}else{  %>
+    <li style="background: #fcf8f5"></li>
+    <li style="background: #fcf8f5"></li></ul>
+    <%}}%>
+    <%});%>
+</script>
+
+<script type="text/template" id="J_temp-item-weixin">
+    <% $.each(list, function(i, item){ %>
+    <li class="item" sid="<%=item.id %>" md5="<%=item.md5 %>"  url="<%=item.url %>" tag="album" tagval="<%=item.tagval %>"  size="<%=item.filesize %>" type="<%=item.type %>" >
+        <a class="item-a" href="javascript:void(0);">
+            <div class="title text-over"><%=item.name %> <span class="desc"><%=item.song_time ?BEME.func.formatTime(item.song_time):BEME.func.formatTime(item.radio_time)%></span></div>
+        </a>
+    </li>
+    <%});%>
+</script>
+
+<script type="text/javascript">
+		function GetQueryString(name)
+		{
+			 var reg = new RegExp("(^|&)"+ name +"=([^&]*)(&|$)");
+			 var r = window.location.search.substr(1).match(reg);
+			 if(r!=null)return  r[2]; return null;
+		}
+		var weixin = GetQueryString('weixin');
+		console.log(weixin);
+		if(weixin == 1){
+			$('.footer-weixin').show();
+		}
+</script>
+
+<script type="text/javascript">
+    BEME.initMinPage('grow');
+</script>
+
+
+</body>
+</html>

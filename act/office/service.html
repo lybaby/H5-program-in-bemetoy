@@ -1,0 +1,120 @@
+<!--#include file="layouts/header.html"-->
+<title>服务能力</title>
+</head>
+
+<body class="page page-service">
+<div class="header" id="J_header">
+    <!--#include file="layouts/navigation.html"-->
+</div>
+
+<div class="banner-box"></div>
+
+<div class="nav-list">
+    <div class="mbox clearfix">
+        <div class="nav current">
+            <div class="n">一</div>
+            <div class="d">IOT神经网络<br>核心能力</div>
+            <i class="line"></i><i class="curbg"></i>
+        </div>
+        <div class="nav">
+            <div class="n">二</div>
+            <div class="d">贝美IOT<br>核心服务组件</div>
+            <i class="line"></i><i class="curbg"></i>
+        </div>
+        <div class="nav">
+            <div class="n">三</div>
+            <div class="d">贝美开放式<br>云服务</div>
+            <i class="line"></i><i class="curbg"></i>
+        </div>
+        <div class="nav">
+            <div class="n">四</div>
+            <div class="d">动态化<br>APP生成库</div>
+            <i class="line"></i><i class="curbg"></i>
+        </div>
+        <div class="nav">
+            <div class="n">五</div>
+            <div class="d">多平台<br>硬件方案</div>
+            <i class="curbg"></i>
+        </div>
+    </div>
+</div>
+
+<div class="mbox content-box">
+    <div class="box-outter clearfix" id="J_outter">
+        <div class="mbox box-1">
+            <div class="title"><h2>一、IOT神经网络核心能力</h2></div>
+            <div class="desc">贝美建立了全新的IOT神经网络，全面覆盖Remote与Local场景，解决了MQTT协议自身服务质量差、安全性弱、可扩展性差、服务端不开源等问题。</div>
+            <div class="pic"><img src="./static/images/service-box1.png"></div>
+        </div>
+
+        <div class="mbox box-2">
+            <div class="title"><h2>二、贝美IOT核心服务组件</h2></div>
+            <div class="desc">贝美专门成立的Pepper实验室研发出多项专利技术解决IOT设备交互体验问题，并将此能力打包成IOT核心服务组件开放给合作伙伴。</div>
+            <div class="pic"><img src="./static/images/service-box2.png" style="width: 100%;"></div>
+        </div>
+
+        <div class="mbox box-3">
+            <div class="title"><h2>三、贝美开放式云服务</h2></div>
+            <div class="desc">业界领先的IOT云架构设计；微信级的稳定性与安全性。</div>
+            <div class="pic"><img src="./static/images/service-box3.png"></div>
+        </div>
+
+        <div class="mbox box-4">
+            <div class="title"><h2>四、动态化APP生成库</h2></div>
+            <div class="pic"><img src="./static/images/service-box4.png"></div>
+            <div class="desc" style="margin-top:30px;">
+                贝美客户端团队来自腾讯微信，在架构设计、用户体验、稳定性、流量控制、弱网络等方面具有业界领先的技术和经验。<br>
+                提供APP技术服务的两种方式：<br>
+                1、SDK：包含基础功能组件与基础GUI，客户可根据自己的需求进行裁剪。<br>
+                2、提供定制化的APP，只需要勾选功能项，即可动态化生成定制APP，为客户提供交钥匙的方案。
+            </div>
+        </div>
+
+        <div class="mbox box-5">
+            <div class="title"><h2>五、多平台硬件方案</h2></div>
+            <div class="desc">
+                <b style="line-height:90px;">多平台、多OS适配。</b><br>
+                贝美Fun-IOT 技术平台已经完成对多个硬件方案与OS的适配，客户可以根据自己的需求在多个方案中进行选择。<br>
+                目前适配的硬件方案包括：<br>
+                1）新唐平台<br>
+                2）MTK功能机平台<br>
+                3）RealTekIOT平台<br>
+                目前适配的OS方案包括：1）Linux2）RTOS3）Android
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+_domReady.push(function(){
+    var setNav = function(index){
+        var $boxs = $('#J_outter .mbox'),
+        $box = $boxs.eq(index);
+
+        if(!$box.attr('hg')){
+            $box.attr('hg', $box.height());
+        }
+        var height = $box.attr('hg');
+        $('#J_outter').parent().height(+height);
+        $('#J_outter').stop().animate({
+            'margin-left' : -index*1200
+        }, 200);
+    };
+
+    $('.nav-list .nav').on('mouseenter', function(){
+        var $this = $(this),
+            index = $this.index();
+        $('.nav-list .nav').removeClass('current noi');
+        $this.addClass('current');
+
+        if(index>0){
+            $('.nav-list .nav').eq(index-1).addClass('noi');
+        }
+        setNav(index);
+    });
+
+    $('#J_navlist .bk[action="service"]').addClass('cur');
+});
+</script>
+
+<!--#include file="layouts/footer.html"-->

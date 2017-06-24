@@ -1,0 +1,90 @@
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name='format-detection' content='telephone=no'>
+<meta name='viewport' content='width=device-width, minimum-scale=1.0, maximum-scale=1.0'>
+<title>test</title>
+<script type="text/javascript" src="../static/lib/zepto-1.1.6.min.js"></script>
+<script type="text/javascript" src="../static/lib/require.js"></script>
+<script type="text/javascript" src="../static-src/js/main.js"></script>
+
+<link rel="stylesheet" type="text/css" href="../static/css/style.css">
+<style type="text/css">
+/*.topicinfo-page{background: url('../static/images/pages/topicinfo.png') no-repeat 0 0; background-size: 100% auto; height: 2000px;}*/
+</style>
+</head>
+<body>
+
+<article class="comm-page albuminfo-page topicinfo-page">
+    <div class="top-box" id="J_top-box">
+        <img src="" alt="" class="img-cover">
+    </div>
+    
+    <div class="infotitle" id="J_album-title">--</div>
+    <div class="infodesc" id="J_album-desc">--</div>
+
+  <div class="caction-box" id="old_box">
+        <a class="item-a play-btn left" href="javascript:void(0);" value="0" >点播全部</a>
+        <div class="desc left">(共<span id="J_songnum">-</span>首)</div>
+        <a class="item-a option-btn right" href="javascript:void(0);" id ="play_edit" ></a>
+    </div>
+	
+	<div class="caction-box" id="new_box">
+        <a class="left new-select" href="javascript:void(0);" value="0" id ="play_edit_new" >多选</a>
+        <div class="desc left">(共<span id="J_songnum">-</span>首)</div>
+        <a class="right" href="javascript:void(0);">推送给玩具</a>
+    </div>
+	
+    <div class="select-all" id="old_select">
+        <a class="left" href="javascript:void(0);" value="0"><img src="./static/images/xuanzekong.png"></a>
+        <a class="title">全选</a>
+        <a class="right content" href="javascript:void(0);" id="cancel">取消</a>
+        <a class="right content_add"  href="javascript:void(0);" id="add">加入歌单</a>
+    </div>
+
+	<div class="select-all" id="new_select">
+        <a class="left" href="javascript:void(0);" value="0"><img src="./static/images/xuanzekong.png"></a>
+        <a class="title">全选</a>
+		<a class="cancel" href="javascript:void(0);" id="cancel">取消</a>
+		<a class="right push_new push_no"  href="javascript:void(0);" id="push" >推送</a>
+		<a class="right add_new add_no"  href="javascript:void(0);" id="add">加入歌单</a>
+    </div>
+
+    <ul class="song-box" id="J_song-box"></ul>
+</article>
+
+
+<!-- 这里是模板 -->
+<script type="text/template" id="J_temp-item">
+    <% $.each(list, function(i, item){ %>
+    <li class="item" sid="<%=item.id %>" md5="<%=item.md5 %>"  url="<%=item.url %>" tag="topic" tagval="<%=item.tagval %>" size="<%=item.filesize %>" type="<%=item.type %>" >
+        <a class="item-a" href="javascript:void(0);">
+		    <span class="checkbox" value = '0'><img src="./static/images/xuanzekong.png"></span>
+            <div class="title text-over"><%=item.name %></div>
+            <div class="desc"><%=BEME.func.formatTime(item.song_time) %></div>
+			 <a class="item-play" href="javascript:void(0);"><img src="./static/images/more.png"></a>
+        </a>
+    </li>
+    <%});%>
+</script>
+
+<!-- 这里是模板 -->
+<script type="text/template" id="J_temp-item-new">
+    <% $.each(list, function(i, item){ %>
+    <li class="item" sid="<%=item.id %>" md5="<%=item.md5 %>"  url="<%=item.url %>" tag="topic" tagval="<%=item.tagval %>" size="<%=item.filesize %>" type="<%=item.type %>" >
+        <a class="item-a" href="javascript:void(0);">
+		    <span class="checkbox" value = '0'><img src="./static/images/xuanzekong.png"></span>
+            <div class="title text-over"><%=item.name %></div>
+            <div class="desc"><%=BEME.func.formatTime(item.song_time) %></div>
+			 <a class="item-play" href="javascript:void(0);"><img src="./static/images/feiji.png"></a>
+        </a>
+    </li>
+    <%});%>
+</script>
+
+<script type="text/javascript">
+    BEME.initMinPage('topicinfo');
+</script>
+
+</body>
+</html>

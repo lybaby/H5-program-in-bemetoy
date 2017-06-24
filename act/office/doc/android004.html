@@ -1,0 +1,72 @@
+<!--#include file="/m2/act/office/layouts/header.html"-->
+<title>贝美开发者中心</title>
+</head>
+
+<body class="page page-scene">
+<div class="header" id="J_header">
+    <!--#include file="/m2/act/office/layouts/navigation.html"-->
+</div>
+<div class="doc_center">
+	<div class="doc">
+		<!--#include file="menulist.html"-->
+		
+		<div class="doc_detail">
+			<div class="">
+				<h1>PEPPER配网</h1>
+				<div class="level1"><hr></div>
+			</div>
+			<div class="doc_content">
+				<div>
+					<h2>开启配置网络</h2>
+					<div class="text_indent text_i0">
+						<div class="code">
+							<code>IOnConfigResultListener listener = new IOnConfigResultListener() {</code>
+							<code class="marginl_20">@Override</code>
+							<code class="marginl_20"> public void onConfigResult(int errCode, String errMsg) {</code>
+							<code class="marginl_20"> if (errCode == BMErrorCode.Err_None) {</code>
+							<code class="marginl_40">              //配网成功</code>
+							<code class="marginl_20">} else if (errCode == ErrorCode.Err_Server_Not_Auth) {</code>
+							<code class="marginl_40">			  //未鉴权</code>
+							<code class="marginl_20"> } else if (errCode == ErrorCode.Err_Local_Invalid_Args) {</code>
+							<code class="marginl_40">             //输入参数错误</code>
+							<code class="marginl_20"> } else if (errCode == ErrorCode.Err_Net_Response_Timeout) {</code>
+							<code class="marginl_40">           //配置超时</code>
+							<code class="marginl_20">} else if (errCode == BMConstantValues.BMErrorCode.Err_Net_Anomaly) {</code>
+							<code class="marginl_40">			//网络异常</code>
+							<code class="marginl_20">}</code>
+							<code>};</code>
+							<code>BMPepperInfo info = BMPepperInfo.from(ssid, pwd);</code>
+							<code>//禁用声纹</code>
+							<code>//info.disableAudioWave();</code>
+							<code>//禁用组播</code>
+							<code>//info.disableMulticast();</code>
+							<code>//开启配置</code>
+							<code>BMIoTClient.getBMPepperConfig().startConfig(info, timeoutMS, listener);</code>
+						</div>
+						<div class="recommend text_i0">
+							超时时间timeoutMS <= 0时，表示永不超时，此时只有在获得配置结果或者用户主动调用stopConfig函数才会停止配网
+						</div>
+					</div>
+				</div>
+				<div>
+					<h2>停止配网</h2>
+					<div class="text_indent">
+						<div class="code">
+							<code>BMIoTClient.getBMPepperConfig().stopConfig();</code>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<script type="text/javascript">
+_domReady.push(function(){
+    $('#J_navlist .bk[action="developer"]').addClass('cur');
+	$('#android004').addClass('cur');
+});
+</script>
+
+<!--#include file="/m2/act/office/layouts/footer.html"-->

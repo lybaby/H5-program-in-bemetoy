@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name='format-detection' content='telephone=no'>
+    <meta name='viewport' content='width=device-width, minimum-scale=1.0, maximum-scale=1.0'>
+    <title>创建的歌单</title>
+    <script type="text/javascript" src="../static/lib/zepto-1.1.6.min.js"></script>
+    <script type="text/javascript" src="../static/lib/require.js"></script>
+    <script type="text/javascript" src="../static-src/js/main.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="../static/css/style.css">
+    <style>
+        .myplay{padding: 1.1rem 0 0.3rem 0; font-size: 16px;}
+        .myplay .title{overflow: hidden;  height: 0.47rem;  line-height: 0.47rem;  padding: 0.2rem 2%; background: #f0edea;}
+        .myplay .play-box{background-color: #fcf8f5;}
+        .myplay .item{position: relative;}
+        .myplay .item-a{height: 0.7rem;padding: 0.15rem 2%;background: url('../images/dianbo.png') no-repeat right 0.2rem center;background-size: 0.5rem auto}
+        .myplay .name{height: 0.4rem; line-height: 0.4rem;font-size: 16px; padding-right: 0.6rem;}
+        .myplay .desc{ color: #999; height: 0.4rem;  line-height: 0.4rem; font-size: 0.3rem;}
+        .myplay .colorall{color: #333}
+        .myplay .colornum{color: #999}
+        .myplay .play-btn{font-size: 15px;padding-left: 0.5rem;  background: url('../images/dianboall.png') no-repeat 0 center;background-size: 0.37rem auto;}
+        .myplay .option-btn{background: url('../images/quanxuan.png') no-repeat center center;background-size: 0.37rem auto;  width: 0.47rem; height: 0.47rem}
+    </style>
+
+</head>
+<body>
+<article class="myplay">
+    <div class="title3">
+        <a class="item-a play-btn left" href="javascript:void(0);" value="0">全部推送至玩具</a>
+        <div class="left colornum">(共<span id="J_songnum">0</span>首)</div>
+        <a class="item-a option-btn right"  id="listen_edit" href="javascript:void(0);"></a>
+    </div>
+    <div class="top">
+        <div class="edit">管理歌曲</div>
+        <div class="cancel">修改歌单名称</div>
+    </div>
+       <div id="play_list">
+            <div class="select-all" style="margin-top:0;">
+                <a class="left" href="javascript:void(0);" value="0"><img src="./static/images/xuanzekong.png"></a>
+                <a class="title_1">全选</a>
+                <a class="right content" href="javascript:void(0);" id="cancel">取消</a>
+                <a class="right content_add"  href="javascript:void(0);" id="delete">删除</a>
+            </div>
+        <ul class="play-box" id="J_song_list"></ul>
+   </div>
+    <div class="song-fail">
+        <div class="image"><img src="./static/images/fail_new.png"/></div>
+        <div class="title">您的歌单里还没有曲目！</div>
+        <div class="title2">可在“听听”中选择儿歌故事加入此到歌单</div>
+    </div>
+</article>
+
+
+<!-- 这里是模板 -->
+<script type="text/template" id="J_temp-mpitem">
+    <% $.each(list, function(i, item){ %>
+    <li class="item" rid="<%=item.relate_id %>" sid="<%=item.id %>" user="true" md5="<%=item.md5 %>"  url="<%=item.url %>" tagval="<%=item.tagval %>" size="<%=item.filesize %>"  tag="<%=item.song_type %>" type="<%=item.type %>">
+        <a class="item_a" href="javascript:void(0);">
+		     <span class="checkbox" value='0'><img src="./static/images/xuanzekong.png"></span>
+            <div class="name title text-over"><%=item.name %></div>
+            <div class="desc"><%=BEME.func.formatTime(item.song_time) %></div>
+			 <a class="item-play" href="javascript:void(0);"><img src="./static/images/more.png"></a>
+        </a>
+    </li>
+    <%});%>
+</script>
+
+<script type="text/template" id="J_temp-mpitem-new">
+    <% $.each(list, function(i, item){ %>
+    <li class="item" rid="<%=item.relate_id %>" sid="<%=item.id %>" user="true" md5="<%=item.md5 %>"  url="<%=item.url %>" tagval="<%=item.tagval %>" size="<%=item.filesize %>"  tag="<%=item.song_type %>" type="<%=item.type %>">
+        <a class="item_a" href="javascript:void(0);">
+		     <span class="checkbox" value='0'><img src="./static/images/xuanzekong.png"></span>
+            <div class="name title text-over"><%=item.name %></div>
+            <div class="desc"><%=BEME.func.formatTime(item.song_time) %></div>
+			 <a class="item-play" href="javascript:void(0);"><img src="./static/images/feiji.png"></a>
+        </a>
+    </li>
+    <%});%>
+</script>
+
+<script type="text/javascript">
+    BEME.initPage('myplay');
+</script>
+
+</body>
+</html>
